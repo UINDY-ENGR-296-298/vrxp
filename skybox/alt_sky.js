@@ -18,12 +18,12 @@ const {path, ext, rotTop, rotBottom, size, swapUpDown} = this.data;
 
 // Expected file names (you can change these if your pack uses other names)
 const names = {
-px: 'bluecloud_rt', // +X (right)
-nx: 'bluecloud_lf', // -X (left)
-py: 'bluecloud_up', // +Y (top)
-ny: 'bluecloud_dn', // -Y (bottom)
-pz: 'bluecloud_bk', // +Z (front)
-nz: 'bluecloud_ft'  // -Z (back)
+px: 'graycloud_rt', // +X (right)
+nx: 'graycloud_lf', // -X (left)
+py: 'graycloud_up', // +Y (top)
+ny: 'graycloud_dn', // -Y (bottom)
+pz: 'graycloud_bk', // +Z (front)
+nz: 'graycloud_ft'  // -Z (back)
 };
 
 // Optionally swap up/down if mislabeled

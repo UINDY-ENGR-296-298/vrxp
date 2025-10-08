@@ -18,7 +18,7 @@
     <script src="components/blankwall.js"></script>
     <script src="index.js"></script>
     <!-- Sky -->
-    <script src="skybox/skycomponent.js"></script>
+    <script src="skybox/alt_sky.js"></script>
 
 </head>
 <body>
@@ -38,7 +38,7 @@
 <!--    </a-entity>-->
 
     <a-assets>
-        <img id="groundTexture" src="ground_texture.jpg" alt="">
+        <img id="groundTexture" src="concrete.jpg" alt="">
         <img id="skyTexture" src="fantasy_sky.jpg" alt="">
     </a-assets>
 
@@ -71,11 +71,11 @@
               static-body="shape: box"></a-entity>
 
     <!-- Blank wall -->
-    <a-entity blank-wall
-              position="0 0 -8"
-              rotation="0 0 0"
-              color="#eaeaea"
-              widthft="100" heightft="100" depthft="1"></a-entity>
+    <a-entity
+        blank-wall="width: 20; height: 20; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="4 1 0"
+        rotation="0 90 0">
+    </a-entity>
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"

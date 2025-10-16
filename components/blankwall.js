@@ -9,7 +9,7 @@
       height:    {type: 'number', default: 6},     // 6 ft tall
       thickness: {type: 'number', default: 0.5},   // 0.5 ft thick
       units:     {type: 'string', default: 'ft'},  // 'ft' | 'm'
-      color:     {type: 'color',  default: '#FFFFFF'},
+      color:     {type: 'color',  default: '#ffffffff'},
       // auto place the wall so it sits on the ground (y = height/2)
       anchor:    {type: 'string', default: 'ground'} // 'ground' | 'center'
     },

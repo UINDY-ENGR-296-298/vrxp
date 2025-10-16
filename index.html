@@ -25,7 +25,7 @@
 
 <a-scene
         renderer="colorManagement: true; physicallyCorrectLights: true"
-        physics="gravity: -9.8; debug: true"
+        physics="gravity: -9.8; debug: false"
         skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708">
 
     <!-- Player RIG with collisions -->
@@ -42,40 +42,45 @@
         <img id="skyTexture" src="fantasy_sky.jpg" alt="">
     </a-assets>
 
-    <!-- Tall boxes: collideable -->
-    <a-entity geometry="primitive: box; depth: 10; height: 100; width: 10"
-              material="shader: standard; color: black"
-              position="100 50 50"></a-entity>
+<!------------------------------------------------------------------------------------------------------>
+<!--                                          Main Hallway                                            -->
+<!------------------------------------------------------------------------------------------------------>
 
-    <a-entity geometry="primitive: box; depth: 10; height: 100; width: 10"
-              material="shader: standard; color: black"
-              position="50 50 100"
-              random-color></a-entity>
-
-    <a-entity geometry="primitive: box; depth: 10; height: 100; width: 10"
-              material="shader: standard; color: black"
-              position="0 50 50"
-              random-color></a-entity>
-
-    <a-entity geometry="primitive: box; depth: 10; height: 100; width: 10"
-              material="shader: standard; color: black"
-              position="50 50 0"
-              random-color></a-entity>
-
-    <!-- Thin diamond floor plate -->
-    <a-entity geometry="primitive: box; depth: 90; height: 0.1; width: 90"
-              material="shader: standard; color: black"
-              position="50 0.2 50"
-              rotation="0 45 0"
-              random-color
-              static-body="shape: box"></a-entity>
-
-    <!-- Blank wall -->
+    <!-- Blank wall to the right -->
     <a-entity
-        blank-wall="width: 20; height: 20; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
-        position="4 1 0"
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="9 0 0"
         rotation="0 90 0">
     </a-entity>
+
+    <!-- Blank wall to the left -->
+    <a-entity
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-9 0 0"
+        rotation="0 90 0">
+    </a-entity>
+
+    <!-- Blank wall behind -->
+    <a-entity
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="0 0 9"
+        rotation="0 0 0">
+    </a-entity>
+
+    <!-- Blank wall front-left -->
+    <a-entity
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-6 0 -9"
+        rotation="0 0 0">
+    </a-entity>
+
+    <!-- Blank wall front-right -->
+    <a-entity
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="6 0 -9"
+        rotation="0 0 0">
+    </a-entity>
+
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"

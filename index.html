@@ -14,7 +14,7 @@
     <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
-    <!-- Your component + app code -->
+    <!-- Components -->
     <script src="components/blankwall.js"></script>
     <script src="index.js"></script>
     <!-- Sky -->
@@ -48,65 +48,83 @@
 
     <!-- Blank wall to the right -->
     <a-entity
-        blank-wall="width: 60; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
         position="9 0 0"
         rotation="0 90 0">
     </a-entity>
 
     <!-- Blank wall to the left -->
     <a-entity
-        blank-wall="width: 60; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
         position="-9 0 0"
         rotation="0 90 0">
     </a-entity>
 
     <!-- Blank wall behind -->
     <a-entity
-        blank-wall="width: 60; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
         position="0 0 9"
         rotation="0 0 0">
     </a-entity>
 
     <!-- Blank wall front-left -->
     <a-entity
-        blank-wall="width: 20; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
         position="-6 0 -9"
         rotation="0 0 0">
     </a-entity>
 
     <!-- Blank wall front-right -->
     <a-entity
-        blank-wall="width: 20; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
         position="6 0 -9"
         rotation="0 0 0">
     </a-entity>
 
     <!-- Blank wall hallway left -->
     <a-entity
-        blank-wall="width: 20; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
-        position="-3 0 -12"
+        blank-wall="width: 60; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-3 0 -18"
         rotation="0 90 0">
     </a-entity> 
     <a-entity
-        blank-wall="width: 10; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
-        position="-3 0 -19.5"
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-3 0 -33"
         rotation="0 90 0">
     </a-entity> 
     
     <!-- Blank wall hallway right -->
     <a-entity
-        blank-wall="width: 40; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
-        position="3 0 -15"
+        blank-wall="width: 89; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="3 0 -22.5"
         rotation="0 90 0">
     </a-entity> 
 
     <!-- Blank wall end of hallway -->
     <a-entity
-        blank-wall="width: 20; height: 3; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
-        position="0 0 -21"
+        blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="0 0 -36"
         rotation="0 0 0">
     </a-entity>
 
+    <!-- Classroom branchoff hallway left -->
+    <a-entity
+        blank-wall="width: 30; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-7.5 0 -27.1"
+        rotation="0 0 0">
+    </a-entity>
+    <!-- Classroom branchoff hallway right -->
+    <a-entity
+        blank-wall="width: 30; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+        position="-7.5 0 -30"
+        rotation="0 0 0">
+    </a-entity>
+
+    <a-entity
+    blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
+    position="0 0 -36"
+    rotation="0 0 0">
+    </a-entity>
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"

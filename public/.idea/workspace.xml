@@ -4,24 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="2ea855cf-78a4-4c79-8690-7cac4a4141f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/Virtual Space Draft.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/blankwall.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/fantasy_sky.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_bk.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_dn.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_ft.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_lf.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_rt.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/bluecloud_up.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/skybox/skycomponent.js" afterDir="false" />
-    </list>
+    <list default="true" id="2ea855cf-78a4-4c79-8690-7cac4a4141f8" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -37,9 +20,9 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="33jygfrUF5Wk2jHyhIzuPpJdeJz" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
@@ -51,9 +34,10 @@
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
+    "git-widget-placeholder": "josiah__dev",
+    "ignore.virus.scanning.warn.message": "true",
     "junie.onboarding.icon.badge.shown": "true",
-    "last_opened_file_path": "C:/Users/josia/OneDrive/Desktop/UIndy Schoolwork/Fall 2025/ENGR 296/Virtual Space Draft/skybox",
+    "last_opened_file_path": "C:/Users/josia/OneDrive/Desktop/UIndy Schoolwork/Fall 2025/ENGR 296/vrxp",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -89,6 +73,7 @@
       <option name="presentableId" value="Default" />
       <updated>1759844888518</updated>
       <workItem from="1759844890062" duration="7329000" />
+      <workItem from="1759885887041" duration="76000" />
     </task>
     <servers />
   </component>

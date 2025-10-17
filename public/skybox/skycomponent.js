@@ -1,5 +1,3 @@
-<!-- Put this <script> in your <head> after A-Frame is loaded -->
-
 AFRAME.registerComponent('skybox-box', {
 schema: {
 path: {type: 'string', default: './skybox/'},

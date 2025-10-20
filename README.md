@@ -15,7 +15,7 @@ docker container ls
 ```
 #For Windows:
 
-docker run -it --rm -p 8080:8080 -v"$PWD\public":/app/public --name vrxp_con vrxp_img
+docker run -it --rm -p 8080:8080 -v"$PWD\public":/app/public --name vrxp_container vrxp_image
 
 #For Mac:
 docker run -it --rm -p 8080:8080 -v ${PWD}\public:/app/public --name vrxp_con vrxp_img

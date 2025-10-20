@@ -19,6 +19,7 @@
     <script src="index.js"></script>
     <!-- Sky -->
     <script src="skybox/alt_sky.js"></script>
+    <script src="components/chair_component.js"></script>
 
 </head>
 <body>
@@ -124,6 +125,29 @@
     blank-wall="width: 20; height: 15; thickness: 0.5; units: ft; color: #eaeaea; anchor: ground"
     position="0 0 -36"
     rotation="0 0 0">
+    </a-entity>
+
+    <!-- Chair Componenet -->
+    <a-entity chair="
+          position: 0 0 0;
+          rotation: 0 30 0;
+          scale: 1 1 1;
+
+          width: 0.6;
+          depth: 0.6;
+          seatHeight: 0.46;
+          seatThickness: 0.045;
+          backHeight: 0.95;
+          backThickness: 0.03;
+          legThickness: 0.04;
+          legInset: 0.03;
+
+          color: #8d6e63;
+          legColor: #4e342e;
+          metalness: 0.15;
+          roughness: 0.85
+        "
+              position="0 0 -2">
     </a-entity>
 
     <!-- Reliable ground collider -->

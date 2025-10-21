@@ -205,9 +205,9 @@ AFRAME.registerComponent('block-arrow-move', {
 
     <!-- Player RIG with collisions -->
     <!-- CAMERA (add this; you can replace with your physics rig later) -->
-    <a-entity id="rig" position="0 0 6">
+    <!-- <a-entity id="rig" position="0 0 6">
     <a-camera wasd-controls look-controls></a-camera>
-    </a-entity>
+    </a-entity> -->
 
 
     <a-assets>
@@ -215,14 +215,14 @@ AFRAME.registerComponent('block-arrow-move', {
     </a-assets>
 
     <!-- create camera obj -->
-    <a-entity
-    id="playerCam"
-    camera
-    position="0 1.6 0"
-    look-controls
-    arrow-look="yawSpeed: 120; pitchSpeed: 90; clamp: 80"
-    wasd-move-only="speed: 3">
+    <a-entity id="rig" position="0 0 6">
+      <a-camera
+        look-controls
+        arrow-look="yawSpeed:120; pitchSpeed:90; clamp:80"
+        wasd-move-only="speed:3">
+      </a-camera>
     </a-entity>
+
 
 <!------------------------------------------------------------------------------------------------------>
 <!--                                          Main Hallway                                            -->

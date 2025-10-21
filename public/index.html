@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>AFrame+WebXR</title>
+    <title>Good Hall - Classroom</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
@@ -16,9 +16,25 @@
 
     <!-- Components -->
     <script src="components/blankwall.js"></script>
+    <script src="components/chair.js"></script>
+    <script src="components/table.js"></script>
+    <script src="components/projector.js"></script>
+    <script src="components/whiteboard.js"></script>
+    <script src="components/projection-screen.js"></script>
+    <script src="components/double-door.js"></script>
+    <script src="components/window-pane.js"></script>
+    <script src="components/ceiling-light-square.js"></script>
+    <script src="components/air-vent.js"></script>
+    <script src="components/classroom-floor.js"></script>
     <script src="index.js"></script>
     <!-- Sky -->
     <script src="skybox/alt_sky.js"></script>
+    <script src="components/chair_component.js"></script>
+
+    <style>
+      html, body { margin:0; height:100%; }
+      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
+    </style>
 
 </head>
 <body>
@@ -28,18 +44,21 @@
         physics="gravity: -9.8; debug: false"
         skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708">
 
-    <!-- Player RIG with collisions -->
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
-<!--    <a-entity id="rig"-->
-<!--              position="0 2 0"-->
-<!--              movement-controls-->
-<!--              kinematic-body="radius: 0.35; height: 1.6; offset: 0 0.8 0">-->
-<!--        <a-entity camera look-controls position="0 1.6 0"></a-entity>-->
-<!--    </a-entity>-->
+
+    <!-- Player RIG with collisions -->
+    <!-- CAMERA (add this; you can replace with your physics rig later) -->
+    <a-entity id="rig" position="0 0 6">
+    <a-camera wasd-controls look-controls></a-camera>
+    </a-entity>
+
 
     <a-assets>
-        <img id="groundTexture" src="concrete.jpg" alt="">
-        <img id="skyTexture" src="fantasy_sky.jpg" alt="">
+        <img id="groundTexture" src="images/concrete.jpg" alt="">
+        <img id="skyTexture" src="images/fantasy_sky.jpg" alt="">
     </a-assets>
 
 <!------------------------------------------------------------------------------------------------------>
@@ -126,12 +145,227 @@
     rotation="0 0 0">
     </a-entity>
 
+    <!-- Chair Componenet -->
+    <!-- <a-entity chair="
+          position: -15 0 -28.5;
+          rotation: 0 180 0;
+          scale: 1 1 1;
+
+          width: 0.6;
+          depth: 0.6;
+          seatHeight: 0.46;
+          seatThickness: 0.045;
+          backHeight: 0.95;
+          backThickness: 0.03;
+          legThickness: 0.04;
+          legInset: 0.03;
+
+          color: #8d6e63;
+          legColor: #4e342e;
+          metalness: 0.15;
+          roughness: 0.85
+        "
+              position="0 0 -2">
+    </a-entity> -->
+
+    <a-entity id="classroom-root"></a-entity>
+
+    <!-- To fill in the weird gap above the entrance to the classroom -->
+    <!-- <a-entity   
+    blank-wall="width: 7; height: 5; thickness: 0.3; units: ft; color: #eaeaea; anchor: ground"
+    position="-11.63 5 -28.57"
+    rotation="0 90 0">
+    </a-entity> -->
+    
+    <a-assets>
+        <img id="classroomRef" src="images/GoodHall_Classroom.jpg" crossorigin="anonymous" />
+    </a-assets>
+
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"
              rotation="-90 0 0" width="1000" height="1000"
              static-body="shape: box"></a-plane>
 
-</a-scene>
+</a-scene>  <!-- End A-Scene -->
+
+    <!--------------------------Classroom function-------------------------->
+    <!-- Everything is this function is chatgpt slightly tweaked by Josiah-->
+    <script>
+    (function () {
+    // ====== CONFIG ======
+    const classroomOrigin = new AFRAME.THREE.Vector3(-16.5, 0, -28.57); // your anchor
+    const ROOM_W = 32;      // ft  (wider)
+    const ROOM_D = 26;      // ft  (deeper)
+    const WALL_H = 15;      // ft  (match rest of build)
+    const WALL_T = 0.5;     // ft
+    const DOOR_W = 6;       // ft (double-door opening per set)
+    const SIDE_OPENING_W = 6; // ft (walk-in gap on right wall)
+    const FT = 0.3048;      // ft → m
+
+    function ensureRoot(scene) {
+        let root = scene.querySelector('#classroom-root');
+        if (!root) { root = document.createElement('a-entity'); root.id = 'classroom-root'; scene.appendChild(root); }
+        if (root.dataset.built === 'true') return null;
+        root.dataset.built = 'true';
+        root.setAttribute('position', `${classroomOrigin.x} ${classroomOrigin.y} ${classroomOrigin.z}`);
+        return root;
+    }
+
+    function buildClassroom(root) {
+        const room = document.createElement('a-entity');
+        room.id = 'classroom';
+        root.appendChild(room);
+
+        // ===== Floor =====
+        const floor = document.createElement('a-entity');
+        floor.setAttribute('classroom-floor', `units: ft; width: ${ROOM_W}; depth: ${ROOM_D}; color: #e7e7ea`);
+        room.appendChild(floor);
+
+        // ===== Walls (in meters) =====
+        // Back wall (whiteboard / doors)
+        const wBack = document.createElement('a-entity');
+        wBack.setAttribute('blank-wall', `units: ft; width: ${ROOM_W}; height: ${WALL_H}; thickness: ${WALL_T}; color: #ffffff; anchor: ground`);
+        wBack.setAttribute('position', `0 0 ${-ROOM_D/2 * FT}`);
+        room.appendChild(wBack);
+
+        // Front wall
+        const wFront = document.createElement('a-entity');
+        wFront.setAttribute('blank-wall', `units: ft; width: ${ROOM_W}; height: ${WALL_H}; thickness: ${WALL_T}; color: #ffffff; anchor: ground`);
+        wFront.setAttribute('position', `0 0 ${ ROOM_D/2 * FT}`);
+        wFront.setAttribute('rotation', '0 180 0');
+        room.appendChild(wFront);
+
+        // Left wall (solid with windows)
+        const wLeft = document.createElement('a-entity');
+        wLeft.setAttribute('blank-wall', `units: ft; width: ${ROOM_D}; height: ${WALL_H}; thickness: ${WALL_T}; color: #ffffff; anchor: ground`);
+        wLeft.setAttribute('rotation', '0 90 0');
+        wLeft.setAttribute('position', `${-ROOM_W/2 * FT} 0 0`);
+        room.appendChild(wLeft);
+
+        // Right wall with a 6-ft opening centered near hallway (split into two segments)
+        const segDepth = (ROOM_D - SIDE_OPENING_W) / 2; // ft
+        const rightA = document.createElement('a-entity');
+        rightA.setAttribute('blank-wall', `units: ft; width: ${segDepth}; height: ${WALL_H}; thickness: ${WALL_T}; color: #ffffff; anchor: ground`);
+        rightA.setAttribute('rotation', '0 -90 0');
+        // place “front” segment (positive z)
+        rightA.setAttribute('position', `${ROOM_W/2 * FT} 0 ${(SIDE_OPENING_W/2 + segDepth/2) * FT}`);
+        room.appendChild(rightA);
+
+        const rightB = document.createElement('a-entity');
+        rightB.setAttribute('blank-wall', `units: ft; width: ${segDepth}; height: ${WALL_H}; thickness: ${WALL_T}; color: #ffffff; anchor: ground`);
+        rightB.setAttribute('rotation', '0 -90 0');
+        // place “back” segment (negative z)
+        rightB.setAttribute('position', `${ROOM_W/2 * FT} 0 ${-(SIDE_OPENING_W/2 + segDepth/2) * FT}`);
+        room.appendChild(rightB);
+
+        // ===== Ceiling (raised) =====
+        const ceiling = document.createElement('a-box');
+        ceiling.setAttribute('width', ROOM_W * FT);
+        ceiling.setAttribute('depth', ROOM_D * FT);
+        ceiling.setAttribute('height', 0.06);
+        ceiling.setAttribute('material', 'color:#f3f4f6; roughness:1');
+        ceiling.setAttribute('position', `0 ${WALL_H*FT} 0`);
+        room.appendChild(ceiling);
+
+        // ===== Back wall: whiteboard, screen, and two double doors =====
+        // Pull them slightly off the wall toward +Z to avoid z-fighting / being embedded.
+        const board = document.createElement('a-entity');
+        board.setAttribute('whiteboard', 'units: ft; width: 12; height: 4.5; frameColor: #222; surfaceColor: #f7fafc');
+        board.setAttribute('position', `0 ${5 * FT} ${-ROOM_D/2 * FT + 0.12}`);   // +0.12m off the wall
+        room.appendChild(board);
+
+        const screen = document.createElement('a-entity');
+        screen.setAttribute('projection-screen', 'units: ft; width: 10; height: 5; color: #f0f0f0'); // slightly gray
+        screen.setAttribute('position', `0 ${7 * FT} ${-ROOM_D/2 * FT + 0.115}`);
+        room.appendChild(screen);
+
+        // Double doors left & right of the board (on back wall)
+        const doorOffsetX = 8; // ft from center to each door (tweak if you like)
+        const mkBackDoor = (sign) => {
+        const d = document.createElement('a-entity');
+        d.setAttribute('double-door', `units: ft; width: ${DOOR_W}; height: 7; autoOpen: true; frameColor: #444; leafColor: #9aa0a6`);
+        d.setAttribute('position', `${sign * doorOffsetX * FT} ${3.5 * FT} ${-ROOM_D/2 * FT + 0.15}`);
+        return d;
+        };
+        room.appendChild(mkBackDoor(-1)); // left of board
+        room.appendChild(mkBackDoor( 1)); // right of board
+
+        // ===== Windows on the left wall =====
+        for (let i = 0; i < 3; i++) {
+        const win = document.createElement('a-entity');
+        win.setAttribute('window-pane', 'units: ft; width: 4; height: 4; opacity: 0.4');
+        win.setAttribute('position', `${-ROOM_W/2 * FT + 0.02} ${1.7} ${(-6 + i*6) * FT}`);
+        win.setAttribute('rotation', '0 90 0');
+        room.appendChild(win);
+        }
+
+        // ===== Ceiling projectors (re-centered for wider room) =====
+        for (let i = 0; i < 2; i++) {
+        const proj = document.createElement('a-entity');
+        proj.setAttribute('ceiling-projector', 'units: ft');
+        const px = (-3 + i*6) * FT; // spread a bit more
+        proj.setAttribute('position', `${px} ${WALL_H*FT - 0.35} ${-5*FT}`);
+        room.appendChild(proj);
+        }
+
+        // ===== Light grid (raised with ceiling) =====
+        for (let x = -3; x <= 3; x += 3) {
+        for (let z = -6; z <= 6; z += 6) {
+            const light = document.createElement('a-entity');
+            light.setAttribute('ceiling-light-square', 'units: ft; size: 2; intensity: 1.0');
+            light.setAttribute('position', `${x*FT*2} ${WALL_H*FT - 0.12} ${z*FT}`);
+            room.appendChild(light);
+        }
+        }
+
+        // ===== Air vents =====
+        for (let i = 0; i < 2; i++) {
+        const vent = document.createElement('a-entity');
+        vent.setAttribute('air-vent', 'units: ft; width: 2; height: 1');
+        vent.setAttribute('rotation', '-90 0 0');
+        vent.setAttribute('position', `${(-8 + i*16)*FT} ${(WALL_H*FT) - 0.02} ${(ROOM_D/2 - 2)*FT}`);
+        room.appendChild(vent);
+        }
+
+        // ===== Tables & chairs (spread out a little more) =====
+        const rows = 3, cols = 4;
+        const tableWft = 4.0, tableDft = 1.8, spacingXft = 6.8, spacingZft = 5.6; // slightly larger gaps
+        const startX = -((cols-1) * spacingXft)/2;
+        const startZ = -2.2;
+
+        for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const tx = (startX + c*spacingXft) * FT;
+            const tz = (startZ + r*spacingZft) * FT;
+
+            const table = document.createElement('a-entity');
+            table.setAttribute('classroom-table', `units: ft; width:${tableWft}; depth:${tableDft}; height:2.5`);
+            table.setAttribute('position', `${tx} 0 ${tz}`);
+            room.appendChild(table);
+
+            const chair = document.createElement('a-entity');
+            chair.setAttribute('classroom-chair', 'units: ft; seatWidth: 1.6; seatDepth: 1.6; seatHeight: 1.6; backHeight: 1.6');
+            chair.setAttribute('position', `${tx} 0 ${tz + 1.25*FT}`);
+            chair.setAttribute('rotation', '0 180 0'); // face board
+            room.appendChild(chair);
+        }
+        }
+    }
+
+    function onSceneReady() {
+        const scene = document.querySelector('a-scene');
+        const root = ensureRoot(scene);
+        if (!root) return;
+        buildClassroom(root);
+    }
+
+    const scene = document.querySelector('a-scene');
+    if (scene.hasLoaded) onSceneReady();
+    else scene.addEventListener('loaded', onSceneReady);
+    })();
+    </script>
+
+    <!---------------------------End Classroom function--------------------------->
 
 </body>
 </html>

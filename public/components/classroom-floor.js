@@ -1,21 +1,18 @@
 (function(){
-  const FT = 0.3048;
   AFRAME.registerComponent('classroom-floor', {
     schema: {
-      units: {type: 'string', default: 'ft'},
-      width:  {type: 'number', default: 28},
-      depth:  {type: 'number', default: 24},
+      width:  {type: 'number', default: 8.534399726899208}, // 28 ft
+      depth:  {type: 'number', default: 7.315199765913608}, // 24 ft
       color:  {type: 'color',  default: '#e5e7eb'}
     },
     init(){
-      const u = this.data.units === 'ft' ? FT : 1.0;
-      const W = this.data.width * u;
-      const D = this.data.depth * u;
+      const W = this.data.width;
+      const D = this.data.depth;
       const floor = document.createElement('a-box');
-      floor.setAttribute('width', W);
-      floor.setAttribute('depth', D);
-      floor.setAttribute('height', 0.05 * u);
-      floor.setAttribute('position', `0 ${0.025*u} 0`);
+      floor.setAttribute('width',  W);
+      floor.setAttribute('depth',  D);
+      floor.setAttribute('height', 0.015239999512320017); // 0.05 ft
+      floor.setAttribute('position', `0 0.0076199997561600084 0`); // 0.025 ft up
       floor.setAttribute('material', `color:${this.data.color}; roughness:1; metalness:0`);
       this.el.appendChild(floor);
     }

@@ -5,10 +5,10 @@
   AFRAME.registerComponent('blank-wall', {
     schema: {
       // sizes in chosen units
-      width:     {type: 'number', default: 6},     // 6 ft wide by default
-      height:    {type: 'number', default: 6},     // 6 ft tall
-      thickness: {type: 'number', default: 0.5},   // 0.5 ft thick
-      units:     {type: 'string', default: 'ft'},  // 'ft' | 'm'
+      width:     {type: 'number', default: (6/3.2)},   
+      height:    {type: 'number', default: (6/3.2)},     
+      thickness: {type: 'number', default: (0.5/3.2)},   
+      units:     {type: 'string', default: 'm'},  // 'ft' | 'm'
       color:     {type: 'color',  default: '#ffffffff'},
       // auto place the wall so it sits on the ground (y = height/2)
       anchor:    {type: 'string', default: 'ground'} // 'ground' | 'center'

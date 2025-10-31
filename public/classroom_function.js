@@ -251,9 +251,21 @@
         buildClassroom(root);
     }
 
-    const scene = document.querySelector('a-scene');
-    if (scene.hasLoaded) onSceneReady();
-    else scene.addEventListener('loaded', onSceneReady);
+    // NEW WRAP
+    document.addEventListener('DOMContentLoaded', () => {
+        const scene = document.querySelector('a-scene');
+        if (!scene) {
+            console.error("No <a-scene> found in DOM. Classroom cannot build.");
+            return;
+        }
+
+        if (scene.hasLoaded) {
+            onSceneReady();
+        } else {
+            scene.addEventListener('loaded', onSceneReady);
+        }
+    });
+
 })();
 //    </script>
 

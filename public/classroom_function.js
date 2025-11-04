@@ -2,7 +2,7 @@
     <!-- Everything is this function is chatgpt slightly tweaked by Josiah-->
     <script>*/
 
-// IMPORT THESE
+// THESE COMPONENTS ARE AVAILABLE
 /*
     <script src="components/blankwall.js"></script>
     <script src="components/chair.js"></script>

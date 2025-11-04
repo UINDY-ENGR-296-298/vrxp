@@ -232,39 +232,34 @@ AFRAME.registerComponent('block-arrow-move', {
      <!-- Create video for back wall-->
     <a-assets>
     <!-- put your mp4 in ./media, or adjust the path -->
-    <video id="wallVid"
-            src="media/TestVideo2Vrxp.mp4"
-            crossorigin="anonymous"
-            muted
-            playsinline
-            loop
-            preload="auto"></video>
+      <video  id="vid2" 
+              src="media/TestVideo2Vrxp.mp4"
+              muted 
+              playsinline 
+              loop 
+              crossorigin="anonymous">
+      </video>
+
+      <video  id="vid" 
+              src="media/TestVideoVrxp.mp4"
+              muted 
+              playsinline 
+              loop 
+              crossorigin="anonymous">
+        </video>
     </a-assets>
 
     <!-- Place video on back wall -->
-    <a-plane id="backWallVideo"
-            width="1.8"
-            height="3.2"
-            position="0 1.5 11.92"
-            rotation="0 180 0"
-            material="shader: flat; src: #wallVid">
-    </a-plane>
-
-    <script>
-    const vid = document.getElementById('wallVid');
-
-    // try silent start, harmless if blocked
-    window.addEventListener('load', () => vid.play().catch(() => {}));
-
-    // first click, unmute and play with sound
-    const startWithSound = async () => {
-        vid.muted = false;
-        vid.volume = 1.0;
-        try { await vid.play(); } catch(e) {}
-        document.removeEventListener('click', startWithSound);
-    };
-    document.addEventListener('click', startWithSound);
-    </script>
+    <!-- first screen -->
+    <a-entity tv-screen="src: #vid; width: 3.2"
+              position="0 1.5 11.9"
+              rotation="0 180 0"></a-entity>
+              
+    <!-- second screen -->
+    <a-entity tv-screen="src: #vid2; width: 2.5; aspect: 0.5625"
+              position="3 1.4 11.9"
+              rotation="0 180 0"></a-entity>
+    
     <!-- End of Austin's stuff -->
 
 <!------------------------------------------------------------------------------------------------------>

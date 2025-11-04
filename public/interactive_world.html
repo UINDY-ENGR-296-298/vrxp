@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>AFrame Interactive Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- A-Frame core -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+
+    <!-- Custom components -->
+    <script src="components/OtherComponenets/change-color-on-click.js"></script>
+    <script src="components/OtherComponenets/toggle-target-on-click.js"></script>
+    <script src="components/OtherComponenets/slide-on-click.js"></script>
+    <script src="components/OtherComponenets/video-toggle-on-click.js"></script>
+    <script src="components/OtherComponenets/wasd-move-only.js"></script>
+    <script src="components/OtherComponenets/arrow-look.js"></script>
+
+    <!-- Skybox component -->
+    <script src="skybox/skycomponent.js"></script>
+
+    <style>
+      html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden; /* prevents arrow keys from scrolling the page */
+    }
+    </style>
+
+</head>
+<body>
+
+<!-- Plain HTML video element -->
+<video id="Video" src="media/CurrentProgram.mp4" loop crossorigin="anonymous"></video>
+
+<a-scene
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+    
+    <!-- Temporarily Disabled -->
+    <!-- PLAYER RIG (the "body") -->
+    <!-- <a-entity id="rig"
+          position="0 1 6"
+          rotation="0 0 0"
+          wasd-move-only="speed:10">
+      
+      <a-camera arrow-look look-controls="enabled: false">
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity> -->
+
+    <a-entity id="rig"
+          position="0 1 6"
+          rotation="0 0 0">
+      <a-camera>
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+    <!-- CLICKABLE BOX (changes color when clicked) -->
+    <a-box class="clickable"
+           position="0 1.5 -3"
+           material="color: #4CC3D9"
+           change-color-on-click>
+    </a-box>
+
+    <!-- TOGGLE TOWER (hidden until you click the small button) -->
+    <a-box id="dissapearing-box"
+           position="-3 2 -10"
+           depth="3"
+           width="3"
+           height="1000"
+           color="#800000"
+           visible="false">
+    </a-box>
+
+    <!-- BUTTON THAT TOGGLES THE TOWER -->
+    <a-box class="clickable"
+           position="-3 1.5 -2.5"
+           depth="0.5"
+           width="0.5"
+           height="0.5"
+           color="#121212"
+           toggle-target-on-click="target: #dissapearing-box">
+    </a-box>
+
+    <!-- Rolling Sphere -->
+    <a-sphere class="clickable"
+          position="-10 1 -2.5"
+          radius="1"
+          color="#800000"
+          slide-on-click="to: -10 1 -1000">
+    </a-sphere>
+
+    <!-- Play/Pause Video -->
+      <!-- The "screen" -->
+      <a-plane id="videoScreen"
+              class="clickable"
+              position="5 2 -1"
+              width="3" height="2"
+              material="shader: flat; src: #Video"
+              video-toggle-on-click>
+      </a-plane>
+
+
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+    <!-- ASSETS -->
+    <a-assets>
+        <img id="groundTexture" src="images/Grass_With_Many_Paths.png" alt="">
+    </a-assets>
+
+    <!-- GROUND PLANE -->
+    <a-plane id="ground" src="#groundTexture"
+             rotation="-90 0 0"
+             width="200"
+             height="200">
+    </a-plane>
+
+</a-scene>
+
+</body>
+</html>
+
+
+

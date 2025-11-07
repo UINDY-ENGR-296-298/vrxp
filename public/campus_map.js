@@ -64,7 +64,34 @@
     }
 
 
-    function road() {
+    function road(RoadStartX, RoadStartZ, RoadEndX, RoadEndZ, RoadWidth) {
+
+        // Direction vector in XZ-plane
+        const dx = RoadEndX - RoadStartX;
+        const dz = RoadEndZ - RoadStartZ;
+
+        // Length of the Road (distance between start and end)
+        const length = Math.sqrt(dx * dx + dz * dz);
+
+        // Midpoint for positioning the Road
+        const midX = (RoadStartX + RoadEndX) / 2;
+        const midZ = (RoadStartZ + RoadEndZ) / 2;
+
+        // Yaw angle so the plane points along the road direction
+        // A-Frame (Three.js) rotations are in degrees
+        const yawDeg = Math.atan2(dz, dx) * 180 / Math.PI;
+
+        const road = document.createElement('a-plane');
+        road.setAttribute(
+            'geometry', 
+            `primitive: plane; height: ${RoadWidth}; width: ${length}`
+        );
+        road.setAttribute('position', `${midX} 0.25 ${midZ}`);
+        road.setAttribute('rotation', `-90 ${yawDeg} 0`);
+        road.setAttribute('material', 'color: #b5b8b9');
+        road.setAttribute('shadow', 'receive: true');
+
+        return road;
 
     }
 
@@ -180,7 +207,7 @@
         const farHalfRing = document.createElement('a-ring');
         farHalfRing.setAttribute(
         'geometry',
-        'primitive: ring; radiusInner: 50.9; radiusOuter: 500; thetaStart: 0; thetaLength: 180'
+        'primitive: ring; radiusInner: 50.9; radiusOuter: 1500; thetaStart: 0; thetaLength: 180'
         );
         farHalfRing.setAttribute('position', '0 0 -37.5');
         farHalfRing.setAttribute('rotation', '-90 0 0');
@@ -191,7 +218,7 @@
         const nearHalfRing = document.createElement('a-ring');
         nearHalfRing.setAttribute(
         'geometry',
-        'primitive: ring; radiusInner: 50.9; radiusOuter: 500; thetaStart: 0; thetaLength: 180'
+        'primitive: ring; radiusInner: 50.9; radiusOuter: 1500; thetaStart: 0; thetaLength: 180'
         );
         nearHalfRing.setAttribute('position', '0 0 -37.5');
         nearHalfRing.setAttribute('rotation', '-90 0 180');
@@ -228,6 +255,8 @@
 
         // === Library ===
         campus.appendChild(building(100, 40, 80, 0, 0, 98, 0, 0, 0));
+        // === Library taller segment ===
+        campus.appendChild(building(40, 60, 80, -20, 0, 98, 0, 0, 0));
         
         // === Walkway in front of library ===
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
@@ -235,7 +264,11 @@
 
         // === Walkway left of library ===
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
-        campus.appendChild(walkway(-57.7, 50, -57.5, 230, 5));
+        campus.appendChild(walkway(-57.7, 50, -57.5, 150, 5));
+
+        // === Walkway behind library ===
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-60, 147.5, 60, 147.5, 5));
 
         // =========================== Martin Hall + Lilly ===========================
 
@@ -293,18 +326,21 @@
         campus.appendChild(parkingLot(-107.5, -160, 100, 130));
 
         // === Parking Lot in front of Entry to Martin and beside library ===
-        campus.appendChild(parkingLot(-115, 110, 100, 100))
+        campus.appendChild(parkingLot(-115, 110, 100, 100));
 
         // === Parking Lot to the back left of library ===
-        campus.appendChild(parkingLot(-115, 200, 50, 100))
+        campus.appendChild(parkingLot(-130, 200, 50, 70));
+
+        // === Parking Lot behind library ===
+        campus.appendChild(parkingLot(0, 190, 70, 100));
 
         // =========================== Miscillaneous Walkways ===========================
 
         // === Path in front of Entry to Martin ===
-        campus.appendChild(walkway( -115, 35, -115, 60, 10))
+        campus.appendChild(walkway( -115, 35, -115, 60, 10));
 
         // === Path around that parking lot ===
-        campus.appendChild(walkway(-172.5, 230, -55, 230, 5))
+        campus.appendChild(walkway(-172.5, 230, -85, 230, 5));
 
         // =========================== Switzer ===========================
 
@@ -356,6 +392,23 @@
         campus.appendChild(building(80, 2, 40, 110, 0, -20, 0, 90, 0));
         campus.appendChild(building(82, 1, 40, 109, 0, -20, 0, 90, 0));
         
+        // =========================== Roads ===========================
+
+        // === Road leading into parking in front of martin ===
+        campus.appendChild(road(-80, 160, -80, 700, 15));
+
+        // === Path around that parking lot ===
+        // campus.appendChild(walkway(-172.5, 230, -85, 230, 5));
+
+        // === Road behind parking lot behind parking lot in front of martin ===
+        campus.appendChild(road(-190, 250, 190, 250, 15));
+
+        // === Road behind Martin and Lilly ===
+        campus.appendChild(road(-182.5, 250, -182.5, -240, 15));
+
+        // === Road behind Switzer ===
+        campus.appendChild(road(-182.5, -232.5, 182.5, -232.5, 15));
+
     }
 
     function onSceneReady() {

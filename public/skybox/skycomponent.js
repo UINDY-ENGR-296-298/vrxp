@@ -5,7 +5,7 @@ ext:  {type: 'string', default: '.jpg'},
 // per-face rotation (radians)
 rotTop:    {type: 'number', default: 0},            // +Y
 rotBottom: {type: 'number', default: 0},            // -Y
-size:      {type: 'number', default: 1000},         // cube size
+size:      {type: 'number', default: 2000},         // cube size
 // If your pack mislabeled up/down, flip them:
 swapUpDown:{type: 'boolean', default: false}
 },

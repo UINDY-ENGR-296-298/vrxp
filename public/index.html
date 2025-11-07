@@ -57,13 +57,14 @@
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
     <!-- create camera obj -->
-    <a-entity id="rig" position="0 1.6 6">
+    <a-entity id="rig" position="0 1.6 0">
       <a-camera
         look-controls
         arrow-look="yawSpeed:120; pitchSpeed:90; clamp:80"
-        wasd-move-only="speed:3">
+        wasd-move-only="speed:40">
       </a-camera>
     </a-entity>
+
 
 
 <!------------------------------------------------------------------------------------------------------>
@@ -243,7 +244,7 @@
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"
-             position="0 -3.5 0"
+             position="0 -2 0"
              rotation="-90 0 0" width="1000" height="1000"
              static-body="shape: box"></a-plane>
 

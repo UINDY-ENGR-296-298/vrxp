@@ -21,6 +21,67 @@
         return root;
     }
 
+    function building(width, height, depth, PosX, PosY, PosZ, RotX, RotY, RotZ) {
+        const newCube = document.createElement('a-box');
+        newCube.setAttribute(
+            'geometry',
+            `primitive: box; width: ${width}; height: ${height}; depth: ${depth}`
+        );
+        newCube.setAttribute('position', `${PosX} ${PosY} ${PosZ}`);
+        newCube.setAttribute('rotation', `${RotX} ${RotY} ${RotZ}`)
+        newCube.setAttribute('material', 'color: #eaeaea');
+        return newCube
+    }
+
+    function walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth) {
+
+        // Direction vector in XZ-plane
+        const dx = PathEndX - PathStartX;
+        const dz = PathEndZ - PathStartZ;
+
+        // Length of the path (distance between start and end)
+        const length = Math.sqrt(dx * dx + dz * dz);
+
+        // Midpoint for positioning the path
+        const midX = (PathStartX + PathEndX) / 2;
+        const midZ = (PathStartZ + PathEndZ) / 2;
+
+        // Yaw angle so the plane points along the path direction
+        // A-Frame (Three.js) rotations are in degrees
+        const yawDeg = Math.atan2(dz, dx) * 180 / Math.PI;
+
+        const path = document.createElement('a-plane');
+        path.setAttribute(
+            'geometry', 
+            `primitive: plane; height: ${PathWidth}; width: ${length}`
+        );
+        path.setAttribute('position', `${midX} 0.2 ${midZ}`);
+        path.setAttribute('rotation', `-90 ${yawDeg} 0`);
+        path.setAttribute('material', 'color: #93a2a7');
+        path.setAttribute('shadow', 'receive: true');
+
+        return path;
+    }
+
+
+    function road() {
+
+    }
+
+    function parkingLot(X, Z, length, width) {
+        const lot = document.createElement('a-plane');
+        lot.setAttribute(
+            'geometry', 
+            `primitive: plane; height: ${length}; width: ${width}`
+        );
+        lot.setAttribute('position', `${X} 0.1 ${Z}`);
+        lot.setAttribute('rotation', '-90 0 0');
+        lot.setAttribute('material', 'color: #3a3f41');
+        lot.setAttribute('shadow', 'receive: true');
+
+        return lot;
+    }
+
     function buildCampus(root) {
         // Parent entity for the campus
         const campus = document.createElement('a-entity');
@@ -46,7 +107,7 @@
         );
         centerGreenFarHalf.setAttribute('position', '0 -1 -40');
         centerGreenFarHalf.setAttribute('rotation', '-90 0 0');
-        centerGreenFarHalf.setAttribute('material', 'color: #148a0b');
+        centerGreenFarHalf.setAttribute('material', 'color: #11750a');
         campus.appendChild(centerGreenFarHalf);
 
         // === Near Half ===
@@ -57,7 +118,7 @@
         );
         centerGreenNearHalf.setAttribute('position', '0 -1 -35');
         centerGreenNearHalf.setAttribute('rotation', '-90 180 0');
-        centerGreenNearHalf.setAttribute('material', 'color: #148a0b');
+        centerGreenNearHalf.setAttribute('material', 'color: #11750a');
         campus.appendChild(centerGreenNearHalf);
 
         // === Pool far wall ===
@@ -143,7 +204,7 @@
         'geometry',
         'primitive: cone; radiusBottom: 51; radiusTop: 50.1; height: 2; openEnded: true'
         );
-        invertedCone.setAttribute('material', 'color: #78858a; side: double');
+        invertedCone.setAttribute('material', 'color: #11750a; side: double');
         invertedCone.setAttribute('rotation', '180 0 0');
         invertedCone.setAttribute('position', '0 -1 -37.5');
         campus.appendChild(invertedCone);
@@ -152,7 +213,7 @@
         const centerWalkWay = document.createElement('a-ring');
         centerWalkWay.setAttribute(
         'geometry',
-        'primitive: ring; radiusInner: 50.9; radiusOuter: 55.9;'
+        'primitive: ring; radiusInner: 50.9; radiusOuter: 61;'
         );
         centerWalkWay.setAttribute('position', '0 0.1 -37.5');
         centerWalkWay.setAttribute('rotation', '-90 0 180');
@@ -162,179 +223,138 @@
         // =========================== Library Segment ===========================
 
         // === Walkway to library ===
-        const walkwayGreenToLibrary = document.createElement('a-plane');
-        walkwayGreenToLibrary.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:40'
-        )
-        walkwayGreenToLibrary.setAttribute('position', '0 0.1 38');
-        walkwayGreenToLibrary.setAttribute('rotation', '-90 90 0');
-        walkwayGreenToLibrary.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(walkwayGreenToLibrary);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(0, 18, 0, 58, 5));
 
         // === Library ===
-        const library = document.createElement('a-box');
-        library.setAttribute(
-            'geometry',
-            'primitive: box; width: 100; height: 40; depth: 80'
-        );
-        library.setAttribute('position', '0 0 98');
-        library.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(library);
+        campus.appendChild(building(100, 40, 80, 0, 0, 98, 0, 0, 0));
         
         // === Walkway in front of library ===
-        const walkwayFrontLibrary = document.createElement('a-plane');
-        walkwayFrontLibrary.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:120'
-        )
-        walkwayFrontLibrary.setAttribute('position', '0 0.1 50');
-        walkwayFrontLibrary.setAttribute('rotation', '-90 0 0');
-        walkwayFrontLibrary.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(walkwayFrontLibrary);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-60, 50, 50, 50, 5));
 
         // === Walkway left of library ===
-        const walkwayLeftLibrary = document.createElement('a-plane');
-        walkwayLeftLibrary.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:100'
-        )
-        walkwayLeftLibrary.setAttribute('position', '-57.5 0.1 100');
-        walkwayLeftLibrary.setAttribute('rotation', '-90 90 0');
-        walkwayLeftLibrary.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(walkwayLeftLibrary);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-57.7, 50, -57.5, 230, 5));
 
         // =========================== Martin Hall + Lilly ===========================
 
         // === Path to between ===
-        const walkwayToBetweenMartinLilly = document.createElement('a-plane');
-        walkwayToBetweenMartinLilly.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:40'
-        )
-        walkwayToBetweenMartinLilly.setAttribute('position', '-75 0.1 -37.5');
-        walkwayToBetweenMartinLilly.setAttribute('rotation', '-90 0 0');
-        walkwayToBetweenMartinLilly.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(walkwayToBetweenMartinLilly);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-55, -37.5, -95, -37.5, 5));
 
         // === Lilly Front ===
-        const lillyFront = document.createElement('a-box');
-        lillyFront.setAttribute(
-            'geometry',
-            'primitive: box; width: 30; height: 100; depth: 60'
-        );
-        lillyFront.setAttribute('position', '-105 0 -62.5');
-        lillyFront.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(lillyFront);
+        campus.appendChild(building(30, 60, 60, -105, 0, -62.5, 0, 0, 0));
 
         // === Lilly Back ===
-        const lillyBack = document.createElement('a-box');
-        lillyBack.setAttribute(
-            'geometry',
-            'primitive: box; width: 50; height: 100; depth: 15'
-        );
-        lillyBack.setAttribute('position', '-125 0 -85');
-        lillyBack.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(lillyBack);
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(50, 60, 15, -125, 0, -85, 0, 0, 0));
 
         // === Path in front of Lilly also leading to Martin ===
-        const crossMartinLilly = document.createElement('a-plane');
-        crossMartinLilly.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:100'
-        )
-        crossMartinLilly.setAttribute('position', '-80 0.1 -30');
-        crossMartinLilly.setAttribute('rotation', '-90 90 0');
-        crossMartinLilly.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(crossMartinLilly);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-80, 20, -80, -110, 5));
 
         // === Martin Front ===
-        const martinFront = document.createElement('a-box');
-        martinFront.setAttribute(
-            'geometry',
-            'primitive: box; width: 20; height: 120; depth: 10'
-        );
-        martinFront.setAttribute('position', '-80 0 20');
-        martinFront.setAttribute('rotation', '0 90 0')
-        martinFront.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(martinFront);
-
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(20, 80, 10, -80, 0, 20, 0, 90, 0));
         
         // === Martin Mid ===
-        const martinMid = document.createElement('a-box');
-        martinMid.setAttribute(
-            'geometry',
-            'primitive: box; width: 40; height: 120; depth: 60'
-        );
-        martinMid.setAttribute('position', '-115 0 15');
-        martinMid.setAttribute('rotation', '0 90 0')
-        martinMid.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(martinMid);
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(40, 80, 60, -115, 0, 15, 0, 90, 0));
 
         // === Martin Back === 
-        const martinBack = document.createElement('a-box');
-        martinBack.setAttribute(
-            'geometry',
-            'primitive: box; width: 80; height: 120; depth: 10'
-        );
-        martinBack.setAttribute('position', '-150 0 -5');
-        martinBack.setAttribute('rotation', '0 90 0')
-        martinBack.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(martinBack);
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(80, 80, 10, -150, 0, -5, 0, 90, 0));
 
         // === Sky Bridge between Martin/Lilly
-        const skyBridge = document.createElement('a-box');
-        skyBridge.setAttribute(
-            'geometry',
-            'primitive: box; width: 50; height: 10; depth: 20'
-        );
-        skyBridge.setAttribute('position', '-105 20 -30');
-        skyBridge.setAttribute('rotation', '0 90 0')
-        skyBridge.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(skyBridge);
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(50, 10, 20, -105, 15, -30, 0, 90, 0));
         
         // === Path between Martin and Lilly - Stage 1 ===
-        const betweenMartinLillyStageOne = document.createElement('a-plane');
-        betweenMartinLillyStageOne.setAttribute(
-            'geometry', 
-            'primitive:plane; height:10; width:55'
-        )
-        betweenMartinLillyStageOne.setAttribute('position', '-107.5 0.1 -17.5');
-        betweenMartinLillyStageOne.setAttribute('rotation', '-90 0 0');
-        betweenMartinLillyStageOne.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(betweenMartinLillyStageOne);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-80, -17.5, -135, -17.5, 10));
+
         // === Path between Martin and Lilly - Stage 2 ===
-        const betweenMartinLillyStageTwo = document.createElement('a-plane');
-        betweenMartinLillyStageTwo.setAttribute(
-            'geometry', 
-            'primitive:plane; height:10; width:65'
-        )
-        betweenMartinLillyStageTwo.setAttribute('position', '-135 0.1 -25');
-        betweenMartinLillyStageTwo.setAttribute('rotation', '-90 90 0');
-        betweenMartinLillyStageTwo.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(betweenMartinLillyStageTwo);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-135, 0, -135, -65, 10));
+
         // === Path between Martin and Lilly - Stage 3 ===
-        const betweenMartinLillyStageThree = document.createElement('a-plane');
-        betweenMartinLillyStageThree.setAttribute(
-            'geometry', 
-            'primitive:plane; height:10; width:40'
-        )
-        betweenMartinLillyStageThree.setAttribute('position', '-150 0.1 -60');
-        betweenMartinLillyStageThree.setAttribute('rotation', '-90 0 0');
-        betweenMartinLillyStageThree.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(betweenMartinLillyStageThree);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-130, -65, -172.5, -65, 10));
 
         // === Walkway behind Martin/Lilly ===
-        const walkwayBehindMartinLilly = document.createElement('a-plane');
-        walkwayBehindMartinLilly.setAttribute(
-            'geometry', 
-            'primitive:plane; height:5; width:300'
-        )
-        walkwayBehindMartinLilly.setAttribute('position', '-170 0.1 50');
-        walkwayBehindMartinLilly.setAttribute('rotation', '-90 90 0');
-        walkwayBehindMartinLilly.setAttribute('material', 'color: #93a2a7');
-        campus.appendChild(walkwayBehindMartinLilly);
+        // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
+        campus.appendChild(walkway(-170, 230, -170, -110, 5));
 
+        // =========================== Parking Lots ===========================
+
+        // === Parking Lot beside cafe ===
+        // parkingLot(X, Z, length, width)
+        campus.appendChild(parkingLot(-107.5, -160, 100, 130));
+
+        // === Parking Lot in front of Entry to Martin and beside library ===
+        campus.appendChild(parkingLot(-115, 110, 100, 100))
+
+        // === Parking Lot to the back left of library ===
+        campus.appendChild(parkingLot(-115, 200, 50, 100))
+
+        // =========================== Miscillaneous Walkways ===========================
+
+        // === Path in front of Entry to Martin ===
+        campus.appendChild(walkway( -115, 35, -115, 60, 10))
+
+        // === Path around that parking lot ===
+        campus.appendChild(walkway(-172.5, 230, -55, 230, 5))
+
+        // =========================== Switzer ===========================
+
+        // === Schwitzer === 
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(120, 40, 60, 17.5, 0, -150, 0, 0, 0));
+
+        // === Schwitzer Deck === 
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(90, 10, 60, 0, 0, -140, 0, 0, 0));
+
+        // === Schwitzer Entry === 
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(70, 5, 60, 35, 0, -140, 0, 0, 0));
+
+        // === Schwitzer Stairs === 
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(30, 4, 60, 57, 0, -138, 0, 0, 0));
+        campus.appendChild(building(32, 3, 60, 58, 0, -137, 0, 0, 0));
+        campus.appendChild(building(34, 2, 60, 59, 0, -136, 0, 0, 0));
+        campus.appendChild(building(36, 1, 60, 60, 0, -135, 0, 0, 0));
+
+        // === Path in front of Schwitzer Entry ===
+        campus.appendChild(walkway(42, -102.5, 78, -102.5, 5));
+
+        // === Path from center-circle path to Schwitzer ===
+        campus.appendChild(walkway(57, -30, 57, -105, 5));
+
+        // =========================== Esch ===========================
+
+        // === Esch ===
+        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        campus.appendChild(building(130, 60, 40, 130, 0, -20, 0, 90, 0));
+
+        // === Esch Wall left ===
+        campus.appendChild(building(30, 30, 40, 120, 0, -70, 0, 90, 0));
+
+        // === Esch Wall Right ===
+        campus.appendChild(building(30, 30, 40, 120, 0, 30, 0, 90, 0));
+
+        // === Esch entry ===
+        campus.appendChild(building(70, 7, 40, 115, 0, -20, 0, 90, 0));
+
+        // === Esch stairs ===
+        campus.appendChild(building(72, 6, 40, 114, 0, -20, 0, 90, 0));
+        campus.appendChild(building(74, 5, 40, 113, 0, -20, 0, 90, 0));
+        campus.appendChild(building(76, 4, 40, 112, 0, -20, 0, 90, 0));
+        campus.appendChild(building(78, 3, 40, 111, 0, -20, 0, 90, 0));
+        campus.appendChild(building(80, 2, 40, 110, 0, -20, 0, 90, 0));
+        campus.appendChild(building(82, 1, 40, 109, 0, -20, 0, 90, 0));
         
     }
 

@@ -116,14 +116,14 @@
         root.appendChild(campus);
 
         // ===== Simple block example =====
-        const block = document.createElement('a-box');
-        block.setAttribute(
-            'geometry',
-            'primitive: box; width: 1; height: 1; depth: 1'
-        );
-        block.setAttribute('position', '0 0 -10');
-        block.setAttribute('material', 'color: #eaeaea');
-        campus.appendChild(block);
+        //const block = document.createElement('a-box');
+        //block.setAttribute(
+        //    'geometry',
+        //    'primitive: box; width: 1; height: 1; depth: 1'
+        //);
+        //block.setAttribute('position', '0 0 -10');
+        //block.setAttribute('material', 'color: #eaeaea');
+        //campus.appendChild(block);
 
         // =========================== Center Circle ===========================
         // === Far Half ===

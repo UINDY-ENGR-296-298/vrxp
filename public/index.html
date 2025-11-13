@@ -30,6 +30,8 @@
     <script src="components/tree_cluster.js"></script>
     <script src="components/wasd-move.js"></script> <!--Austin's-->
     <script src="components/arrow-look.js"></script> <!--Austin's-->
+    <script src="components/teleport-pad.js"></script> <!--Austin's-->
+
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
     <script src="components/chair_component.js"></script>
@@ -55,13 +57,20 @@
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
     <!-- create camera obj -->
-    <a-entity id="rig" position="0 0 6">
+    <a-entity id="rig"
+              dynamic-body="mass:1"
+              wasd-move-only="speed:10"
+              position="0 0 6">
+
       <a-camera
         look-controls
-        arrow-look="yawSpeed:120; pitchSpeed:90; clamp:80"
-        wasd-move-only="speed:3">
+        arrow-look
+        wasd-controls-enabled="false">
       </a-camera>
+
     </a-entity>
+
+
 
 
 <!------------------------------------------------------------------------------------------------------>
@@ -128,6 +137,13 @@
       position="0 0 12"
       rotation="0 0 0">
     </a-entity>
+
+    <!-- add teleporter to next html -->
+    <a-entity 
+      teleport-pad="to: interactive_world.html"
+      position="0 0 5">
+    </a-entity>
+
 
     <!-- LEFT WALL of the room -->
     <a-entity

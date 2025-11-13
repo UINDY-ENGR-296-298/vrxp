@@ -28,9 +28,11 @@
     <script src="components/classroom-floor.js"></script>
     <script src="index.js"></script>
     <script src="components/tree_cluster.js"></script>
-    <script src="components/wasd-move.js"></script> <!--Austin's-->
-    <script src="components/arrow-look.js"></script> <!--Austin's-->
-    <script src="components/teleport-pad.js"></script> <!--Austin's-->
+    <script src="components/wasd-move.js"></script>
+    <script src="components/arrow-look.js"></script>
+    <script src="components/teleport-pad.js"></script>
+    <script src="components/scene-fade.js"></script>
+
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -48,9 +50,9 @@
 
 <body>
 <a-scene
-        renderer="colorManagement: true; physicallyCorrectLights: true"
-        physics="gravity: -9.8; debug: false"
-        skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708">
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
@@ -58,18 +60,27 @@
 
     <!-- create camera obj -->
     <a-entity id="rig"
-              dynamic-body="mass:1"
-              wasd-move-only="speed:10"
-              position="0 0 6">
+          dynamic-body="mass:1"
+          wasd-move-only="speed:10"
+          position="0 0 6">
 
-      <a-camera
-        look-controls
-        arrow-look
-        wasd-controls-enabled="false">
+    <a-camera
+      look-controls
+      arrow-look
+      wasd-controls-enabled="false">
+
+        <!-- Cursor and raycaster for clicking -->
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
       </a-camera>
-
     </a-entity>
-
 
 
 
@@ -138,12 +149,16 @@
       rotation="0 0 0">
     </a-entity>
 
-    <!-- add teleporter to next html -->
-    <a-entity 
-      teleport-pad="to: interactive_world.html"
-      position="0 0 5">
-    </a-entity>
-
+    <!-- add teleporter (with con fig) to next html -->
+    <a-entity
+    teleport-pad="to: interactive_world.html;
+                  width: 2.5;
+                  color: #c0d950;
+                  glowColor: #32c743;
+                  radius: 1.5;
+                  fadetime: 1000"
+    position="0 0 10">
+  </a-entity>
 
     <!-- LEFT WALL of the room -->
     <a-entity

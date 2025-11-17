@@ -90,48 +90,59 @@
 
     <!-- All assets go here -->
     <a-assets>
-      
-    <img id="groundTexture" src="images/concrete.jpg" alt="">
-    <img id="classroomRef" src="images/GoodHall_Classroom.jpg" crossorigin="anonymous" />
+        
+      <img id="groundTexture" src="images/concrete.jpg" alt="">
+      <img id="classroomRef" src="images/GoodHall_Classroom.jpg" crossorigin="anonymous" />
 
-    <!------------ Austin's stuff ------------>
-    <!-- put your mp4 in ./media, or adjust the path -->
-    <!-- Create video for back wall-->
-    <video id="wallVid"
-            src="media/TestVideo2Vrxp.mp4"
-            crossorigin="anonymous"
-            muted
-            playsinline
-            loop
-            preload="auto"></video>
+      <!------------ Austin's stuff ------------>
+      <!-- put your mp4 in ./media, or adjust the path of src to match videos location -->
+      <!-- define the video to pass to a video screen-->
+      <video  id="TestVideo1Vrxp"
+              src="media/TestVideoVrxp.mp4"
+              crossorigin="anonymous"
+              muted
+              playsinline
+              loop
+              preload="auto"></video>
+
+      <video  id="TestVideo2Vrxp"
+              src="media/TestVideo2Vrxp.mp4"
+              crossorigin="anonymous"
+              muted
+              playsinline
+              loop
+              preload="auto"></video>
 
     </a-assets>
-    <!--  End all assets -->
 
-    <!-- Place video on back wall -->
-    <a-plane id="backWallVideo"
-            width="1.8"
-            height="3.2"
-            position="0 1.5 11.92"
-            rotation="0 180 0"
-            material="shader: flat; src: #wallVid">
-    </a-plane>
+    <!-- Place video on back wall, creates the video screen and passes video from above -->
+    <a-entity
+      position="3 0.5 11.92"
+      rotation="0 180 0"
+      tv-screen="
+          width: 3.6;
+          aspect: 1.7778;
+          x: 0;
+          y: 1.5;
+          zLift: 0.01;
+          src: #TestVideo1Vrxp;
+          autoplay: true;
+          controls: true">
+      </a-entity>
 
-    <script>
-    const vid = document.getElementById('wallVid');
-
-    // try silent start, harmless if blocked
-    window.addEventListener('load', () => vid.play().catch(() => {}));
-
-    // first click, unmute and play with sound
-    const startWithSound = async () => {
-        vid.muted = false;
-        vid.volume = 1.0;
-        try { await vid.play(); } catch(e) {}
-        document.removeEventListener('click', startWithSound);
-    };
-    document.addEventListener('click', startWithSound);
-    </script>
+    <a-entity
+      position="-3 0.5 11.92"
+      rotation="0 180 0"
+      tv-screen="
+          width: 1.8;
+          aspect: 0.5624;
+          x: 0;
+          y: 1.5;
+          zLift: 0.01;
+          src: #TestVideo2Vrxp;
+          autoplay: true;
+          controls: true">
+      </a-entity>
     <!-- End of Austin's stuff -->
 
 <!------------------------------------------------------------------------------------------------------>
@@ -157,7 +168,7 @@
                   glowColor: #32c743;
                   radius: 1.5;
                   fadetime: 1000"
-    position="0 0 10">
+    position="0 0 -10">
   </a-entity>
 
     <!-- LEFT WALL of the room -->

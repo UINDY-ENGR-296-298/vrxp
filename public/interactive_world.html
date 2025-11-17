@@ -14,8 +14,11 @@
     <script src="components/OtherComponenets/toggle-target-on-click.js"></script>
     <script src="components/OtherComponenets/slide-on-click.js"></script>
     <script src="components/OtherComponenets/video-toggle-on-click.js"></script>
-    <script src="components/OtherComponenets/wasd-move-only.js"></script>
-    <script src="components/OtherComponenets/arrow-look.js"></script>
+    <script src="components/wasd-move.js"></script>
+    <script src="components/arrow-look.js"></script>
+    <script src="components/teleport-pad.js"></script>
+    <script src="components/scene-fade.js"></script>
+
 
     <!-- Skybox component -->
     <script src="skybox/skycomponent.js"></script>
@@ -35,33 +38,22 @@
 <video id="Video" src="media/CurrentProgram.mp4" loop crossorigin="anonymous"></video>
 
 <a-scene
+    scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
-    
-    <!-- Temporarily Disabled -->
-    <!-- PLAYER RIG (the "body") -->
-    <!-- <a-entity id="rig"
-          position="0 1 6"
-          rotation="0 0 0"
-          wasd-move-only="speed:10">
-      
-      <a-camera arrow-look look-controls="enabled: false">
-        <a-entity
-          id="aimDot"
-          class="cursor"
-          cursor="fuse: false"
-          raycaster="objects: .clickable"
-          position="0 0 -1"
-          geometry="primitive: circle; radius: 0.005"
-          material="color: white; shader: flat">
-        </a-entity>
-      </a-camera>
-    </a-entity> -->
 
+    <!-- create camera obj -->
     <a-entity id="rig"
-          position="0 1 6"
-          rotation="0 0 0">
-      <a-camera>
+          dynamic-body="mass:1"
+          wasd-move-only="speed:10"
+          position="0 0 6">
+
+    <a-camera
+      look-controls
+      arrow-look
+      wasd-controls-enabled="false">
+
+        <!-- Cursor and raycaster for clicking -->
         <a-entity
           id="aimDot"
           class="cursor"
@@ -72,6 +64,12 @@
           material="color: white; shader: flat">
         </a-entity>
       </a-camera>
+    </a-entity>
+
+    <!-- add teleporter to next html -->
+    <a-entity 
+      teleport-pad="to: index.html; radius: 1.5"
+      position="0 0 10">
     </a-entity>
 
     <!-- CLICKABLE BOX (changes color when clicked) -->

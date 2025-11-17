@@ -2,11 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>AFrame Interactive Test</title>
+    <title>VRXP - Interactive World</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- A-Frame core -->
+    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- Physics system -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
 
     <!-- Custom components -->
@@ -18,7 +24,6 @@
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
-
 
     <!-- Skybox component -->
     <script src="skybox/skycomponent.js"></script>

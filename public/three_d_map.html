@@ -14,6 +14,12 @@
     <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
+    <!--Components-->
+    <script src="components/wasd-move.js"></script>
+    <script src="components/arrow-look.js"></script>
+    <script src="components/teleport-pad.js"></script>
+    <script src="components/scene-fade.js"></script>
+
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
 
@@ -21,8 +27,11 @@
      <script src="campus_map.js"></script>
 
     <style>
-      html, body { margin:0; height:100%; }
-      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
+      html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden; /* prevents arrow keys from scrolling the page */
+    }
     </style>
 
 </head>
@@ -30,22 +39,44 @@
 <body>
 
 <a-scene
-        renderer="colorManagement: true; physicallyCorrectLights: true"
-        physics="gravity: -9.8; debug: false"
-        skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708">
+
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- create camera obj -->
+    <a-entity id="rig"
+          dynamic-body="mass:1"
+          wasd-move-only="speed:10"
+          position="0 0 6">
+
+    <a-camera
+      look-controls
+      arrow-look
+      wasd-controls-enabled="false">
+
+        <!-- Cursor and raycaster for clicking -->
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+    <!-- add teleporter to next html -->
+    <a-entity 
+      teleport-pad="to: index.html; radius: 1.5"
+      position="0 1 30">
+    </a-entity>
 
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
-
-    <!-- create camera obj -->
-    <a-entity id="rig" position="0 1.6 0">
-      <a-camera
-        look-controls
-        arrow-look="yawSpeed:120; pitchSpeed:90; clamp:80"
-        wasd-move-only="speed:40">
-      </a-camera>
-    </a-entity>
 
     <!-- All assets go here -->
     <a-assets>

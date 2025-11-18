@@ -21,11 +21,14 @@
     <script src="components/OtherComponents/slide-on-click.js"></script>
     <script src="components/OtherComponents/video-toggle-on-click.js"></script>
 
+    <script src="components/OtherComponents/change-color-on-click.js"></script>
+    <script src="components/OtherComponents/toggle-target-on-click.js"></script>
+    <script src="components/OtherComponents/slide-on-click.js"></script>
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
-
+    <script src="components/videoscreen.js"></script>    
     <!-- Skybox component -->
     <script src="skybox/skycomponent.js"></script>
 
@@ -40,13 +43,24 @@
 </head>
 <body>
 
-<!-- Plain HTML video element -->
-<video id="Video" src="media/CurrentProgram.mp4" loop crossorigin="anonymous"></video>
-
 <a-scene
     scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- ASSETS -->
+    <a-assets>
+        <img id="groundTexture" src="images/ground_texture.jpeg" alt="">
+
+    <!-- Plain HTML video element (define videos to use latter) -->
+    <video  id="TestVideo1Vrxp"
+            src="media/TestVideoVrxp.mp4"
+            crossorigin="anonymous"
+            muted
+            playsinline
+            loop
+            preload="auto"></video>
+    </a-assets>
 
     <!-- create camera obj -->
     <a-entity id="rig"
@@ -71,6 +85,21 @@
         </a-entity>
       </a-camera>
     </a-entity>
+
+    <!-- Play/Pause Video -->
+    <!-- The "screen" -->
+        <a-entity
+          position="3.5 0.25 -3"
+          rotation="0 0 0"
+          tv-screen="
+            width: 3.6;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #TestVideo1Vrxp;
+            autoplay: true;">
+        </a-entity>
 
     <!-- add teleporter to next html -->
     <a-entity 
@@ -113,32 +142,19 @@
           slide-on-click="to: -10 1 -1000">
     </a-sphere>
 
-    <!-- Play/Pause Video -->
-      <!-- The "screen" -->
-      <a-plane id="videoScreen"
-              class="clickable"
-              position="5 2 -1"
-              width="3" height="2"
-              material="shader: flat; src: #Video"
-              video-toggle-on-click>
-      </a-plane>
-
-
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
-    <!-- ASSETS -->
-    <a-assets>
-        <img id="groundTexture" src="images/Grass_With_Many_Paths.png" alt="">
-    </a-assets>
-
     <!-- GROUND PLANE -->
-    <a-plane id="ground" src="#groundTexture"
-             rotation="-90 0 0"
-             width="200"
-             height="200">
+    <a-plane id="ground"
+            src="#groundTexture"
+            rotation="-90 0 0"
+            width="200"
+            height="200"
+            material="repeat: 40 40; src: #groundTexture">
     </a-plane>
+
 
 </a-scene>
 

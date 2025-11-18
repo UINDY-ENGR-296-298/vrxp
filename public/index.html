@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>Tech Demo - Classroom/Video</title>
+    <title>VRXP - Classroom/Videos</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
@@ -98,7 +98,7 @@
       <!-- put your mp4 in ./media, or adjust the path of src to match videos location -->
       <!-- define the video to pass to a video screen-->
       <video  id="TestVideo1Vrxp"
-              src="media/TestVideoVrxp.mp4"
+              src="media/InteractivityTest.mp4"
               crossorigin="anonymous"
               muted
               playsinline
@@ -170,6 +170,12 @@
                   fadetime: 1000"
     position="0 0 -10">
   </a-entity>
+
+    <!-- add teleporter to 3D Map html -->
+    <a-entity 
+      teleport-pad="to: three_d_map.html; radius: 1.5"
+      position="0 0 10">
+    </a-entity>
 
     <!-- LEFT WALL of the room -->
     <a-entity

@@ -21,9 +21,7 @@
     <script src="components/scene-fade.js"></script>
 
     <!-- Models -->
-    <script src="models_Chinese_Generator/Library/411a0e52a216b3f4a1d726d5fe3cc0a7.obj"></script>
-    <script src="models_Chinese_Generator/Library/material.mtl"></script>
-    <!-- <script src="models_ChatGPT/krannert_memorial_library_proxy_v2_gltf/model.gltf"></script> -->
+    <script src="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"></script>
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -53,16 +51,6 @@
     <a-assets>
       
       <img id="groundTexture" src="images/concrete.jpg" alt="">
-
-      <a-asset-item
-        id="library-obj"
-        src="models_Chinese_Generator/Library/411a0e52a216b3f4a1d726d5fe3cc0a7.obj">
-      </a-asset-item>
-
-      <a-asset-item
-        id="library-mtl"
-        src="models_Chinese_Generator/Library/material.mtl">
-      </a-asset-item>
 
     </a-assets>
     <!--  End all assets -->
@@ -99,18 +87,11 @@
 
     <!-- 3D Model Library -->
     <a-entity
-      obj-model="obj: #library-obj; mtl: #library-mtl"
-      position="0 0 89"
-      rotation="0 -180 0"
-      scale="100 100 100"
-    ></a-entity>
-
-    <!-- <a-entity
-    gltf-model="models_ChatGPT/krannert_memorial_library_proxy_v2_gltf/model.gltf"
+    gltf-model="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"
     position="23 0 72"
     rotation="0 180 0"
     scale="1 1 1">
-    </a-entity> -->
+    </a-entity>
 
 
     <!-- LIGHTS -->

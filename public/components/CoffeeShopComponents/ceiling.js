@@ -16,33 +16,33 @@ AFRAME.registerComponent('ceiling-trim', {
     // Start at origin
     shape.moveTo(0, 0);
     shape.bezierCurveTo(
-      d.width * 0.05, d.length * -0.67,
-      d.width * 0.15,  d.length * -1.5,
-      d.width * 0.25, d.length * -2
+      d.width * 0.01, d.length * -0.1763157895,
+      d.width * 0.03, d.length * -0.3947368421,
+      d.width * 0.05, d.length * -0.5263157895
     );
 
     shape.bezierCurveTo(
-      d.width * 0.34, d.length * -2.3,
-      d.width * 0.59, d.length * -2.8,
-      d.width * 0.75, d.length * -3
+      d.width * 0.068, d.length * -0.6052631579,
+      d.width * 0.118, d.length * -0.7368421053,
+      d.width * 0.15,  d.length * -0.7894736842
     );
 
     shape.bezierCurveTo(
-      d.width * 1.1, d.length * -3.26,
-      d.width * 1.6, d.length * -3.46,
-      d.width * 2,   d.length * -3.55
+      d.width * 0.22, d.length * -0.8578947368,
+      d.width * 0.32, d.length * -0.9105263158,
+      d.width * 0.4,  d.length * -0.9342105263
     );
 
     shape.bezierCurveTo(
-      d.width * 2.5, d.length * -3.64,
-      d.width * 3,   d.length * -3.69,
-      d.width * 3.5, d.length * -3.73
+      d.width * 0.5, d.length * -0.9578947368,
+      d.width * 0.6, d.length * -0.9710526316,
+      d.width * 0.7, d.length * -0.9815789474
     );
 
     shape.bezierCurveTo(
-      d.width * 4,   d.length * -3.76,
-      d.width * 4.6, d.length * -3.79,
-      d.width * 5,   d.length * -3.8
+      d.width * 0.8,  d.length * -0.9894736842,
+      d.width * 0.92, d.length * -0.9973684211,
+      d.width * 1,    d.length * -1
     );
 
 
@@ -93,36 +93,36 @@ AFRAME.registerComponent('ceiling', {
     // Start at origin
     shape.moveTo(0, 0);
     shape.bezierCurveTo(
-      d.width * 0.05, d.length * -0.67,
-      d.width * 0.15,  d.length * -1.5,
-      d.width * 0.25, d.length * -2
+      d.width * 0.01, d.length * -0.1763157895,
+      d.width * 0.03, d.length * -0.3947368421,
+      d.width * 0.05, d.length * -0.5263157895
     );
 
     shape.bezierCurveTo(
-      d.width * 0.34, d.length * -2.3,
-      d.width * 0.59, d.length * -2.8,
-      d.width * 0.75, d.length * -3
+      d.width * 0.068, d.length * -0.6052631579,
+      d.width * 0.118, d.length * -0.7368421053,
+      d.width * 0.15,  d.length * -0.7894736842
     );
 
     shape.bezierCurveTo(
-      d.width * 1.1, d.length * -3.26,
-      d.width * 1.6, d.length * -3.46,
-      d.width * 2,   d.length * -3.55
+      d.width * 0.22, d.length * -0.8578947368,
+      d.width * 0.32, d.length * -0.9105263158,
+      d.width * 0.4,  d.length * -0.9342105263
     );
 
     shape.bezierCurveTo(
-      d.width * 2.5, d.length * -3.64,
-      d.width * 3,   d.length * -3.69,
-      d.width * 3.5, d.length * -3.73
+      d.width * 0.5, d.length * -0.9578947368,
+      d.width * 0.6, d.length * -0.9710526316,
+      d.width * 0.7, d.length * -0.9815789474
     );
 
     shape.bezierCurveTo(
-      d.width * 4,   d.length * -3.76,
-      d.width * 4.6, d.length * -3.79,
-      d.width * 5,   d.length * -3.8
+      d.width * 0.8,  d.length * -0.9894736842,
+      d.width * 0.92, d.length * -0.9973684211,
+      d.width * 1,    d.length * -1
     );
 
-    shape.lineTo(d.width*5, 0);
+    shape.lineTo(d.width*1, 0);
     shape.lineTo(0, 0);
     shape.closePath();
 

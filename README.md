@@ -23,3 +23,7 @@ docker run -it --rm -p 8080:8080 -v ${PWD}/public:/app/public --name vrxp_con vr
 ```
 docker exec -it vrxp_con /bin/sh
 ``
+
+NAMING CONVENTION:
+- Use camelCase for folders
+- Use snake_case for files

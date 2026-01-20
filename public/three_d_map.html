@@ -20,6 +20,9 @@
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
 
+    <!-- Models -->
+    <script src="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"></script>
+
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
 
@@ -43,6 +46,14 @@
     scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- All assets go here -->
+    <a-assets>
+      
+      <img id="groundTexture" src="images/concrete.jpg" alt="">
+
+    </a-assets>
+    <!--  End all assets -->
 
     <!-- create camera obj -->
     <a-entity id="rig"
@@ -74,17 +85,18 @@
       position="0 0 -37.5">
     </a-entity>
 
+    <!-- 3D Model Library -->
+    <a-entity
+    gltf-model="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"
+    position="23 0 72"
+    rotation="0 180 0"
+    scale="1 1 1">
+    </a-entity>
+
+
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
-
-    <!-- All assets go here -->
-    <a-assets>
-      
-    <img id="groundTexture" src="images/concrete.jpg" alt="">
-
-    </a-assets>
-    <!--  End all assets -->
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"

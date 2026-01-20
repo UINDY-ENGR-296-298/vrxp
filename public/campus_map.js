@@ -253,10 +253,10 @@
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
         campus.appendChild(walkway(0, 18, 0, 58, 5));
 
-        // === Library ===
-        campus.appendChild(building(100, 40, 80, 0, 0, 98, 0, 0, 0));
-        // === Library taller segment ===
-        campus.appendChild(building(40, 60, 80, -20, 0, 98, 0, 0, 0));
+        // // === Library ===
+        // campus.appendChild(building(100, 40, 80, 0, 0, 98, 0, 0, 0));
+        // // === Library taller segment ===
+        // campus.appendChild(building(40, 60, 80, -20, 0, 98, 0, 0, 0));
         
         // === Walkway in front of library ===
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)

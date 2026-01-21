@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>The Perk III at Krannert Memorial Library</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- Physics system -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+
+    <!-- Components -->
+    <script src="components/wasd-move.js"></script> <!--Austin's-->
+    <script src="components/arrow-look.js"></script> <!--Austin's-->
+
+    <!-- Skybox component -->
+    <script src="skybox/skycomponent.js"></script>
+
+    <!-- Toggle Main -->
+    <script src="index.js"></script>
+
+    <style>
+      html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden; /* prevents arrow keys from scrolling the page */
+    }
+    </style>
+
+</head>
+<body>
+
+<a-scene
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+    
+    <!-- Temporarily Disabled -->
+    <!-- PLAYER RIG (the "body") -->
+    <!-- <a-entity id="rig"
+          position="0 1 6"
+          rotation="0 0 0"
+          wasd-move-only="speed:10">
+      
+      <a-camera arrow-look look-controls="enabled: false">
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity> -->
+
+    <a-entity id="rig"
+          position="0 1 6"
+          rotation="0 0 0">
+      <a-camera>
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+    <a-entity
+      counter
+      position="0 0 0"
+      rotation="0 0 0">
+    </a-entity>
+
+    <a-entity
+      counter
+      position="0 0 0">
+    </a-entity>
+
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+    <!-- ASSETS -->
+    <a-assets>
+        <img id="groundTexture" src="images/Grass_With_Many_Paths.png" alt="">
+    </a-assets>
+
+    <!-- GROUND PLANE -->
+    <a-plane id="ground" src="#groundTexture"
+             rotation="-90 0 0"
+             width="200"
+             height="200">
+    </a-plane>
+
+</a-scene>
+
+</body>
+</html>
+
+
+

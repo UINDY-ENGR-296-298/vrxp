@@ -1,3 +1,9 @@
+function yVal(xVal){
+  return (1/(100*xVal))-(1+(1/101))
+  // Copy-Paste into Desmos Graphing calculator:
+  // \frac{1}{100x+1}-\left(1+\frac{1}{100+1}\right)
+}
+
 (function(){
 
 AFRAME.registerComponent('ceiling-trim', {
@@ -6,7 +12,7 @@ AFRAME.registerComponent('ceiling-trim', {
     length: { type: 'number', default: 1.5 },
     thickness: { type: 'number', default: 1 },
     depth: { type: 'number', default: 1 },
-    color: { type: 'color', default: '#942323ff' }
+    color: { type: 'color', default: '#d41234' }
   },
 
   init() {

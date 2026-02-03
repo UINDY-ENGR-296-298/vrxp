@@ -1,57 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>VRXP - 3D UIndy Map</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta charset="UTF-8" />
+  <title>VRXP - 3D UIndy Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- Physics system -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+  <!-- Physics system -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+  <!-- aframe-extras v4.1.2 -->
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
-    <!--Components-->
-    <script src="components/wasd-move.js"></script>
-    <script src="components/arrow-look.js"></script>
-    <script src="components/teleport-pad.js"></script>
-    <script src="components/scene-fade.js"></script>
-    <script src="skybox/skycomponent.js"></script>
+  <!-- Components -->
+  <script src="components/wasd-move.js"></script>
+  <script src="components/arrow-look.js"></script>
+  <script src="components/teleport-pad.js"></script>
+  <script src="components/scene-fade.js"></script>
+  <script src="components/wall-text.js"></script>
+  <script src="skybox/skycomponent.js"></script>
+  <script src="components/ComplexComponents/spawn_room.js"></script>
 
-
-    <style>
-      html, body {
+  <style>
+    html, body {
       margin: 0;
       height: 100%;
-      overflow: hidden; /* prevents arrow keys from scrolling the page */
+      overflow: hidden;
     }
-    </style>
-
+  </style>
 </head>
 
 <body>
-
-<a-scene
-
+  <a-scene
     scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
-    <!-- create camera obj -->
+    <!-- camera rig -->
     <a-entity id="rig"
-          dynamic-body="mass:1"
-          wasd-move-only="speed:20"
-          position="0 0 5">
+      dynamic-body="mass:1"
+      wasd-move-only="speed:20"
+      position="0 0 5">
 
-    <a-camera
-      look-controls
-      arrow-look
-      wasd-controls-enabled="false">
+      <a-camera
+        look-controls
+        arrow-look
+        wasd-controls-enabled="false">
 
-        <!-- Cursor and raycaster for clicking -->
         <a-entity
           id="aimDot"
           class="cursor"
@@ -61,35 +58,36 @@
           geometry="primitive: circle; radius: 0.005"
           material="color: white; shader: flat">
         </a-entity>
-      </a-camera>
-    </a-entity>
 
-    <!-- add teleporter to next html -->
-    <a-entity 
-      teleport-pad="to: three_d_map.html; radius: 1.5"
-      position="0 0 0">
+      </a-camera>
     </a-entity>
 
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
-    <!-- All assets go here -->
+    <!-- Assets -->
     <a-assets>
-      
-    <img id="groundTexture" src="images/concrete.jpg" alt="">
+      <!-- MSDF font assets (public/fonts/...) -->
+      <a-asset-item id="robotoFont" src="/fonts/Roboto-msdf.json"></a-asset-item>
+      <img id="robotoFontImg" src="/fonts/Roboto-msdf.png" crossorigin="anonymous" />
 
+      <!-- Your textures -->
+      <img id="groundTexture" src="images/concrete.jpg" alt="" />
+      <img id="pathTex" src="images/path_texture.jpg" alt="" />
     </a-assets>
-    <!--  End all assets -->
 
-    <!-- Reliable ground collider -->
-    <a-plane id="ground" src="#groundTexture"
-             position="0 -2 0"
-             rotation="-90 0 0" width="1000" height="1000"
-             static-body="shape: box"></a-plane>
+    <!-- Ground collider -->
+    <a-plane
+      id="ground"
+      src="#groundTexture"
+      position="0 -2 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      static-body="shape: box">
+    </a-plane>
 
-</a-scene>  <!-- End A-Scene -->
-
+  </a-scene>
 </body>
-
 </html>

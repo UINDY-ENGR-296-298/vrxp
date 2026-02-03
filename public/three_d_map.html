@@ -23,6 +23,7 @@
     <script src="components/ComplexComponents/campus_map.js"></script>
     <script src="skybox/skycomponent.js"></script>
     <script src="components/ComplexComponents/campus_map.js"></script>
+    <script src="components/hud.js"></script>
 
     <!-- Models -->
     <script src="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"></script>
@@ -63,6 +64,11 @@
       look-controls
       arrow-look
       wasd-controls-enabled="false">
+
+      <a-entity
+        position="-0.7 0.6 -1.5"
+        hud-coords="target: #rig">
+      </a-entity>
 
         <!-- Cursor and raycaster for clicking -->
         <a-entity

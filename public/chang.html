@@ -20,8 +20,8 @@
   <script src="components/teleport-pad.js"></script>
   <script src="components/scene-fade.js"></script>
   <script src="components/wall-text.js"></script>
-  <script src="skybox/skycomponent.js"></script>
-  <script src="components/ComplexComponents/spawn_room.js"></script>
+  <script src="skybox/chang_skycomponent.js"></script>
+
 
   <style>
     html, body {
@@ -42,7 +42,7 @@
     <a-entity id="rig"
       dynamic-body="mass:1"
       wasd-move-only="speed:20"
-      position="0 0 5">
+      position="0 0 0">
 
       <a-camera
         look-controls
@@ -54,7 +54,7 @@
           class="cursor"
           cursor="fuse: false"
           raycaster="objects: .clickable"
-          position="0 0 -1"
+          position="0 0 0"
           geometry="primitive: circle; radius: 0.005"
           material="color: white; shader: flat">
         </a-entity>
@@ -66,32 +66,22 @@
     <a-entity light="type: ambient; intensity: 0.45"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
-    <!-- Assets -->
-    <a-assets>
-      <!-- MSDF font assets (public/fonts/...) -->
-      <a-asset-item id="robotoFont" src="/fonts/Roboto-msdf.json"></a-asset-item>
-      <img id="robotoFontImg" src="/fonts/Roboto-msdf.png" crossorigin="anonymous" />
-
-      <!-- Your textures -->
-      <img id="groundTexture" src="images/concrete.jpg" alt="" />
-      <img id="pathTex" src="images/path_texture.jpg" alt="" />
-    </a-assets>
 
     <!-- Ground collider -->
     <a-plane
       id="ground"
       src="#groundTexture"
-      position="0 -2 0"
+      position="0 0 -50"
       rotation="-90 0 0"
-      width="1000"
-      height="1000"
+      width="10"
+      height="100"
       static-body="shape: box">
     </a-plane>
 
-    <!-- Easter Egg -->
+    <!-- add teleporter to next html -->
     <a-entity 
-      teleport-pad="to: chang.html; radius: 1.5"
-      position="0 0 100">
+      teleport-pad="to: index.html; radius: 1.5"
+      position="0 1 -95">
     </a-entity>
 
   </a-scene>

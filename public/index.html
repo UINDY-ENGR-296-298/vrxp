@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8" />
     <title>VRXP - 3D UIndy Map</title>
+    <title>VRXP - 3D UIndy Map</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
@@ -15,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
     <!--Components-->
+    <!--Components-->
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
@@ -22,7 +24,13 @@
     <script src="skybox/skycomponent.js"></script>
 
 
+
     <style>
+      html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden; /* prevents arrow keys from scrolling the page */
+    }
       html, body {
       margin: 0;
       height: 100%;
@@ -34,7 +42,9 @@
 
 <body>
 
+
 <a-scene
+
 
     scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
@@ -43,6 +53,8 @@
     <!-- create camera obj -->
     <a-entity id="rig"
           dynamic-body="mass:1"
+          wasd-move-only="speed:20"
+          position="0 0 5">
           wasd-move-only="speed:20"
           position="0 0 5">
 
@@ -78,12 +90,16 @@
     <a-assets>
       
     <img id="groundTexture" src="images/concrete.jpg" alt="">
+      
+    <img id="groundTexture" src="images/concrete.jpg" alt="">
 
     </a-assets>
+    <!--  End all assets -->
     <!--  End all assets -->
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"
+             position="0 -2 0"
              position="0 -2 0"
              rotation="-90 0 0" width="1000" height="1000"
              static-body="shape: box"></a-plane>

@@ -346,22 +346,22 @@
 
         // === Schwitzer === 
         // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(120, 40, 60, 17.5, 0, -150, 0, 0, 0));
+        // campus.appendChild(building(120, 40, 60, 17.5, 0, -150, 0, 0, 0));
 
         // === Schwitzer Deck === 
         // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(90, 10, 60, 0, 0, -140, 0, 0, 0));
+        // campus.appendChild(building(90, 10, 60, 0, 0, -140, 0, 0, 0));
 
         // === Schwitzer Entry === 
         // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(70, 5, 60, 35, 0, -140, 0, 0, 0));
+        // campus.appendChild(building(70, 5, 60, 35, 0, -140, 0, 0, 0));
 
         // === Schwitzer Stairs === 
         // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(30, 4, 60, 57, 0, -138, 0, 0, 0));
-        campus.appendChild(building(32, 3, 60, 58, 0, -137, 0, 0, 0));
-        campus.appendChild(building(34, 2, 60, 59, 0, -136, 0, 0, 0));
-        campus.appendChild(building(36, 1, 60, 60, 0, -135, 0, 0, 0));
+        // campus.appendChild(building(30, 4, 60, 57, 0, -138, 0, 0, 0));
+        // campus.appendChild(building(32, 3, 60, 58, 0, -137, 0, 0, 0));
+        // campus.appendChild(building(34, 2, 60, 59, 0, -136, 0, 0, 0));
+        // campus.appendChild(building(36, 1, 60, 60, 0, -135, 0, 0, 0));
 
         // === Path in front of Schwitzer Entry ===
         campus.appendChild(walkway(42, -102.5, 78, -102.5, 5));
@@ -466,20 +466,20 @@
         addBuildingLabel('Health Pavilion', 230, -250, 60, 90);
 
         // === Nicoson Hall (Athletics) — balanced south position) ===
-        campus.appendChild(building(85, 45, 85, 150, 0, -270, 0, 0, 0));
-        campus.appendChild(walkway(150, -270, 182.5, -232.5, 6));
-        addBuildingLabel('Nicoson Hall', 150, -270, 85, 0);
+        // campus.appendChild(building(85, 45, 85, 150, 0, -400, 0, 0, 0));
+        // campus.appendChild(walkway(150, -270, 182.5, -232.5, 6));
+        // addBuildingLabel('Nicoson Hall', 150, -270, 85, 0);
 
         // === Ruth Lilly Fitness Center (RLFC) — pulled slightly south for realism) ===
-        campus.appendChild(building(125, 55, 65, 40, 0, -250, 0, 90, 0));
-        campus.appendChild(walkway(40, -250, 10, -250, 6));
-        campus.appendChild(parkingLot(40, -300, 70, 120));
-        addBuildingLabel('Ruth Lilly Fitness Center', 40, -250, 65, 90);
+        // campus.appendChild(building(125, 55, 65, 40, 0, -250, 0, 90, 0));
+        // campus.appendChild(walkway(40, -250, 10, -250, 6));
+        // campus.appendChild(parkingLot(40, -300, 70, 120));
+        // addBuildingLabel('Ruth Lilly Fitness Center', 40, -250, 65, 90);
 
         // === Greyhound Village / Apartments (SW; modest offset from RLFC/Nicoson) ===
-        campus.appendChild(building(120, 45, 45, -150, 0, -270, 0, 0, 0));
-        campus.appendChild(parkingLot(-150, -320, 90, 160));
-        addBuildingLabel('Greyhound Village', -150, -270, 45, 0);
+        // campus.appendChild(building(120, 45, 45, -150, 0, -270, 0, 0, 0));
+        // campus.appendChild(parkingLot(-150, -320, 90, 160));
+        // addBuildingLabel('Greyhound Village', -150, -270, 45, 0);
 
         // === Residence Halls (W side, slightly wider spacing) ===
         campus.appendChild(building(75, 40, 35, -280, 0, 60, 0, 0, 0));   // Cory Bretz

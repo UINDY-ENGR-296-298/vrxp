@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <title>VRXP - Interactive World</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+    <!-- Physics system -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+
+
+    <!-- Custom components -->
+    <script src="components/OtherComponents/change-color-on-click.js"></script>
+    <script src="components/OtherComponents/toggle-target-on-click.js"></script>
+    <script src="components/OtherComponents/slide-on-click.js"></script>
+    <script src="components/OtherComponents/video-toggle-on-click.js"></script>
+
+    <script src="components/OtherComponents/change-color-on-click.js"></script>
+    <script src="components/OtherComponents/toggle-target-on-click.js"></script>
+    <script src="components/OtherComponents/slide-on-click.js"></script>
+    <script src="components/wasd-move.js"></script>
+    <script src="components/arrow-look.js"></script>
+    <script src="components/teleport-pad.js"></script>
+    <script src="components/scene-fade.js"></script>
+    <script src="components/videoscreen.js"></script>    
+    <!-- Skybox component -->
+    <script src="skybox/skycomponent.js"></script>
+
+    <style>
+      html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden; /* prevents arrow keys from scrolling the page */
+    }
+    </style>
+
+</head>
+<body>
+
+<a-scene
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- ASSETS -->
+    <a-assets>
+        <img id="groundTexture" src="images/ground_texture.jpeg" alt="">
+
+    <!-- Plain HTML video element (define videos to use latter) -->
+    <video  id="TestVideo1Vrxp"
+            src="media/TestVideoVrxp.mp4"
+            crossorigin="anonymous"
+            muted
+            playsinline
+            loop
+            preload="auto"></video>
+    </a-assets>
+
+    <!-- create camera obj -->
+    <a-entity id="rig"
+          dynamic-body="mass:1"
+          wasd-move-only="speed:10"
+          position="0 0 6">
+
+    <a-camera
+      look-controls
+      arrow-look
+      wasd-controls-enabled="false">
+
+        <!-- Cursor and raycaster for clicking -->
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+      </a-camera>
+    </a-entity>
+
+    <!-- Play/Pause Video -->
+    <!-- The "screen" -->
+        <a-entity
+          position="3.5 0.25 -3"
+          rotation="0 0 0"
+          tv-screen="
+            width: 3.6;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #TestVideo1Vrxp;
+            autoplay: true;">
+        </a-entity>
+
+    <!-- add teleporter to next html -->
+    <a-entity 
+      teleport-pad="to: index.html; radius: 1.5"
+      position="0 0 10">
+    </a-entity>
+
+    <!-- CLICKABLE BOX (changes color when clicked) -->
+    <a-box class="clickable"
+           position="0 1.5 -3"
+           material="color: #4CC3D9"
+           change-color-on-click>
+    </a-box>
+
+    <!-- TOGGLE TOWER (hidden until you click the small button) -->
+    <a-box id="dissapearing-box"
+           position="-3 2 -10"
+           depth="3"
+           width="3"
+           height="1000"
+           color="#800000"
+           visible="false">
+    </a-box>
+
+    <!-- BUTTON THAT TOGGLES THE TOWER -->
+    <a-box class="clickable"
+           position="-3 1.5 -2.5"
+           depth="0.5"
+           width="0.5"
+           height="0.5"
+           color="#121212"
+           toggle-target-on-click="target: #dissapearing-box">
+    </a-box>
+
+    <!-- Rolling Sphere -->
+    <a-sphere class="clickable"
+          position="-10 1 -2.5"
+          radius="1"
+          color="#800000"
+          slide-on-click="to: -10 1 -1000">
+    </a-sphere>
+
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+    <!-- GROUND PLANE -->
+    <a-plane id="ground"
+            src="#groundTexture"
+            rotation="-90 0 0"
+            width="200"
+            height="200"
+            material="repeat: 40 40; src: #groundTexture">
+    </a-plane>
+
+
+</a-scene>
+
+</body>
+</html>
+
+
+

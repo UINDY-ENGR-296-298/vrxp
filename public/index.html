@@ -1,102 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <title>Computer Lab (A-Frame)</title>
+  <meta charset="UTF-8" />
+  <title>VRXP - 3D UIndy Map</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- A-Frame -->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
+  <!-- Physics system -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-    <script>
-        (function () {
-            const origin = new AFRAME.THREE.Vector3(-10, 0, -7);
-            const ROOM_W = 8.8392;
-            const ROOM_D = 7.3152;
-            const WALL_H = 4.2672;
-            const WALL_T = 0.1;
+  <!-- aframe-extras v4.1.2 -->
+  <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
-            function ensureRoot(scene) {
-                let root = scene.querySelector('#lab-root');
-                if (!root) {
-                    root = document.createElement('a-entity');
-                    root.id = 'lab-root';
-                    scene.appendChild(root);
-                }
-                if (root.dataset.built === 'true') return null;
-                root.dataset.built = 'true';
-                root.setAttribute(
-                    'position',
-                    `${origin.x} ${origin.y} ${origin.z}`
-                );
-                return root;
-            }
+  <!-- Components -->
+  <script src="components/wasd-move.js"></script>
+  <script src="components/arrow-look.js"></script>
+  <script src="components/teleport-pad.js"></script>
+  <script src="components/scene-fade.js"></script>
+  <script src="components/wall-text.js"></script>
+  <script src="skybox/skycomponent.js"></script>
+  <script src="components/ComplexComponents/spawn_room.js"></script>
 
-            function buildLab(root) {
-                const lab = document.createElement('a-entity');
-                lab.id = 'computer-lab';
-                root.appendChild(lab);
-
-                // Floor
-                const floor = document.createElement('a-plane');
-                floor.setAttribute('width', ROOM_W);
-                floor.setAttribute('height', ROOM_D);
-                floor.setAttribute('color', '#d8dee9');
-                floor.setAttribute('rotation', '-90 0 0');
-                lab.appendChild(floor);
-
-                // Walls
-                function makeWall(w, h, color, pos, rot) {
-                    const wall = document.createElement('a-box');
-                    wall.setAttribute('width', w);
-                    wall.setAttribute('height', h);
-                    wall.setAttribute('depth', WALL_T);
-                    wall.setAttribute('color', color);
-                    wall.setAttribute('position', pos);
-                    if (rot) wall.setAttribute('rotation', rot);
-                    lab.appendChild(wall);
-                }
-
-                makeWall(ROOM_W, WALL_H, '#ffffff', `0 ${WALL_H / 2} ${-ROOM_D / 2}`);
-                makeWall(ROOM_W, WALL_H, '#ffffff', `0 ${WALL_H / 2} ${ROOM_D / 2}`, '0 180 0');
-                makeWall(ROOM_D, WALL_H, '#ffffff', `${-ROOM_W / 2} ${WALL_H / 2} 0`, '0 90 0');
-                makeWall(ROOM_D, WALL_H, '#ffffff', `${ROOM_W / 2} ${WALL_H / 2} 0`, '0 -90 0');
-            }
-
-            function onSceneReady() {
-                const scene = document.querySelector('a-scene');
-                const root = ensureRoot(scene);
-                if (root) buildLab(root);
-            }
-
-            document.addEventListener('DOMContentLoaded', () => {
-                const scene = document.querySelector('a-scene');
-                if (scene.hasLoaded) onSceneReady();
-                else scene.addEventListener('loaded', onSceneReady);
-            });
-        })();
-    </script>
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
 </head>
 
 <body>
-    <a-scene background="color: #e5e9f0">
-        <a-entity camera
-                  position="0 1.6 8"
-                  look-controls
-                  wasd-controls>
+  <a-scene
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- camera rig -->
+    <a-entity id="rig"
+      dynamic-body="mass:1"
+      wasd-move-only="speed:20"
+      position="0 0 5">
+
+      <a-camera
+        look-controls
+        arrow-look
+        wasd-controls-enabled="false">
+
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 -1"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
         </a-entity>
 
-        <a-entity light="type: directional; color: #fff; intensity: 0.9"
-                  position="1 4 2">
-        </a-entity>
+      </a-camera>
+    </a-entity>
 
-        <a-entity light="type: ambient; color: #ccc"></a-entity>
-    </a-scene>
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+    <!-- Assets -->
+    <a-assets>
+      <!-- MSDF font assets (public/fonts/...) -->
+      <a-asset-item id="robotoFont" src="/fonts/Roboto-msdf.json"></a-asset-item>
+      <img id="robotoFontImg" src="/fonts/Roboto-msdf.png" crossorigin="anonymous" />
+
+      <!-- Your textures -->
+      <img id="groundTexture" src="images/concrete.jpg" alt="" />
+      <img id="pathTex" src="images/path_texture.jpg" alt="" />
+    </a-assets>
+
+    <!-- Ground collider -->
+    <a-plane
+      id="ground"
+      src="#groundTexture"
+      position="0 -2 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      static-body="shape: box">
+    </a-plane>
+
+  </a-scene>
 </body>
 </html>

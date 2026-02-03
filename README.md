@@ -18,8 +18,12 @@ docker container ls
 docker run -it --rm -p 8080:8080 -v"$PWD\public":/app/public --name vrxp_con vrxp_img
 
 #For Mac:
-docker run -it --rm -p 8080:8080 -v ${PWD}\public:/app/public --name vrxp_con vrxp_img
+docker run -it --rm -p 8080:8080 -v ${PWD}/public:/app/public --name vrxp_con vrxp_img
 ```
 ```
 docker exec -it vrxp_con /bin/sh
 ``
+
+NAMING CONVENTION:
+- Use camelCase for folders
+- Use snake_case for files

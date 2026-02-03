@@ -253,7 +253,7 @@
         y: 0.5,
         z: portalZ,
         rotY: -45,
-        value: "This is a Teleportor, they may appeir in many different colors. Simply step inside to use.",
+        value: "This is a Teleportor, they may appear in many different colors. Simply step inside to use.",
         width: 2,
         height: 2,
         textWidth: 2,

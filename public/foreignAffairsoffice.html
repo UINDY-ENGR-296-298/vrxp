@@ -33,6 +33,7 @@
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
+    <script src="components/hud.js"></script>
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -59,13 +60,18 @@
     <!-- create camera obj -->
     <a-entity id="rig"
           dynamic-body="mass:1"
-          wasd-move-only="speed:10"
-          position="0 0 6">
+          wasd-move-only="speed:20"
+          position="-5.2 0 1">
 
     <a-camera
       look-controls
       arrow-look
-      wasd-controls-enabled="true">
+      wasd-controls-enabled="false">
+
+      <a-entity
+        position="2.55 0.95 -1.5"
+        hud-coords="target: #rig">
+      </a-entity>
 
         <!-- Cursor and raycaster for clicking -->
         <a-entity
@@ -87,16 +93,15 @@
 <!------------------------------------------------------------------------------------------------------>
 
     <!-- TELEPORT PAD TO RETURN TO MAIN WORLD -->
-
     <a-entity
-  teleport-pad="to: index.html;
-                width: 2.5;
-                color: #c0d950;
-                glowColor: #32c743;
-                radius: 1.5;
-                fadetime: 1000"
-  position="-5.2 0 3.5">
-</a-entity>
+      teleport-pad="to: three_d_map.html;
+                    width: 2.5;
+                    color: #c0d950;
+                    glowColor: #32c743;
+                    radius: 1.5;
+                    fadetime: 1000"
+      position="-5.2 0 3.5">
+    </a-entity>
 
     <!-- Back wall -->
     <a-box

@@ -83,9 +83,14 @@
       </a-camera>
     </a-entity>
 
-    <!-- add teleporter to next html -->
-    <a-entity 
-      teleport-pad="to: index.html; radius: 1.5"
+    <!-- add teleporter to index.html -->
+    <a-entity
+      teleport-pad="to: index.html;
+                      width: 2.5;
+                      color: #cb4abc;
+                      glowColor: #a01fa7;
+                      radius: 1.5;
+                      fadetime: 1000"
       position="0 0 -37.5">
     </a-entity>
 
@@ -97,10 +102,21 @@
     scale="1 1 1">
     </a-entity>
 
+    <!-- add teleporter to Krannert Coffee Shop -->
+    <a-entity
+      teleport-pad="to: coffeeShop.html;
+                      width: 2.5;
+                      color: #c0d950;
+                      glowColor: #32c743;
+                      radius: 1.5;
+                      fadetime: 1000"
+      position="0 0 59.5">
+    </a-entity>
+
     <!-- 3D Model Schwitzer -->
     <a-entity
     gltf-model="models_ChatGPT/UIndy_Schwitzer_gltf_proxy_v5/model.gltf"
-    position="10 0 -205"
+    position="27 0 -150"
     rotation="0 270 0"
     scale="1 1 1">
     </a-entity>

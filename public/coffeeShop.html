@@ -33,6 +33,7 @@
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
+    <script src="components/hud.js"></script>
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -67,6 +68,11 @@
       arrow-look
       wasd-controls-enabled="false">
 
+      <a-entity
+        position="2.55 0.95 -1.5"
+        hud-coords="target: #rig">
+      </a-entity>
+      
         <!-- Cursor and raycaster for clicking -->
         <a-entity
           id="aimDot"

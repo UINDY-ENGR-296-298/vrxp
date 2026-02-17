@@ -1,0 +1,60 @@
+// Simple camera-relative WASD movement (no physics) like your original.
+AFRAME.registerComponent('wasd-move-only', {
+    schema: { speed: {type: 'number', default: 6} },
+
+    init() {
+    this.state = {w:false, a:false, s:false, d:false};
+    this.forward = new THREE.Vector3();
+    this.right   = new THREE.Vector3();
+    this.up      = new THREE.Vector3(0, 1, 0);
+
+    this.cameraEl = this.el.querySelector('[camera]') || document.querySelector('[camera]');
+
+    this.onKeyDown = e => {
+        if (e.code === 'KeyW') this.state.w = true;
+        if (e.code === 'KeyA') this.state.a = true;
+        if (e.code === 'KeyS') this.state.s = true;
+        if (e.code === 'KeyD') this.state.d = true;
+    };
+    this.onKeyUp = e => {
+        if (e.code === 'KeyW') this.state.w = false;
+        if (e.code === 'KeyA') this.state.a = false;
+        if (e.code === 'KeyS') this.state.s = false;
+        if (e.code === 'KeyD') this.state.d = false;
+    };
+
+    window.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('keyup', this.onKeyUp);
+    },
+
+    tick(time, dt) {
+    const dsec = dt / 1000;
+    if (!this.state.w && !this.state.a && !this.state.s && !this.state.d) return;
+    if (!this.cameraEl) return;
+
+    const rig = this.el.object3D;
+
+    this.cameraEl.object3D.getWorldDirection(this.forward);
+    this.forward.y = 0;
+    if (this.forward.lengthSq() < 1e-6) this.forward.set(0, 0, -1);
+    this.forward.normalize();
+
+    this.right.copy(this.forward).cross(this.up).normalize();
+
+    let moveX = 0, moveZ = 0;
+
+    if (this.state.w) { moveX -= this.forward.x; moveZ -= this.forward.z; }
+    if (this.state.s) { moveX += this.forward.x; moveZ += this.forward.z; }
+    if (this.state.d) { moveX -= this.right.x;   moveZ -= this.right.z; }
+    if (this.state.a) { moveX += this.right.x;   moveZ += this.right.z; }
+
+    const speed = this.data.speed * dsec;
+    rig.position.x += moveX * speed;
+    rig.position.z += moveZ * speed;
+    },
+
+    remove() {
+    window.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('keyup', this.onKeyUp);
+    }
+});

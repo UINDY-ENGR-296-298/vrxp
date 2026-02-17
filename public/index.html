@@ -23,6 +23,8 @@
   <script src="skybox/skycomponent.js"></script>
   <script src="components/ComplexComponents/spawn_room.js"></script>
 
+
+
   <style>
     html, body {
       margin: 0;
@@ -50,11 +52,43 @@
         wasd-controls-enabled="false">
 
       <a-entity
-        position="-3 2 -3"
+        id = "hud"
+        position="3 2 -3"
         hud-coords="target: #rig">
       </a-entity>
 
-      <!-- your aim dot stays -->
+<!--Set objectives -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    const scene = document.querySelector("a-scene");
+    const hud = document.querySelector("#hud");
+
+    function setObjectives() {
+      // Set a list, first one shows, next appears when completed
+      hud.emit("hud-set-objectives", {
+        list: [
+          "Go to the Engineering Building entrance",
+          "Find Room 101",
+          "Reach the exit"
+        ]
+      });
+
+      // Optional test: press O to complete the current objective
+      window.addEventListener("keydown", (e) => {
+        if (e.key.toLowerCase() === "o") {
+          hud.emit("hud-complete-objective");
+        }
+      });
+    }
+
+    // Wait until the A-Frame scene is fully loaded
+    if (scene.hasLoaded) setObjectives();
+    else scene.addEventListener("loaded", setObjectives);
+  });
+  </script>
+
+
+      <!--aim dot-->
       <a-entity
         id="aimDot"
         class="cursor"

@@ -66,9 +66,40 @@
       wasd-controls-enabled="false">
 
       <a-entity
-        position="2.55 0.95 -1.5"
+        id = "hud"
+        position="3 2 -3"
         hud-coords="target: #rig">
       </a-entity>
+
+      <!--Set objectives -->
+      <script>
+        document.addEventListener("DOMContentLoaded", () => {
+          const scene = document.querySelector("a-scene");
+          const hud = document.querySelector("#hud");
+
+          function setObjectives() {
+            // Set a list, first one shows, next appears when completed
+            hud.emit("hud-set-objectives", {
+              list: [
+                "task 1",
+                "task 2",
+                "task 3"
+              ]
+            });
+
+            // Optional test: press O to complete the current objective
+            window.addEventListener("keydown", (e) => {
+              if (e.key.toLowerCase() === "o") {
+                hud.emit("hud-complete-objective");
+              }
+            });
+          }
+
+          // Wait until the A-Frame scene is fully loaded
+          if (scene.hasLoaded) setObjectives();
+          else scene.addEventListener("loaded", setObjectives);
+        });
+        </script>
 
         <!-- Cursor and raycaster for clicking -->
         <a-entity

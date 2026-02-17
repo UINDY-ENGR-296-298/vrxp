@@ -9,42 +9,12 @@ AFRAME.registerComponent("hud-coords", {
     wrapCount: { type: "number", default: 48 },
     align: { type: "string", default: "left" },
 
-    // background box settings for readability
-    bgColor: { type: "string", default: "#808080" },
-    bgOpacity: { type: "number", default: 0.6 },
-    bgPadding: { type: "number", default: 0.15 },
-    bgHeight: { type: "number", default: 0.40 }, // UPDATED: taller to fit 2 lines
-    bgZ: { type: "number", default: -0.01 },
-    bgWidthScale: { type: "number", default: 0.5 },
-    bgXOffset: { type: "number", default: -0.15 },
-
-    // ADDED: objective text style/placement
+    // objective
     objectiveColor: { type: "string", default: "#201d1d" },
-    objectiveYOffset: { type: "number", default: -0.16 } // ADDED: objective below coords
+    objectiveYOffset: { type: "number", default: -0.16 }
   },
 
   init: function () {
-    // ----------------------------
-    // Background plane
-    // ----------------------------
-    this.bgEl = document.createElement("a-plane");
-    this.bgEl.setAttribute("material", {
-      color: this.data.bgColor,
-      opacity: this.data.bgOpacity,
-      transparent: true
-    });
-
-    const bgW = (this.data.width * this.data.bgWidthScale) + this.data.bgPadding;
-    this.bgEl.setAttribute("width", bgW);
-    this.bgEl.setAttribute("height", this.data.bgHeight);
-
-    this.bgEl.setAttribute(
-      "position",
-      `${(bgW / 2) + this.data.bgXOffset} 0 ${this.data.bgZ}`
-    );
-
-    this.el.appendChild(this.bgEl);
-
     // ----------------------------
     // Coords text
     // ----------------------------
@@ -64,10 +34,10 @@ AFRAME.registerComponent("hud-coords", {
     // ----------------------------
     // Objective text (second line)
     // ----------------------------
-    this.objectiveEl = document.createElement("a-entity"); // ADDED
-    this.objectiveEl.setAttribute("position", `0 ${this.data.objectiveYOffset} 0`); // ADDED
-    this.objectiveEl.setAttribute("text", { // ADDED
-      value: "", // starts empty
+    this.objectiveEl = document.createElement("a-entity");
+    this.objectiveEl.setAttribute("position", `0 ${this.data.objectiveYOffset} 0`);
+    this.objectiveEl.setAttribute("text", {
+      value: "",
       align: this.data.align,
       color: this.data.objectiveColor,
       width: this.data.width,
@@ -76,13 +46,13 @@ AFRAME.registerComponent("hud-coords", {
       font: this.data.font,
       fontImage: this.data.fontImage
     });
-    this.el.appendChild(this.objectiveEl); // ADDED
+    this.el.appendChild(this.objectiveEl);
 
     // ----------------------------
     // Objectives state
     // ----------------------------
-    this.objectives = []; // ADDED
-    this.objectiveIndex = 0; // ADDED
+    this.objectives = [];
+    this.objectiveIndex = 0;
 
     // ----------------------------
     // Render on top of walls
@@ -105,6 +75,7 @@ AFRAME.registerComponent("hud-coords", {
           m.depthTest = false;
           m.depthWrite = false;
           m.transparent = true;
+          if (window.THREE) m.side = THREE.DoubleSide;
           m.needsUpdate = true;
         });
       });
@@ -113,10 +84,9 @@ AFRAME.registerComponent("hud-coords", {
     };
 
     this._fixHudMaterial = () => {
-      const bgOk = this.bgEl ? this._applyTopLayer(this.bgEl, 9997) : true;
       const coordsOk = this._applyTopLayer(this.textEl, 9999);
-      const objOk = this.objectiveEl ? this._applyTopLayer(this.objectiveEl, 9999) : true;
-      return bgOk && coordsOk && objOk;
+      const objOk = this._applyTopLayer(this.objectiveEl, 9999);
+      return coordsOk && objOk;
     };
 
     this._tryFix = () => {
@@ -124,11 +94,19 @@ AFRAME.registerComponent("hud-coords", {
       this._hudFixed = this._fixHudMaterial();
     };
 
-    // Events when meshes build/rebuild
-    [this.bgEl, this.textEl, this.objectiveEl].forEach((e) => {
-      e.addEventListener("object3dset", this._tryFix);
-      e.addEventListener("loaded", this._tryFix);
-      e.addEventListener("componentchanged", (ev) => {
+    // Re-apply top-layer when meshes rebuild
+    [this.textEl, this.objectiveEl].forEach((ent) => {
+      ent.addEventListener("object3dset", () => {
+        this._hudFixed = false;
+        this._tryFix();
+      });
+
+      ent.addEventListener("loaded", () => {
+        this._hudFixed = false;
+        this._tryFix();
+      });
+
+      ent.addEventListener("componentchanged", (ev) => {
         if (ev.detail && ev.detail.name === "text") {
           this._hudFixed = false;
           this._tryFix();
@@ -137,52 +115,50 @@ AFRAME.registerComponent("hud-coords", {
     });
 
     // ----------------------------
-    // Public API methods
+    // Objective rendering and API
     // ----------------------------
-    this._renderObjective = () => { // ADDED
+    this._renderObjective = () => {
       const current = this.objectives[this.objectiveIndex];
       const text = current ? `Objective: ${current}` : "";
       this.objectiveEl.setAttribute("text", "value", text);
     };
 
-    this.setObjective = (text) => { // ADDED
+    this.setObjective = (text) => {
       this.objectives = [text];
       this.objectiveIndex = 0;
       this._renderObjective();
     };
 
-    this.setObjectives = (list) => { // ADDED
+    this.setObjectives = (list) => {
       this.objectives = Array.isArray(list) ? list.slice() : [];
       this.objectiveIndex = 0;
       this._renderObjective();
     };
 
-    this.completeObjective = () => { // ADDED
+    this.completeObjective = () => {
       if (this.objectiveIndex < this.objectives.length) {
         this.objectiveIndex += 1;
       }
       this._renderObjective();
     };
 
-    // ----------------------------
-    // Event hooks (trigger from anywhere)
-    // ----------------------------
-    this.el.addEventListener("hud-set-objective", (e) => { // ADDED
+    // Event hooks
+    this.el.addEventListener("hud-set-objective", (e) => {
       const t = e.detail && e.detail.text ? String(e.detail.text) : "";
       if (t) this.setObjective(t);
     });
 
-    this.el.addEventListener("hud-set-objectives", (e) => { // ADDED
+    this.el.addEventListener("hud-set-objectives", (e) => {
       const list = e.detail && e.detail.list ? e.detail.list : [];
       this.setObjectives(list);
     });
 
-    this.el.addEventListener("hud-complete-objective", () => { // ADDED
+    this.el.addEventListener("hud-complete-objective", () => {
       this.completeObjective();
     });
 
     // Initial render
-    this._renderObjective(); // ADDED
+    this._renderObjective();
   },
 
   tick: function () {

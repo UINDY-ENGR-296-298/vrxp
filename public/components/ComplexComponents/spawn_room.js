@@ -94,22 +94,6 @@
     return wall;
   }
 
-  function makeTeleportPad(opts) {
-    const pad = document.createElement("a-entity");
-    pad.setAttribute("position", `${opts.x} ${opts.y || 0} ${opts.z}`);
-    pad.setAttribute("rotation", `0 ${opts.rotY || 0} 0`);
-
-    // teleport-pad component must already be registered (teleport-pad.js loaded before this file)
-    pad.setAttribute(
-      "teleport-pad",
-      `to: ${opts.to}; radius: ${opts.radius || 1.2}; fadetime: ${opts.fadetime || 800}; ` +
-        `width: ${opts.width || 2}; depth: ${opts.depth || 2}; ` +
-        `color: ${opts.color || "#1e90ff"}; glowColor: ${opts.glowColor || "#00ffff"}`
-    );
-
-    return pad;
-  }
-
   // MSDF text helper: forces both JSON and PNG to be requested.
   function makeMsdfText(opts) {
     const t = document.createElement("a-entity");
@@ -131,7 +115,6 @@
     return t;
   }
 
-  // Flat panel (plane) with MSDF text on top, now clickable + dismissible.
   function makeTextPanel(opts) {
   const panel = document.createElement("a-entity");
   panel.setAttribute("position", `${opts.x || 0} ${opts.y || 0} ${opts.z || 0}`);
@@ -142,6 +125,7 @@
   const yCenter = opts.centerY !== undefined ? opts.centerY : h / 2;
 
   const dismissOnClick = opts.dismissOnClick !== undefined ? opts.dismissOnClick : true;
+  const completeObjective = opts.completeObjective !== undefined ? opts.completeObjective : true;
 
   // helper: hide whole panel
   const hidePanel = () => {
@@ -164,6 +148,10 @@
     bg.addEventListener("click", (e) => {
       e.stopPropagation();
       hidePanel();
+      if (completeObjective){
+        const hud = document.querySelector("#hud");
+        if (hud) hud.emit("hud-complete-objective");
+      }
     });
   }
 
@@ -187,6 +175,10 @@
     txt.addEventListener("click", (e) => {
       e.stopPropagation();
       hidePanel();
+      if (completeObjective){
+        const hud = document.querySelector("#hud");
+        if (hud) hud.emit("hud-complete-objective");
+      }
     });
   }
 
@@ -217,34 +209,20 @@
     room.appendChild(makeWall(ROOM_DEPTH, ROOM_HEIGHT, WALL_THICKNESS, halfW, wallY, 0, 90));
     room.appendChild(makeWall(ROOM_DEPTH, ROOM_HEIGHT, WALL_THICKNESS, -halfW, wallY, 0, 90));
 
-    // ===== Teleporter location =====
-    const portalX = 0;
-    const portalZ = -halfD + 3;
-
-    const teleporter = makeTeleportPad({
-      x: portalX,
-      y: 0,
-      z: portalZ,
-      rotY: 0,
-      to: "three_d_map.html",
-      radius: 1.2,
-      fadetime: 800,
-      width: 2.2,
-      depth: 2.2,
-      color: "#cb4abc",
-      glowColor: "#a01fa7"
-    });
-    room.appendChild(teleporter);
-
     // ===== Path from spawn to teleporter =====
     const spawnX = 0;
     const spawnZ = 8;
+    const portalX = 0;
+    const portalZ = -halfD + 3;
 
     const path1 = makePathBetweenExtended(spawnX, spawnZ, portalX, portalZ, 0.02, 2, 1.5);
     if (path1) room.appendChild(path1);
 
-    const path2 = makePathBetween(0, 0, -7, 0, 0.02, 2);
+    const path2 = makePathBetween(0, -3, -7, -3, 0.02, 2);
     if (path2) room.appendChild(path2);
+
+    const path3 = makePathBetween(0, -7, 7, -7, 0.02, 2);
+    if (path2) room.appendChild(path3);
 
     // ===== Clickable instruction panels (click to dismiss) =====
     room.appendChild(
@@ -258,30 +236,72 @@
         height: 2,
         textWidth: 2,
         wrapCount: 14,
-        bgColor: "#d27c7c",
+        bgColor: "#e14747",
         bgOpacity: 0.85,
         textColor: "#111",
         align: "center",
-        dismissOnClick: true
+        dismissOnClick: true,
+        completeObjective: false
       })
     );
 
     room.appendChild(
       makeTextPanel({
-        x: spawnX,
+        x: spawnX -1,
         y: 1,
-        z: spawnZ - 8,
-        rotY: 0,
-        value: "Use WASD to move and the arrow keys to look around. Explor the Path to learn more. \n\nBy clicking on text pannels you confirm your understanding and may continue",
+        z: spawnZ - 7,
+        rotY: 35,
+        value: "Welcome to the UIndy Virtual Campus. \n\n Control the player with WASD and the arrow keys to look around, or alternatively click and hold with the mouse. Explor the Path to learn more.",
         width: 2,
-        height: 3.5,
+        height: 3.75,
         textWidth: 2,
         wrapCount: 14,
-        bgColor: "#cb5c3b",
+        bgColor: "#4058e1",
         bgOpacity: 0.85,
         textColor: "#111",
         align: "center",
-        dismissOnClick: true
+        dismissOnClick: true,
+        completeObjective: false
+      })
+    );
+
+    room.appendChild(
+      makeTextPanel({
+        x: 7,
+        y: 1,
+        z: -7,
+        rotY: -90,
+        value: "Try activating your objectives by standing in the circle along the back wall.",
+        width: 3,
+        height: .75,
+        textWidth: 3,
+        wrapCount: 28,
+        bgColor: "#1b794f",
+        bgOpacity: 0.85,
+        textColor: "#111",
+        align: "center",
+        dismissOnClick: true,
+        completeObjective: true
+      })
+    );
+
+    room.appendChild(
+      makeTextPanel({
+        x: -7,
+        y: 1,
+        z: -3,
+        rotY: 90,
+        value: "Objectives will act as your guide throughout the UIndy campus. Additionally you may use the letter o to skip an objective.",
+        width: 3,
+        height: 1.25,
+        textWidth: 3,
+        wrapCount: 28,
+        bgColor: "#9751ed",
+        bgOpacity: 0.85,
+        textColor: "#111",
+        align: "center",
+        dismissOnClick: true,
+        completeObjective: false
       })
     );
 

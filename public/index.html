@@ -19,7 +19,6 @@
   <script src="components/arrow-look.js"></script>
   <script src="components/teleport-pad.js"></script>
   <script src="components/scene-fade.js"></script>
-  <script src="components/wall-text.js"></script>
   <script src="skybox/skycomponent.js"></script>
   <script src="components/hud.js"></script>
   <script src="components/ComplexComponents/spawn_room.js"></script>
@@ -68,8 +67,8 @@
       // Set a list, first one shows, next appears when completed
       hud.emit("hud-set-objectives", {
         list: [
-          "Go to the Engineering Building entrance",
-          "Find Room 101",
+          " ",
+          "Travel through the pink teleporter to the campus map",
           "Reach the exit"
         ]
       });
@@ -128,6 +127,17 @@
       height="1000"
       static-body="shape: box">
     </a-plane>
+
+
+    <a-entity
+      teleport-pad="to: three_d_map.html;
+                      width: 2.5;
+                      color: #cb4abc;
+                      glowColor: #a01fa7;
+                      radius: 1.5;
+                      fadetime: 1000"
+      position="0 0 -13">
+    </a-entity>
 
     <!-- Easter Egg -->
     <a-entity 

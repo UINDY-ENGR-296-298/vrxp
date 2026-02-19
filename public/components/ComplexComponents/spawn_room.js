@@ -80,7 +80,7 @@
     ceiling.setAttribute("geometry", `primitive: plane; width: ${width}; height: ${depth}`);
     ceiling.setAttribute("position", `0 ${height} 0`);
     ceiling.setAttribute("rotation", "90 0 0");
-    ceiling.setAttribute("material", "color: #efefef; side: double");
+    ceiling.setAttribute("material", "src: #cellingTex; side: double; repeat: 6 3");
     return ceiling;
   }
 
@@ -89,7 +89,7 @@
     wall.setAttribute("geometry", `primitive: box; width: ${width}; height: ${height}; depth: ${thickness}`);
     wall.setAttribute("position", `${x} ${y} ${z}`);
     wall.setAttribute("rotation", `0 ${rotY} 0`);
-    wall.setAttribute("material", "color: #e6e6e6");
+    wall.setAttribute("material", "src: #wallTex; side: double; repeat: 2 1;");
     wall.setAttribute("shadow", "cast: true; receive: true");
     return wall;
   }

@@ -21,6 +21,7 @@
   <script src="components/scene-fade.js"></script>
   <script src="components/wall-text.js"></script>
   <script src="skybox/skycomponent.js"></script>
+  <script src="components/collision.js"></script>
 
   <style>
     html, body {
@@ -95,21 +96,13 @@
     </a-plane>
 
     <a-box
-        position="0 0.5 -3"
-        width="10"
+        collision="target: #rig; origin: 0 0 0; width: 5; height: 10; depth: 10; log: true"
+        position="15 0 0"
+        width="5"
         height="10"
         depth="10"
         color="#4CC3D9"
         static-body>
-    </a-box>
-
-    <a-box
-        position="0 0.5 -3"
-        width="10"
-        height="10"
-        depth="10"
-        color="#4CC3D9"
-        dynamic-body>
     </a-box>
 
   </a-scene>

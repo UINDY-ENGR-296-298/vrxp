@@ -5,6 +5,7 @@
   AFRAME.registerComponent('blank-wall', {
     schema: {
       // sizes in chosen units
+
       width:     {type: 'number', default: (6/3.2)},   
       height:    {type: 'number', default: (6/3.2)},     
       thickness: {type: 'number', default: (0.5/3.2)},   

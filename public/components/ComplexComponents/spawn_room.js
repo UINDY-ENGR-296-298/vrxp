@@ -86,6 +86,7 @@
 
   function makeWall(width, height, thickness, x, y, z, rotY) {
     const wall = document.createElement("a-box");
+    wall.setAttribute("collision", `target: #rig; origin: 0 0 0; width: ${width+1}; height: ${height+1}; depth: ${thickness+1}; Yrot: ${rotY}; log: true`);
     wall.setAttribute("geometry", `primitive: box; width: ${width}; height: ${height}; depth: ${thickness}`);
     wall.setAttribute("position", `${x} ${y} ${z}`);
     wall.setAttribute("rotation", `0 ${rotY} 0`);

@@ -23,7 +23,8 @@
   <script src="components/collision.js"></script>
   <script src="components/hud.js"></script>
   <script src="components/ComplexComponents/spawn_room.js"></script>
-
+  <script src="components/cookies.js"></script>
+  <script src="components/objectives-init.js"></script>
 
 
 
@@ -59,36 +60,46 @@
         hud-coords="target: #rig">
       </a-entity>
 
-<!--Set objectives -->
-<script>
-  document.addEventListener("DOMContentLoaded", () => {
-    const scene = document.querySelector("a-scene");
-    const hud = document.querySelector("#hud");
+      <!-- set objectives -->
+      <!-- can use different cookie key to have different objective list, not implimented but shouldt be too hard -->
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const scene = document.querySelector("a-scene");
+        const hud = document.querySelector("#hud");
 
-    function setObjectives() {
-      // Set a list, first one shows, next appears when completed
-      hud.emit("hud-set-objectives", {
-        list: [
+        // Define the objective list ONCE
+        const LIST = [
           " ",
           "Travel through the pink teleporter to the campus map",
-          "Reach the exit"
-        ]
-      });
+          "Explore to find the green teleporter and travel to the Christel DeHaan Center for Global Engagement",
+          "Read through the information avalible",
+          "Return to the campus map",
+          "Good Job boss you're free to explore the campus freely"
+        ];
 
-      // Optional test: press O to complete the current objective
-      window.addEventListener("keydown", (e) => {
-        if (e.key.toLowerCase() === "o") {
-          hud.emit("hud-complete-objective");
+        function setObjectives() {
+          // normal init, keep progress if cookie exists
+          initObjectives(hud, LIST);
+
+          window.addEventListener("keydown", (e) => {
+            const k = e.key.toLowerCase();
+
+            // test complete
+            if (k === "o") hud.emit("hud-complete-objective");
+
+            // reset with P
+            if (k === "p") {
+              deleteCookie("objectives_v2");      // hard delete
+              initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
+              console.log("Reset objectives:", getCookie("objectives_v2"));
+            }
+          });
         }
+
+        if (scene.hasLoaded) setObjectives();
+        else scene.addEventListener("loaded", setObjectives);
       });
-    }
-
-    // Wait until the A-Frame scene is fully loaded
-    if (scene.hasLoaded) setObjectives();
-    else scene.addEventListener("loaded", setObjectives);
-  });
-  </script>
-
+    </script>
 
       <!--aim dot-->
       <a-entity
@@ -117,6 +128,8 @@
       <!-- Your textures -->
       <img id="groundTexture" src="images/concrete.jpg" alt="" />
       <img id="pathTex" src="images/path_texture.jpg" alt="" />
+      <img id="wallTex" src="images/wallphoto.jpg">
+      <img id="cellingTex" src="images/cellingPhoto.jpg">
     </a-assets>
 
     <!-- Ground collider -->

@@ -80,7 +80,7 @@
     ceiling.setAttribute("geometry", `primitive: plane; width: ${width}; height: ${depth}`);
     ceiling.setAttribute("position", `0 ${height} 0`);
     ceiling.setAttribute("rotation", "90 0 0");
-    ceiling.setAttribute("material", "color: #efefef; side: double");
+    ceiling.setAttribute("material", "src: #cellingTex; side: double; repeat: 6 3");
     return ceiling;
   }
 
@@ -90,7 +90,7 @@
     wall.setAttribute("geometry", `primitive: box; width: ${width}; height: ${height}; depth: ${thickness}`);
     wall.setAttribute("position", `${x} ${y} ${z}`);
     wall.setAttribute("rotation", `0 ${rotY} 0`);
-    wall.setAttribute("material", "color: #e6e6e6");
+    wall.setAttribute("material", "src: #wallTex; side: double; repeat: 2 1;");
     wall.setAttribute("shadow", "cast: true; receive: true");
     return wall;
   }
@@ -232,7 +232,7 @@
         y: 0.5,
         z: portalZ,
         rotY: -45,
-        value: "This is a Teleportor, they may appear in many different colors. Simply step inside to use.",
+        value: "This is a teleporter, they may appear in many different colors. Simply step inside to use.",
         width: 2,
         height: 2,
         textWidth: 2,
@@ -252,7 +252,7 @@
         y: 1,
         z: spawnZ - 7,
         rotY: 35,
-        value: "Welcome to the UIndy Virtual Campus. \n\n Control the player with WASD and the arrow keys to look around, or alternatively click and hold with the mouse. Explor the Path to learn more.",
+        value: "Welcome to the UIndy Virtual Campus. \n\n Control the player with WASD and use the arrow keys or click and hold with the mouse to look around. Explore the path to learn more.",
         width: 2,
         height: 3.75,
         textWidth: 2,

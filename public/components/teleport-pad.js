@@ -170,6 +170,7 @@ AFRAME.registerComponent('teleport-pad', {
     });
 
     setTimeout(function () {
+      if (window.saveObjectiveStore) window.saveObjectiveStore();
       window.location.href = url;
     }, duration);
   }

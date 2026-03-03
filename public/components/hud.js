@@ -129,28 +129,33 @@ AFRAME.registerComponent("hud-coords", {
       this._renderObjective();
     };
 
-    this.setObjectives = (list) => {
+    // NEW: supports restoring objectiveIndex from cookie
+    this.setObjectives = (list, startIndex = 0) => {
       this.objectives = Array.isArray(list) ? list.slice() : [];
-      this.objectiveIndex = 0;
+      const maxIndex = Math.max(0, this.objectives.length - 1);
+      this.objectiveIndex = Math.min(Math.max(0, startIndex), maxIndex);
       this._renderObjective();
     };
 
     this.completeObjective = () => {
-      if (this.objectiveIndex < this.objectives.length) {
-        this.objectiveIndex += 1;
-      }
+      const maxIndex = Math.max(0, this.objectives.length - 1);
+      this.objectiveIndex = Math.min(this.objectiveIndex + 1, maxIndex);
       this._renderObjective();
     };
 
+    // ----------------------------
     // Event hooks
+    // ----------------------------
     this.el.addEventListener("hud-set-objective", (e) => {
       const t = e.detail && e.detail.text ? String(e.detail.text) : "";
       if (t) this.setObjective(t);
     });
 
+    // KEEP ONLY ONE handler for hud-set-objectives, supports { list, current }
     this.el.addEventListener("hud-set-objectives", (e) => {
       const list = e.detail && e.detail.list ? e.detail.list : [];
-      this.setObjectives(list);
+      const current = e.detail && typeof e.detail.current === "number" ? e.detail.current : 0;
+      this.setObjectives(list, current);
     });
 
     this.el.addEventListener("hud-complete-objective", () => {

@@ -15,20 +15,8 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
     <!-- Components -->
-    <script src="components/blankwall.js"></script>
-    <script src="components/chair.js"></script>
-    <script src="components/table.js"></script>
-    <script src="components/projector.js"></script>
-    <script src="components/whiteboard.js"></script>
-    <script src="components/projection-screen.js"></script>
-    <script src="components/double-door.js"></script>
-    <script src="components/window-pane.js"></script>
-    <script src="components/ceiling-light-square.js"></script>
-    <script src="components/air-vent.js"></script>
-    <script src="components/classroom-floor.js"></script>
     <script src="components/CoffeeShopComponents/ceiling.js"></script>
-    <script src="index.js"></script>
-    <script src="components/tree_cluster.js"></script>
+    <script src="components/CoffeeShopComponents/counter-display.js"></script>
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
@@ -37,8 +25,6 @@
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
-    <script src="components/chair_component.js"></script>
-    <script src="components/videoscreen.js"></script>
 
     <style>
       html, body { margin:0; height:100%; }
@@ -121,31 +107,31 @@
     <img id="groundTexture" src="images/concrete.jpg" alt="">
 
 <!------------------------------------------------------------------------------------------------------>
-<!--                                          Main Area                                            -->
+<!--                                          Main Area                                               -->
 <!------------------------------------------------------------------------------------------------------>
 
     <!-- TELEPORT PAD TO RETURN TO MAIN WORLD -->
 
     <a-entity
-        teleport-pad="to: three_d_map.html;
-                        width: 2.5;
-                        color: #c0d950;
-                        glowColor: #32c743;
-                        radius: 1.5;
-                        fadetime: 1000"
+        teleport-pad="to: index.html;
+            width: 2.5;
+            color: #c0d950;
+            glowColor: #32c743;
+            radius: 1.5;
+            fadetime: 1000"
         position="0 0 20">
     </a-entity>
 
     <!-- Ceiling and Trim (Both should have same width and height) -->
 
     <a-entity
-      ceiling-trim="width: 10; length: 25; thickness: 0.3; depth: 1; color: #d41234"
+      ceiling-trim="width: 13; length: 25; thickness: 0.3; depth: 1; color: #d41234"
       position="0 7 -3"
-      rotation="0 90 0">
+      rotation="90 90 0">
     </a-entity>
 
     <a-entity
-      ceiling="width: 10; length: 25; depth: 0.5; color: #343434"
+      ceiling="width: 13; length: 25; depth: 0.5; color: #343434"
       position="0 7 -3"
       rotation="90 90 0">
     </a-entity>
@@ -153,7 +139,7 @@
     <!-- Back Wall of the Shop -->
 
     <a-box
-      position="0 3.5 -8"
+      position="0 3.5 -9"
       rotation="0 0 0"
       width="25"
       height="7"
@@ -165,7 +151,19 @@
     <!-- Left Red Box thing -->
 
     <a-box
-      position="-10 3.5 -7"
+      position="-10.5 3.5 -8"
+      rotation="0 0 0"
+      width="5"
+      height="7"
+      depth="4"
+      color="#d41234"
+      static-body>
+    </a-box>
+
+    <!-- Right Red Box thing -->
+
+    <a-box
+      position="12 3.5 2"
       rotation="0 0 0"
       width="5"
       height="7"
@@ -177,7 +175,7 @@
     <!-- Right Gray Wall w/ Doorway to Back Room -->
 
     <a-box
-      position="6 3.5 -5"
+      position="4 3.5 -6"
       rotation="0 0 0"
       width="2"
       height="7"
@@ -187,7 +185,7 @@
     </a-box>
 
     <a-box
-      position="10 6 -5"
+      position="8 6 -6"
       rotation="0 0 0"
       width="7"
       height="3"
@@ -196,12 +194,29 @@
       static-body>
     </a-box>
 
+    <a-box
+      position="12 3.5 -4"
+      rotation="0 0 0"
+      width="2"
+      height="7"
+      depth="8"
+      color="#545454"
+      static-body>
+    </a-box>
 
+    <!-- Counter  -->
+
+    <a-entity 
+      counter-display="width: 0.5; height: 0.5; length: 4; color: #000000"
+      position="0 0 0"
+      rotation="0 90 0">
+    </a-entity>
 
     <!-- Reliable ground collider -->
     <a-plane id="ground" src="#groundTexture"
-             rotation="-90 0 0" width="1000" height="1000"
-             static-body="shape: box"></a-plane>
+      rotation="-90 0 0" width="1000" height="1000"
+      static-body="shape: box">
+    </a-plane>
         
 </a-scene>
 </body>

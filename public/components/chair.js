@@ -32,6 +32,7 @@
         'material',
         `color:${d.color}; metalness:0.1; roughness:0.8`
       );
+      seat.setAttribute("collision", `target: #rig; origin: 0 0 0; width: ${W}; height: ${BH}; depth: ${D}; log: true`);
       root.appendChild(seat);
 
       // --- backrest ---

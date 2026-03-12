@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8" />
-    <title>VRXP - The Perk III</title>
+    <title>VRXP - Office of Foreign Affairs</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
@@ -15,6 +15,7 @@
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
 
     <!-- Components -->
+    <script src="components/collision.js"></script>
     <script src="components/blankwall.js"></script>
     <script src="components/chair.js"></script>
     <script src="components/table.js"></script>
@@ -62,7 +63,7 @@
     <a-entity id="rig"
           dynamic-body="mass:1"
           wasd-move-only="speed:20"
-          position="-5.2 0 1">
+          position="-5.2 0.3 1">
 
     <a-camera
       look-controls
@@ -143,11 +144,12 @@
                     glowColor: #32c743;
                     radius: 1.5;
                     fadetime: 1000"
-      position="-5.2 0 3.5">
+      position="-5.5 0 4.5">
     </a-entity>
 
     <!-- Back wall -->
     <a-box
+  collision="target: #rig; origin: 0 0 0; width: 14; height: 5.5; depth: 0.3; log: true; Yrot: 0"
   position="0 2.75 -4.5"
   width="14"
   height="5.5"
@@ -158,6 +160,7 @@
 
     <!--Front wall-->
     <a-box
+    collision="target: #rig; origin: 0 0 0; width: 14; height: 5.5; depth: 0.3; log: true; Yrot: 0"
   position="0 2.75 4.5"
   width="14"
   height="5.5"
@@ -169,6 +172,7 @@
 
     <!-- Left wall -->
     <a-box
+    collision="target: #rig; origin: 0 0 0; width: 0.3; height: 5.5; depth: 9; log: true; Yrot: 0"
   position="-7 2.75 0"
   width="0.3"
   height="5.5"
@@ -179,6 +183,7 @@
 
      <!-- Right wall -->
     <a-box
+  collision="target: #rig; origin: 0 0 0; width: 0.3; height: 5.5; depth: 9; log: true; Yrot: 0"
   position="7 2.75 0"
   width="0.3"
   height="5.5"
@@ -190,24 +195,36 @@
 
     
       <!--Back wall doors-->
-    <a-box position="-4.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
-<a-box position="-0.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
-<a-box position="5.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
+    <a-box 
+      collision="target: #rig; origin: 0 0 0; width: 2.4; height: 3; depth: 0.35; log: true; Yrot: 0"
+      position="-4.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e">
+    </a-box>
+
+<a-box collision="target: #rig; origin: 0 0 0; width: 2.4; height: 3; depth: 0.35; log: true; Yrot: 0"
+position="-0.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
+
+<a-box collision="target: #rig; origin: 0 0 0; width: 2.4; height: 3; depth: 0.35; log: true; Yrot: 0"
+position="5.8 1.5 -4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
 
 
 
 
     <!--Front wall doors-->
-    <a-box position="-5.8 1.5 4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
-<a-box position="3.0 1.5 4.5"  width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
+    <a-box collision="target: #rig; origin: 0 0 0; width: 2.4; height: 3; depth: 0.35; log: true; Yrot: 0"
+    position="-5.8 1.5 4.5" width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
+
+<a-box collision="target: #rig; origin: 0 0 0; width: 2.4; height: 3; depth: 0.35; log: true; Yrot: 0"
+position="3.0 1.5 4.5"  width="2.4" height="3.0" depth="0.35" color="#5a3a1e"></a-box>
 
 
     <!--Right wall door-->
-    <a-box position="7 1.5 0" width="0.35" height="3.0" depth="2.4" color="#5a3a1e"></a-box>
+    <a-box collision="target: #rig; origin: 0 0 0; width: 0.35; height: 3; depth: 2.4; log: true; Yrot: 0"
+    position="7 1.5 0" width="0.35" height="3.0" depth="2.4" color="#5a3a1e"></a-box>
 
 
     <!--Desk-->
     <a-box
+  collision="target: #rig; origin: 0 0 0; width: 6; height: 1; depth: 2; log: true; Yrot: 0"
   position="-4.1 1 -2.3"
   width="5.8"
   height="1"
@@ -217,6 +234,7 @@
 </a-box>
 
 <a-box
+collision="target: #rig; origin: 0 0 0; width: 6; height: 1.2; depth: 1; log: true; Yrot: 0"
   position="-4.1 0.6 -1.6"
   width="5.8"
   height="1.2"
@@ -226,6 +244,7 @@
 </a-box>
 
 <a-box
+  collision="target: #rig; origin: 0 0 0; width: 0.5; height: 1.2; depth: 2; log: true; Yrot: 0"
   position="-1.2 0.6 -2.3"
   width="0.2"
   height="1.2"
@@ -251,11 +270,21 @@
 </a-entity>
 
 <!--Chairs-->
-<a-entity classroom-chair position="-3.6 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
-<a-entity classroom-chair position="-2.4 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
-<a-entity classroom-chair position="-1.2 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
-<a-entity classroom-chair position="0 0 3.6"   rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
-<a-entity classroom-chair position="1.2 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+<a-entity collision="target: #rig; origin: 0 0 0; width: 1; height: 1; depth: 1; log: true; Yrot: 180"
+classroom-chair position="-3.6 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+
+<a-entity collision="target: #rig; origin: 0 0 0; width: 1; height: 1; depth: 1; log: true; Yrot: 180"
+classroom-chair position="-2.4 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+
+<a-entity collision="target: #rig; origin: 0 0 0; width: 1; height: 1; depth: 1; log: true; Yrot: 180"
+classroom-chair position="-1.2 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+
+<a-entity collision="target: #rig; origin: 0 0 0; width: 1; height: 1; depth: 1; log: true; Yrot: 180"
+classroom-chair position="0 0 3.6"   rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+
+<a-entity collision="target: #rig; origin: 0 0 0; width: 1; height: 1; depth: 1; log: true; Yrot: 180"
+classroom-chair position="1.2 0 3.6" rotation="0 180 0" scale="1.4 1.4 1.4"></a-entity>
+
 
 <!-- Chair Componenet -->
 

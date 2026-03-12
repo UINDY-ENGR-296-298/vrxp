@@ -34,6 +34,7 @@
       const t = d.thickness * unitScale;
 
       // Geometry + material
+      el.setAttribute("collision", `target: #rig; origin: 0 0 0; width: ${w}; height: ${h}; depth: ${t}; log: true`);
       el.setAttribute('geometry', { primitive: 'box', width: w, height: h, depth: t });
       el.setAttribute('material', { color: d.color, shader: 'standard' });
 

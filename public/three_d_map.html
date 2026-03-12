@@ -23,6 +23,7 @@
     <script src="components/ComplexComponents/campus_map.js"></script>
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
+    <script src = "components/collision.js"></script>
 
     <style>
       html, body {
@@ -139,6 +140,13 @@
       rotation="0 180 0"
       scale="1 1 1">
     </a-entity>
+    <!-- Collision -->
+    <a-box
+      collision="target: #rig; origin: 0 0 10; width: 130; height: 40; depth: 40; log: true; Yrot: 0"
+      position="23 0 72"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
 
     <!-- add teleporter to Krannert Coffee Shop -->
     <a-entity
@@ -172,7 +180,7 @@
 
     <!-- 3D Model Martin -->
     <a-entity
-      gltf-model="models_ChatGPT/martin_lilly_proxy_v9_gltf/model.gltf"
+      gltf-model="models_ChatGPT/martin_lilly_proxy_v12_gltf/model.gltf"
       position="-30 0 -2"
       rotation="0 0 0"
       scale="0.75 0.75 0.75">

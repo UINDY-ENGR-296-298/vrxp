@@ -23,6 +23,7 @@
     <script src="components/scene-fade.js"></script>
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
+    <script src="components/collision.js"></script>
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -150,6 +151,7 @@
     <!-- Back Wall of the Shop -->
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 25; height: 7; depth: 0.5; log: true; Yrot: 0"
       position="0 3.5 -9"
       rotation="0 0 0"
       width="25"
@@ -162,6 +164,7 @@
     <!-- Left Red Box thing -->
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 5; height: 7; depth: 4; log: true"
       position="-10.5 3.5 -8"
       rotation="0 0 0"
       width="5"
@@ -174,6 +177,7 @@
     <!-- Right Red Box thing -->
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 5; height: 7; depth: 4; log: true"
       position="12 3.5 2"
       rotation="0 0 0"
       width="5"
@@ -186,6 +190,7 @@
     <!-- Right Gray Wall w/ Doorway to Back Room -->
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 2; height: 7; depth: 6; log: true; Yrot: 0"
       position="4 3.5 -6"
       rotation="0 0 0"
       width="2"
@@ -196,6 +201,7 @@
     </a-box>
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 7; height: 3; depth: 6; log: true; Yrot: 0"
       position="8 6 -6"
       rotation="0 0 0"
       width="7"
@@ -206,6 +212,7 @@
     </a-box>
 
     <a-box
+      collision="target: #rig; origin: 0 0 0; width: 2; height: 7; depth: 8; log: true; Yrot: 0"
       position="12 3.5 -4"
       rotation="0 0 0"
       width="2"
@@ -218,6 +225,7 @@
     <!-- Counter  -->
 
     <a-entity 
+      collision="target: #rig; origin: 2 0 0; width: 4; height: 0.5; depth: 0.5; log: true; Yrot: 0"
       counter-display="width: 0.5; height: 0.5; length: 4; color: #000000"
       position="0 0 0"
       rotation="0 90 0">

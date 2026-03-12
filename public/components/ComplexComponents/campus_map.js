@@ -277,31 +277,31 @@
         campus.appendChild(walkway(-55, -37.5, -95, -37.5, 5));
 
         // === Lilly Front ===
-        campus.appendChild(building(30, 60, 60, -105, 0, -62.5, 0, 0, 0));
+        // campus.appendChild(building(30, 60, 60, -105, 0, -62.5, 0, 0, 0));
 
-        // === Lilly Back ===
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(50, 60, 15, -125, 0, -85, 0, 0, 0));
+        // // === Lilly Back ===
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(50, 60, 15, -125, 0, -85, 0, 0, 0));
 
         // === Path in front of Lilly also leading to Martin ===
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)
         campus.appendChild(walkway(-80, 20, -80, -110, 5));
 
-        // === Martin Front ===
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(20, 80, 10, -80, 0, 20, 0, 90, 0));
+        // // === Martin Front ===
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(20, 80, 10, -80, 0, 20, 0, 90, 0));
         
-        // === Martin Mid ===
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(40, 80, 60, -115, 0, 15, 0, 90, 0));
+        // // === Martin Mid ===
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(40, 80, 60, -115, 0, 15, 0, 90, 0));
 
-        // === Martin Back === 
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(80, 80, 10, -150, 0, -5, 0, 90, 0));
+        // // === Martin Back === 
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(80, 80, 10, -150, 0, -5, 0, 90, 0));
 
-        // === Sky Bridge between Martin/Lilly
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(50, 10, 20, -105, 15, -30, 0, 90, 0));
+        // // === Sky Bridge between Martin/Lilly
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(50, 10, 20, -105, 15, -30, 0, 90, 0));
         
         // === Path between Martin and Lilly - Stage 1 ===
         // walkway(PathStartX, PathStartZ, PathEndX, PathEndZ, PathWidth)

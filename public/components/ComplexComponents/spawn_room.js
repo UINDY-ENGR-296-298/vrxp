@@ -207,7 +207,7 @@
     const wallY = ROOM_HEIGHT / 2;
     room.appendChild(makeWall(ROOM_WIDTH, ROOM_HEIGHT, WALL_THICKNESS, 0, wallY, halfD, 0));
     room.appendChild(makeWall(ROOM_WIDTH, ROOM_HEIGHT, WALL_THICKNESS, 0, wallY, -halfD, 0));
-    room.appendChild(makeWall(ROOM_DEPTH, ROOM_HEIGHT, WALL_THICKNESS, halfW, wallY, 0, 90));
+    room.appendChild(makeWall(ROOM_DEPTH, ROOM_HEIGHT, WALL_THICKNESS, halfW, wallY, 0, 90)); 
     room.appendChild(makeWall(ROOM_DEPTH, ROOM_HEIGHT, WALL_THICKNESS, -halfW, wallY, 0, 90));
 
     // ===== Path from spawn to teleporter =====

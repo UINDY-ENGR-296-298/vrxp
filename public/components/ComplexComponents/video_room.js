@@ -219,11 +219,23 @@
     const path1 = makePathBetweenExtended(spawnX, spawnZ, portalX, portalZ, 0.02, 2, 1.5);
     if (path1) room.appendChild(path1);
 
-    const path2 = makePathBetween(0, -3, -7, -3, 0.02, 2);
-    if (path2) room.appendChild(path2);
+    const pathGrady = makePathBetween(-1, 2, -10, 2, 0.02, 2);
+    if (pathGrady) room.appendChild(pathGrady);
 
-    const path3 = makePathBetween(0, -7, 7, -7, 0.02, 2);
-    if (path2) room.appendChild(path3);
+    const pathVolly = makePathBetween(1, 2, 10, 2, 0.02, 2);
+    if (pathVolly) room.appendChild(pathVolly);
+
+    const pathWres = makePathBetween(-1, -4, -10, -4, 0.02, 2);
+    if (pathWres) room.appendChild(pathWres);
+
+    const pathFlag = makePathBetween(1, -4, 10, -4, 0.02, 2);
+    if (pathFlag) room.appendChild(pathFlag);
+
+    const pathlofts = makePathBetween(-1, -10, -10, -10, 0.02, 2);
+    if (pathlofts) room.appendChild(pathlofts);
+
+    const pathdinning = makePathBetween(1, -10, 10, -10, 0.02, 2);
+    if (pathdinning) room.appendChild(pathdinning);
 
 
 
@@ -231,16 +243,16 @@
     // ===== Clickable instruction panels (click to dismiss) =====
     room.appendChild(
       makeTextPanel({
-        x: spawnX -1,
+        x: spawnX +1,
         y: 1,
         z: spawnZ - 7,
-        rotY: 35,
-        value: "Welcome to the UIndy Virtual Campus. \n\n Control the player with WASD and use the arrow keys or click and hold with the mouse to look around. Explore the path to learn more.",
+        rotY: -35,
+        value: "Explore the videos. Click to pause and play.",
         width: 2,
-        height: 3.75,
+        height: 1.25,
         textWidth: 2,
         wrapCount: 14,
-        bgColor: "#4058e1",
+        bgColor: "#728fb6",
         bgOpacity: 0.85,
         textColor: "#111",
         align: "center",

@@ -132,7 +132,7 @@
             'geometry',
             'primitive: circle; radius:50; thetaStart:0; thetaLength:180'
         );
-        centerGreenFarHalf.setAttribute('position', '0 -1 -40');
+        centerGreenFarHalf.setAttribute('position', '0 -3 -40');
         centerGreenFarHalf.setAttribute('rotation', '-90 0 0');
         centerGreenFarHalf.setAttribute('material', 'color: #11750a');
         campus.appendChild(centerGreenFarHalf);
@@ -143,7 +143,7 @@
             'geometry',
             'primitive: circle; radius:50; thetaStart:0; thetaLength:180'
         );
-        centerGreenNearHalf.setAttribute('position', '0 -1 -35');
+        centerGreenNearHalf.setAttribute('position', '0 -3 -35');
         centerGreenNearHalf.setAttribute('rotation', '-90 180 0');
         centerGreenNearHalf.setAttribute('material', 'color: #11750a');
         campus.appendChild(centerGreenNearHalf);
@@ -211,7 +211,7 @@
         );
         farHalfRing.setAttribute('position', '0 0 -37.5');
         farHalfRing.setAttribute('rotation', '-90 0 0');
-        farHalfRing.setAttribute('material', 'color: #6a767a; side: double');
+        farHalfRing.setAttribute('material', 'src: #groundTexture; repeat: 200 200; roughness: 1; metalness: 0; side: double');
         campus.appendChild(farHalfRing);
 
         // === Ground - Near half ===
@@ -222,7 +222,7 @@
         );
         nearHalfRing.setAttribute('position', '0 0 -37.5');
         nearHalfRing.setAttribute('rotation', '-90 0 180');
-        nearHalfRing.setAttribute('material', 'color: #6a767a; side: double');
+        nearHalfRing.setAttribute('material', 'src: #groundTexture; repeat: 200 200; roughness: 1; metalness: 0; side: double');
         campus.appendChild(nearHalfRing);
 
         // === Transition from ground to center circle ===
@@ -371,26 +371,26 @@
 
         // =========================== Esch ===========================
 
-        // === Esch ===
-        // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
-        campus.appendChild(building(130, 60, 40, 130, 0, -20, 0, 90, 0));
+        // // === Esch ===
+        // // Width, Height, Depth, X, Y, Z, RotationAxis: X, Y, Z
+        // campus.appendChild(building(130, 60, 40, 130, 0, -20, 0, 90, 0));
 
-        // === Esch Wall left ===
-        campus.appendChild(building(30, 30, 40, 120, 0, -70, 0, 90, 0));
+        // // === Esch Wall left ===
+        // campus.appendChild(building(30, 30, 40, 120, 0, -70, 0, 90, 0));
 
-        // === Esch Wall Right ===
-        campus.appendChild(building(30, 30, 40, 120, 0, 30, 0, 90, 0));
+        // // === Esch Wall Right ===
+        // campus.appendChild(building(30, 30, 40, 120, 0, 30, 0, 90, 0));
 
-        // === Esch entry ===
-        campus.appendChild(building(70, 7, 40, 115, 0, -20, 0, 90, 0));
+        // // === Esch entry ===
+        // campus.appendChild(building(70, 7, 40, 115, 0, -20, 0, 90, 0));
 
-        // === Esch stairs ===
-        campus.appendChild(building(72, 6, 40, 114, 0, -20, 0, 90, 0));
-        campus.appendChild(building(74, 5, 40, 113, 0, -20, 0, 90, 0));
-        campus.appendChild(building(76, 4, 40, 112, 0, -20, 0, 90, 0));
-        campus.appendChild(building(78, 3, 40, 111, 0, -20, 0, 90, 0));
-        campus.appendChild(building(80, 2, 40, 110, 0, -20, 0, 90, 0));
-        campus.appendChild(building(82, 1, 40, 109, 0, -20, 0, 90, 0));
+        // // === Esch stairs ===
+        // campus.appendChild(building(72, 6, 40, 114, 0, -20, 0, 90, 0));
+        // campus.appendChild(building(74, 5, 40, 113, 0, -20, 0, 90, 0));
+        // campus.appendChild(building(76, 4, 40, 112, 0, -20, 0, 90, 0));
+        // campus.appendChild(building(78, 3, 40, 111, 0, -20, 0, 90, 0));
+        // campus.appendChild(building(80, 2, 40, 110, 0, -20, 0, 90, 0));
+        // campus.appendChild(building(82, 1, 40, 109, 0, -20, 0, 90, 0));
         
         // =========================== Roads ===========================
 

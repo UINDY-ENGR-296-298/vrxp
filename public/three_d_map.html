@@ -46,7 +46,7 @@
     <!-- All assets go here -->
     <a-assets>
       
-      <img id="groundTexture" src="images/concrete.jpg" alt="">
+      <img id="groundTexture" src="images/green-ground-texture.jpg">
 
     </a-assets>
     <!--  End all assets -->
@@ -54,8 +54,8 @@
     <!-- create camera obj -->
     <a-entity id="rig"
           dynamic-body="mass:1"
-          wasd-move-only="speed:40"
-          position="0 0 25">
+          wasd-move-only="speed:20"
+          position="0 2 25">
 
     <a-camera
       look-controls
@@ -135,10 +135,10 @@
 
     <!-- 3D Model Library -->
     <a-entity
-      gltf-model="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"
+      gltf-model="models_ChatGPT/krannert_adapted/model.gltf"
       position="23 0 72"
       rotation="0 180 0"
-      scale="1 1 1">
+      scale="1 2 1">
     </a-entity>
     <!-- Collision -->
     <a-box
@@ -161,10 +161,18 @@
 
     <!-- 3D Model Schwitzer -->
     <a-entity
-      gltf-model="models_ChatGPT/schwitzer_student_center_proxy_v1/model.gltf"
+      gltf-model="models_ChatGPT/schwitzer_student_center_gltf/model.gltf"
       position="0 0 -155"
       rotation="0 0 0"
       scale="1 1 1">
+    </a-entity>
+
+    <!-- 3D Model Esch -->
+    <a-entity
+      gltf-model="models_ChatGPT/esch_model_v5.glb"
+      position=" 120 0 -60"
+      rotation="0 270 0"
+      scale="2 2 2">
     </a-entity>
 
     <!-- add teleporter to Foreign Affairs Office -->
@@ -180,7 +188,7 @@
 
     <!-- 3D Model Martin/Lilly -->
     <a-entity
-      gltf-model="models_ChatGPT/martin_lilly_proxy_v16_gltf/model.gltf"
+      gltf-model="models_ChatGPT/Martin_Lilly_Adapted/model.gltf"
       position="-30 0 -2"
       rotation="0 0 0"
       scale="0.75 0.75 0.75">
@@ -212,14 +220,19 @@
     </a-box>
 
     <!-- LIGHTS -->
-    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: ambient; intensity: 0.8"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
     <!-- Reliable ground collider -->
-    <a-plane id="ground" src="#groundTexture"
-             position="0 -2 0"
-             rotation="-90 0 0" width="1000" height="1000"
-             static-body="shape: box"></a-plane>
+    <a-plane
+      id="ground"
+      material="src: #groundTexture; repeat: 200 200; roughness: 1; metalness: 0"
+      position="0 -2 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      static-body="shape: box">
+    </a-plane>
 
     <!-- Easter Egg -->
     <a-entity 

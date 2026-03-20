@@ -40,13 +40,15 @@
 <a-scene
 
     scene-fade="duration: 800"
-    renderer="colorManagement: true; physicallyCorrectLights: true"
+    renderer="colorManagement: true; physicallyCorrectLights: true; light: 0 5 -37.5"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
     <!-- All assets go here -->
     <a-assets>
       
-      <img id="groundTexture" src="images/concrete.jpg" alt="">
+      <img id="groundTexture" src="images/green-ground-texture.jpg">
+      <img id="wallTexture" src="images/brick.jpg">
+      <img id="pathTexture" src="images/path.jpg">
 
     </a-assets>
     <!--  End all assets -->
@@ -55,7 +57,7 @@
     <a-entity id="rig"
           dynamic-body="mass:1"
           wasd-move-only="speed:20"
-          position="0 0 25">
+          position="0 1 25">
 
     <a-camera
       look-controls
@@ -135,10 +137,10 @@
 
     <!-- 3D Model Library -->
     <a-entity
-      gltf-model="models_ChatGPT/krannert_memorial_library_proxy_v6/model.gltf"
-      position="23 0 72"
+      gltf-model="models_ChatGPT/Krannert_Final.glb"
+      position="30 0 82"
       rotation="0 180 0"
-      scale="1 1 1">
+      scale="1.25 1 2">
     </a-entity>
     <!-- Collision -->
     <a-box
@@ -159,12 +161,28 @@
       position="0 0 59.5">
     </a-entity>
 
+    <!--Art in front of library-->
+    <a-entity
+      gltf-model="models_ChatGPT/library_art.glb"
+      position="0 0.2 42"
+      rotation="0 0 0"
+      scale="2 2 2">
+    </a-entity>
+
     <!-- 3D Model Schwitzer -->
     <a-entity
-      gltf-model="models_ChatGPT/schwitzer_student_center_proxy_v1/model.gltf"
-      position="0 0 -155"
-      rotation="0 0 0"
+      gltf-model="models_ChatGPT/schwitzer_student_center_v11.glb"
+      position="-10 0 -155"
+      rotation="0 90 0"
       scale="1 1 1">
+    </a-entity>
+
+    <!-- 3D Model Esch -->
+    <a-entity
+      gltf-model="models_ChatGPT/Esch_v6.glb"
+      position="90 0 -42"
+      rotation="0 270 0"
+      scale="2 1.2 2">
     </a-entity>
 
     <!-- add teleporter to Foreign Affairs Office -->
@@ -180,10 +198,10 @@
 
     <!-- 3D Model Martin/Lilly -->
     <a-entity
-      gltf-model="models_ChatGPT/martin_lilly_proxy_v16_gltf/model.gltf"
+      gltf-model="models_ChatGPT/Martin_Lilly_v8.glb"
       position="-30 0 -2"
       rotation="0 0 0"
-      scale="0.75 0.75 0.75">
+      scale="0.75 0.3 0.85">
     </a-entity>
     <!-- Collision -->
     <a-box
@@ -211,21 +229,271 @@
       visible="false">
     </a-box>
 
+    <!-- Picnic Table -->
+    <a-entity
+      gltf-model="models_ChatGPT/picnic_table.glb"
+      position="-66 0 -60"
+      rotation="0 90 0"
+      scale="1.5 1.5 1.5">
+    </a-entity>
+
     <!-- LIGHTS -->
-    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: ambient; intensity: 0.8"></a-entity>
     <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
     <!-- Reliable ground collider -->
-    <a-plane id="ground" src="#groundTexture"
-             position="0 -2 0"
-             rotation="-90 0 0" width="1000" height="1000"
-             static-body="shape: box"></a-plane>
+    <a-plane
+      id="ground"
+      material="src: #groundTexture; repeat: 1000 1000; roughness: 1; metalness: 0"
+      position="0 -2 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      static-body="shape: box">
+    </a-plane>
 
     <!-- Easter Egg -->
     <a-entity 
       teleport-pad="to: chang.html; radius: 1.5"
       position="-141.22 0 -4.88">
     </a-entity>
+
+    <!--Tree-->
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-47 0 10"
+      rotation="0 0 0"
+      scale="3 3 3">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-55 0 4"
+      rotation="0 0 0"
+      scale="3 3 3">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-72 0 0"
+      rotation="0 0 0"
+      scale="2.8 2.8 3.6">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-72 0 -22"
+      rotation="0 0 0"
+      scale="2.8 4 3.6">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-67 0 -11"
+      rotation="0 0 0"
+      scale="2.8 2.3 3.6">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-84 0 -7"
+      rotation="0 0 0"
+      scale="2.8 2.3 3.6">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-91 0 -58"
+      rotation="0 0 0"
+      scale="2.8 2.3 3.6">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-57 0 -5"
+      rotation="0 0 0"
+      scale="3 5 3">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-68 0 11"
+      rotation="0 0 0"
+      scale="3 3 3">
+    </a-entity>
+      <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-52 0 -78"
+      rotation="0 0 0"
+      scale="2.6 2.9 2.4">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-69 0 -50"
+      rotation="0 0 0"
+      scale="2.6 3.2 2.4">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-73 0 -60"
+      rotation="0 0 0"
+      scale="2.6 3.2 2.4">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-74 0 -44"
+      rotation="0 0 0"
+      scale="2.6 3.2 2.4">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-68 0 -68"
+      rotation="0 0 0"
+      scale="2.7 2.5 2.7">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-72 0 -75"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="10 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="20 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="30 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="40 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="50 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+        <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="10 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="20 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="30 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="40 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="50 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+        <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-10 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-20 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-30 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-40 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-50 0 30"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+        <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-10 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-20 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-30 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-40 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-50 0 40"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="50 0 1"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="48 0 10"
+      rotation="0 0 0"
+      scale="0.9 3 0.9">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="43 0 12"
+      rotation="0 0 0"
+      scale="3 2.5 3">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-44 0 -90"
+      rotation="0 90 0"
+      scale="3.5 3.5 3.5">
+    </a-entity>
+
 
 
 </a-scene>  <!-- End A-Scene -->

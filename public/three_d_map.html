@@ -40,7 +40,7 @@
 <a-scene
 
     scene-fade="duration: 800"
-    renderer="colorManagement: true; physicallyCorrectLights: true"
+    renderer="colorManagement: true; physicallyCorrectLights: true; light: 0 5 -37.5"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
     <!-- All assets go here -->
@@ -135,10 +135,10 @@
 
     <!-- 3D Model Library -->
     <a-entity
-      gltf-model="models_ChatGPT/krannert_adapted/model.gltf"
-      position="23 0 72"
+      gltf-model="models_ChatGPT/Krannert_Final.glb"
+      position="23 0 82"
       rotation="0 180 0"
-      scale="1 2 1">
+      scale="1 2 2">
     </a-entity>
     <!-- Collision -->
     <a-box
@@ -161,7 +161,7 @@
 
     <!-- 3D Model Schwitzer -->
     <a-entity
-      gltf-model="models_ChatGPT/schwitzer_student_center_gltf/model.gltf"
+      gltf-model="models_ChatGPT/schwitzer_student_center_v9.glb"
       position="0 0 -155"
       rotation="0 0 0"
       scale="1 1 1">
@@ -169,7 +169,7 @@
 
     <!-- 3D Model Esch -->
     <a-entity
-      gltf-model="models_ChatGPT/esch_model_v5.glb"
+      gltf-model="models_ChatGPT/Esch_v6.glb"
       position=" 120 0 -60"
       rotation="0 270 0"
       scale="2 2 2">
@@ -188,7 +188,7 @@
 
     <!-- 3D Model Martin/Lilly -->
     <a-entity
-      gltf-model="models_ChatGPT/Martin_Lilly_Adapted/model.gltf"
+      gltf-model="models_ChatGPT/Martin_Lilly_v5.glb"
       position="-30 0 -2"
       rotation="0 0 0"
       scale="0.75 0.75 0.75">
@@ -226,7 +226,7 @@
     <!-- Reliable ground collider -->
     <a-plane
       id="ground"
-      material="src: #groundTexture; repeat: 200 200; roughness: 1; metalness: 0"
+      material="src: #groundTexture; repeat: 1000 1000; roughness: 1; metalness: 0"
       position="0 -2 0"
       rotation="-90 0 0"
       width="1000"
@@ -238,6 +238,26 @@
     <a-entity 
       teleport-pad="to: chang.html; radius: 1.5"
       position="-141.22 0 -4.88">
+    </a-entity>
+
+    <!--Tree-->
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-62 0 7"
+      rotation="0 0 0"
+      scale="3 3 3">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-68 0 -18"
+      rotation="0 0 0"
+      scale="2.5 2.5 2.5">
+    </a-entity>
+    <a-entity
+      gltf-model="models_ChatGPT/Tree.gltf"
+      position="-72 0 -75"
+      rotation="0 0 0"
+      scale="2.75 2.75 2.75">
     </a-entity>
 
 

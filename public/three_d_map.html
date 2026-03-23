@@ -9,7 +9,7 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
     <!-- Physics system -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@c-frame/aframe-physics-system@4.2.4/dist/aframe-physics-system.min.js"></script>
 
     <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
     <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
@@ -40,7 +40,7 @@
 <a-scene
 
     scene-fade="duration: 800"
-    renderer="colorManagement: true; physicallyCorrectLights: true; light: 0 5 -37.5"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
     <!-- All assets go here -->
@@ -55,7 +55,6 @@
 
     <!-- create camera obj -->
     <a-entity id="rig"
-          dynamic-body="mass:1"
           wasd-move-only="speed:20"
           position="0 1 25">
 
@@ -248,8 +247,7 @@
       position="0 -2 0"
       rotation="-90 0 0"
       width="1000"
-      height="1000"
-      static-body="shape: box">
+      height="1000">
     </a-plane>
 
     <!-- Easter Egg -->

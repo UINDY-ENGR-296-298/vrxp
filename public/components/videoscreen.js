@@ -31,7 +31,6 @@
     init: function () {
       const el = this.el;
       const d  = this.data;
-      const s  = d.units.toLowerCase() === 'ft' ? FT : 1.0;
 
       // compute screen height
       const w = d.width;

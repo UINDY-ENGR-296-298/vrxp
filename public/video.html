@@ -19,9 +19,10 @@
   <script src="skybox/skycomponent.js"></script>
   <script src="components/collision.js"></script>
   <script src="components/hud.js"></script>
-  <script src="components/ComplexComponents/spawn_room.js"></script>
   <script src="components/cookies.js"></script>
   <script src="components/objectives-init.js"></script>
+  <script src="components/videoscreen.js"></script>
+  <script src="components/ComplexComponents/video_room.js"></script>
 
 
 
@@ -127,6 +128,56 @@
       <img id="pathTex" src="images/path_texture.jpg" alt="" />
       <img id="wallTex" src="images/wallphoto.jpg">
       <img id="cellingTex" src="images/cellingPhoto.jpg">
+
+      <!-- Plain HTML video element (define videos to use latter) -->
+      <video  id="Grady"
+        src="media/Grady vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+      <video  id="Volleyball"
+        src="media/Volleyball Vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Wrestling"
+        src="media/Wrestling vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Flags"
+        src="media/Flags.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Lofts"
+        src="media/Lofts.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Dinning"
+        src="media/Dinning Hall.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
     </a-assets>
 
     <!-- Ground collider -->
@@ -150,6 +201,86 @@
                       fadetime: 1000"
       position="0 0 -13">
     </a-entity>
+
+    <!-- Play/Pause Video -->
+    <!-- The "screen" -->
+        <a-entity
+          position="-9.75 1.5 2"
+          rotation="0 90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Grady;
+            autoplay: true;">
+        </a-entity>
+
+          <a-entity
+          position="9.75 1.5 2"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Volleyball;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="-9.75 1.5 -4"
+          rotation="0 90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Wrestling;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="9.75 0.5 -4"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Flags;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="-9.75 0.5 -10"
+          rotation="0 90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Lofts;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="9.75 0.5 -10"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Dinning;
+            autoplay: true;">
+        </a-entity>
 
   </a-scene>
 </body>

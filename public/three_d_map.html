@@ -11,9 +11,6 @@
     <!-- Physics system -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
-
     <!--Components-->
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
@@ -24,6 +21,11 @@
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
     <script src = "components/collision.js"></script>
+    <script>
+      console.log(AFRAME.version);
+      console.log(THREE.REVISION);
+      console.log(typeof THREE.LoaderUtils?.extractUrlBase);
+    </script>
 
     <style>
       html, body {
@@ -198,7 +200,7 @@
 
     <!-- 3D Model Martin/Lilly -->
     <a-entity
-      gltf-model="models_ChatGPT/Martin_Lilly_v8.glb"
+      gltf-model="models_ChatGPT/Martin_Lilly_v10.glb"
       position="-30 0 -2"
       rotation="0 0 0"
       scale="0.75 0.3 0.85">

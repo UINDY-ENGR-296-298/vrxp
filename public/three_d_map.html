@@ -57,7 +57,7 @@
 
     <!-- create camera obj -->
     <a-entity id="rig"
-          wasd-move-only="speed:20"
+          wasd-move-only="speed:50"
           position="0 1 25">
 
     <a-camera
@@ -145,8 +145,14 @@
     </a-entity>
     <!-- Collision -->
     <a-box
-      collision="target: #rig; origin: 0 0 10; width: 130; height: 40; depth: 40; log: true; Yrot: 0"
-      position="23 0 72"
+      collision="target: #rig; origin: 0 0 10; width: 160; height: 40; depth: 80; log: true; Yrot: 0"
+      position="33 0 90"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 4; height: 5; depth: 4; log: true; Yrot: 0"
+      position="0 0 42.5"
       rotation="0 0 0"
       visible="false">
     </a-box>
@@ -177,6 +183,25 @@
       rotation="0 90 0"
       scale="1 1 1">
     </a-entity>
+    <!-- Collision -->
+    <a-box
+      collision="target: #rig; origin: 0 0 10; width: 95; height: 40; depth: 55; log: true; Yrot: 0"
+      position="10 0 -150"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 10; width: 45; height: 40; depth: 133; log: true; Yrot: 0"
+      position="-21 0 -190"
+      rotation="0 0 0"  
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 20; height: 40; depth: 20; log: true; Yrot: 0"
+      position="2 0 -170"
+      rotation="0 0 0"  
+      visible="false">
+    </a-box>
 
     <!-- 3D Model Esch -->
     <a-entity
@@ -185,6 +210,13 @@
       rotation="0 270 0"
       scale="2 1.2 2">
     </a-entity>
+    <!-- Collision -->
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 65; height: 40; depth: 167; log: true; Yrot: 0"
+      position="95 0 -41"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
 
     <!-- add teleporter to Foreign Affairs Office -->
     <a-entity
@@ -205,21 +237,24 @@
       scale="0.75 0.3 0.85">
     </a-entity>
     <!-- Collision -->
+    <!-- Lilly Front -->
     <a-box
-      collision="target: #rig; origin: 0 0 0; width: 47; height: 40; depth: 25; log: true; Yrot: 90"
-      position="-109 0 -51"
+      collision="target: #rig; origin: 0 0 0; width: 55; height: 40; depth: 25; log: true; Yrot: 90"
+      position="-109 0 -57"
       rotation="0 0 0"
       visible="false">
     </a-box>
+    <!-- Lilly Back -->
     <a-box
-      collision="target: #rig; origin: 0 0 0; width: 25; height: 40; depth: 13; log: true; Yrot: 0"
-      position="-131 0 -69"
+      collision="target: #rig; origin: 0 0 0; width: 25; height: 40; depth: 16; log: true; Yrot: 0"
+      position="-131 0 -76"
       rotation="0 0 0"
       visible="false">
     </a-box>
+    <!-- Martin Front -->
     <a-box
-      collision="target: #rig; origin: 0 0 0; width: 64; height: 40; depth: 33; log: true; Yrot: 0"
-      position="-116 0 12"
+      collision="target: #rig; origin: 0 0 0; width: 64; height: 40; depth: 38; log: true; Yrot: 0"
+      position="-118 0 16.5"
       rotation="0 0 0"
       visible="false">
     </a-box>
@@ -237,6 +272,13 @@
       rotation="0 90 0"
       scale="1.5 1.5 1.5">
     </a-entity>
+    <!-- Collision -->
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 7; height: 10; depth: 5; log: true; Yrot: 90"
+      position="-66 0 -58"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
 
     <!-- LIGHTS -->
     <a-entity light="type: ambient; intensity: 0.8"></a-entity>

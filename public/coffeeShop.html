@@ -1,230 +1,323 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8" />
-    <title>VRXP - The Perk III</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <head>
+      <meta charset="UTF-8" />
+      <title>VRXP - The Perk III</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
-    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+      <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
+      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
-    <!-- Physics system -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+      <!-- Physics system -->
+      <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
-    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+      <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
+      <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+      
+      <!-- aframe-multisrc-component (for vending machine) -->
+      <script src="https://cdn.rawgit.com/elbobo/aframe-multisrc-component/b6d23310/dist/0.3/aframe-multisrc-component.js"></script>
+      
+      <!-- Components -->
+      <script src="components/CoffeeShopComponents/ceiling.js"></script>
+      <script src="components/CoffeeShopComponents/counter-display.js"></script>
+      <script src="components/CoffeeShopComponents/counter.js"></script>
+      <script src="components/wasd-move.js"></script>
+      <script src="components/arrow-look.js"></script>
+      <script src="components/teleport-pad.js"></script>
+      <script src="components/scene-fade.js"></script>
+      <script src="components/hud.js"></script>
 
-    <!-- Components -->
-    <script src="components/CoffeeShopComponents/ceiling.js"></script>
-    <script src="components/CoffeeShopComponents/counter-display.js"></script>
-    <script src="components/wasd-move.js"></script>
-    <script src="components/arrow-look.js"></script>
-    <script src="components/teleport-pad.js"></script>
-    <script src="components/scene-fade.js"></script>
-    <script src="components/hud.js"></script>
+      <!-- Sky -->
+      <script src="skybox/skycomponent.js"></script>
 
-    <!-- Sky -->
-    <script src="skybox/skycomponent.js"></script>
+      <style>
+        html, body { margin:0; height:100%; }
+        .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
+      </style>
 
-    <style>
-      html, body { margin:0; height:100%; }
-      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
-    </style>
+  </head>
 
-</head>
+  <body>
+    <a-scene
+      scene-fade="duration: 800"
+      renderer="colorManagement: true; physicallyCorrectLights: true"
+      skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
 
-<body>
-<a-scene
-    scene-fade="duration: 800"
-    renderer="colorManagement: true; physicallyCorrectLights: true"
-    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+      <!-- LIGHTS -->
+      <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+      <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
 
-    <!-- LIGHTS -->
-    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
-    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+      <!-- create camera obj -->
+      <a-entity id="rig"
+        dynamic-body="mass:1"
+        wasd-move-only="speed:10"
+        position="0 0 6">
 
-    <!-- create camera obj -->
-    <a-entity id="rig"
-          dynamic-body="mass:1"
-          wasd-move-only="speed:10"
-          position="0 0 6">
+        <a-camera
+          look-controls
+          arrow-look
+          wasd-controls-enabled="false">
 
-    <a-camera
-      look-controls
-      arrow-look
-      wasd-controls-enabled="false">
+          <a-entity
+            id="hud"
+            position="3 2 -3"
+            hud-coords="target: #rig">
+          </a-entity>
+
+          <!--Set objectives -->
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const scene = document.querySelector("a-scene");
+              const hud = document.querySelector("#hud");
+
+              function setObjectives() {
+                // Set a list, first one shows, next appears when completed
+                hud.emit("hud-set-objectives", {
+                  list: [
+                    "task 1",
+                    "task 2",
+                    "task 3"
+                  ]
+                });
+
+                // Optional test: press O to complete the current objective
+                window.addEventListener("keydown", (e) => {
+                  if (e.key.toLowerCase() === "o") {
+                    hud.emit("hud-complete-objective");
+                  }
+                });
+              }
+
+              // Wait until the A-Frame scene is fully loaded
+              if (scene.hasLoaded) setObjectives();
+              else scene.addEventListener("loaded", setObjectives);
+            });
+          </script>
+
+          
+          <!-- Cursor and raycaster for clicking -->
+          <a-entity
+            id="aimDot"
+            class="cursor"
+            cursor="fuse: false"
+            raycaster="objects: .clickable"
+            position="0 0 -1"
+            geometry="primitive: circle; radius: 0.005"
+            material="color: white; shader: flat">
+          </a-entity>
+        </a-camera>
+      </a-entity>
+      <a-assets>
+        <img id="groundTexture" src="images/concrete.jpg" alt="">
+        <img id="vendingMachineFront" src="images/vending_machine_front.jpg" alt="">
+        <img id="vendingMachineSide" src="images/vending_machine_side.png" alt="">
+        <img id="RedBoxSign" src="images/red_box_sign.jpg" alt="">
+        <img id="CeilingTexture" src="images/ceiling.jpg" alt="">
+        <img id="Windows" src="images/windows.jpg" alt="">
+      </a-assets>
+
+  <!------------------------------------------------------------------------------------------------------>
+  <!--                                          Main Area                                               -->
+  <!------------------------------------------------------------------------------------------------------>
+
+      <!-- TELEPORT PAD TO RETURN TO MAIN WORLD -->
 
       <a-entity
-        id = "hud"
-        position="3 2 -3"
-        hud-coords="target: #rig">
+          teleport-pad="to: three_d_map.html;
+              width: 2.5;
+              color: #c0d950;
+              glowColor: #32c743;
+              radius: 1.5;
+              fadetime: 1000"
+          position="-5 0 10">
       </a-entity>
 
-      <!--Set objectives -->
-      <script>
-        document.addEventListener("DOMContentLoaded", () => {
-          const scene = document.querySelector("a-scene");
-          const hud = document.querySelector("#hud");
+      <!-- Walls -->
 
-          function setObjectives() {
-            // Set a list, first one shows, next appears when completed
-            hud.emit("hud-set-objectives", {
-              list: [
-                "task 1",
-                "task 2",
-                "task 3"
-              ]
-            });
+      <a-box
+        position="0 3 10"
+        rotation="0 0 0"
+        width="20"
+        height="6"
+        depth="0.3"
+        color="#ffffff"
+        material="src: #Windows; repeat: 4 1"
+        static-body>
+      </a-box>
 
-            // Optional test: press O to complete the current objective
-            window.addEventListener("keydown", (e) => {
-              if (e.key.toLowerCase() === "o") {
-                hud.emit("hud-complete-objective");
-              }
-            });
-          }
+      <a-box
+        position="10 3 0"
+        rotation="0 90 0"
+        width="20"
+        height="6"
+        depth="0.3"
+        color="#ffffff"
+        material="src: #Windows; repeat: 4 1"
+        static-body>
+      </a-box>
 
-          // Wait until the A-Frame scene is fully loaded
-          if (scene.hasLoaded) setObjectives();
-          else scene.addEventListener("loaded", setObjectives);
-        });
-        </script>
+      <a-box
+        position="0 4.5 0"
+        rotation="0 90 0"
+        width="20"
+        height="0.3"
+        depth="20"
+        color="ffffff"
+        material="src: #CeilingTexture; repeat: 2.8 4.2"
+        static-body>
+      </a-box>
 
-      
-        <!-- Cursor and raycaster for clicking -->
-        <a-entity
-          id="aimDot"
-          class="cursor"
-          cursor="fuse: false"
-          raycaster="objects: .clickable"
-          position="0 0 -1"
-          geometry="primitive: circle; radius: 0.005"
-          material="color: white; shader: flat">
-        </a-entity>
-      </a-camera>
-    </a-entity>
+      <!-- Ceiling and Trim (Both should have same width and height) -->
 
-    <img id="groundTexture" src="images/concrete.jpg" alt="">
+      <a-entity
+        ceiling-trim="width: 7.5; length: 14.28; thickness: 0.2; depth: 0.6; color: #d41234"
+        position="0 4 -1.7"
+        rotation="90 90 0">
+      </a-entity>
 
-<!------------------------------------------------------------------------------------------------------>
-<!--                                          Main Area                                               -->
-<!------------------------------------------------------------------------------------------------------>
+      <a-entity
+        ceiling="width: 7.5; length: 14.28; depth: 0.29; color: #343434"
+        position="0 4 -1.7"
+        rotation="90 90 0">
+      </a-entity>
 
-    <!-- TELEPORT PAD TO RETURN TO MAIN WORLD -->
+      <!-- Back Wall of the Shop -->
 
-    <a-entity
-        teleport-pad="to: three_d_maphtml;
-            width: 2.5;
-            color: #c0d950;
-            glowColor: #32c743;
-            radius: 1.5;
-            fadetime: 1000"
-        position="0 0 20">
-    </a-entity>
+      <a-box
+        position="0 2 -5.14"
+        rotation="0 0 0"
+        width="14.3"
+        height="4"
+        depth="0.3"
+        color="#545454"
+        static-body>
+      </a-box>
 
-    <!-- Ceiling and Trim (Both should have same width and height) -->
+      <!-- Left Red Box thing w/ sign -->
 
-    <a-entity
-      ceiling-trim="width: 7.5; length: 14.28; thickness: 0.2; depth: 0.6; color: #d41234"
-      position="0 4 -1.7"
-      rotation="90 90 0">
-    </a-entity>
+      <a-box
+        position="-6 2 -4.5"
+        rotation="0 0 0"
+        color = "#d41234"
+        width="2.86"
+        height="4"
+        depth="2.29"
+        static-body>
+      </a-box>
 
-    <a-entity
-      ceiling="width: 7.5; length: 14.28; depth: 0.29; color: #343434"
-      position="0 4 -1.7"
-      rotation="90 90 0">
-    </a-entity>
+      <a-plane src="#RedBoxSign"
+        position="-6 2 -3.352"
+        width="2.86"
+        height="4"
+        rotation="0 0 0"
+        static-body="shape: box">
+      </a-plane>
 
-    <!-- Back Wall of the Shop -->
+      <!-- Right Red Box thing -->
 
-    <a-box
-      position="0 2 -5.14"
-      rotation="0 0 0"
-      width="14.3"
-      height="4"
-      depth="0.3"
-      color="#545454"
-      static-body>
-    </a-box>
+      <a-box
+        position="6.86 2 1.14"
+        rotation="0 0 0"
+        width="2.86"
+        height="4"
+        depth="2.29"
+        color="#d41234"
+        static-body>
+      </a-box>
 
-    <!-- Left Red Box thing -->
+      <!-- Right Gray Wall w/ Doorway to Back Room -->
 
-    <a-box
-      position="-6 2 -4.5"
-      rotation="0 0 0"
-      width="2.86"
-      height="4"
-      depth="2.29"
-      color="#d41234"
-      static-body>
-    </a-box>
+      <a-box
+        position="2.28 2 -3.43"
+        rotation="0 0 0"
+        width="1.14"
+        height="4"
+        depth="3.43"
+        color="#545454"
+        static-body>
+      </a-box>
 
-    <!-- Right Red Box thing -->
+      <a-box
+        position="4.57 3.43 -3.43"
+        rotation="0 0 0"
+        width="4"
+        height="1.71"
+        depth="3.43"
+        color="#545454"
+        static-body>
+      </a-box>
 
-    <a-box
-      position="6.86 2 1.14"
-      rotation="0 0 0"
-      width="2.86"
-      height="4"
-      depth="2.29"
-      color="#d41234"
-      static-body>
-    </a-box>
+      <a-box
+        position="6.86 2 -2.29"
+        rotation="0 0 0"
+        width="1.14"
+        height="4"
+        depth="4.57"
+        color="#545454"
+        static-body>
+      </a-box>
 
-    <!-- Right Gray Wall w/ Doorway to Back Room -->
+      <!-- Counter  -->
 
-    <a-box
-      position="2.28 2 -3.43"
-      rotation="0 0 0"
-      width="1.14"
-      height="4"
-      depth="3.43"
-      color="#545454"
-      static-body>
-    </a-box>
+      <a-entity 
+        counter-display="width: 0.4; height: 0.29; length: 2; color: #232323"
+        position="-5.75 0 -3.05"
+        rotation="0 3 0">
+      </a-entity>
 
-    <a-box
-      position="4.57 3.43 -3.43"
-      rotation="0 0 0"
-      width="4"
-      height="1.71"
-      depth="3.43"
-      color="#545454"
-      static-body>
-    </a-box>
+      <a-entity 
+        counter-display-top="width: 0.4; height: 0.29; length: 2; color: #e6e6e6"
+        position="-5.75 0 -3.05"
+        rotation="0 3 0">
+      </a-entity>
 
-    <a-box
-      position="6.86 2 -2.29"
-      rotation="0 0 0"
-      width="1.14"
-      height="4"
-      depth="4.57"
-      color="#545454"
-      static-body>
-    </a-box>
+      <a-entity
+        counter="width: 7; length: 8.5; thickness: 1; depth: 1"
+        position="-3.6 0.5 -1.7"
+        rotation="90 90 0">
+      </a-entity>
 
-    <!-- Counter  -->
+      <a-entity 
+        counter-display="width: 0.4; height: 0.29; length: 3; color: #232323"
+        position="-1.5 0 1.25"
+        rotation="0 88 0">
+      </a-entity>
 
-    <a-entity 
-      counter-display="width: 0.5; height: 0.29; length: 2.29; color: #000000"
-      position="0 0 0"
-      rotation="0 90 0">
-    </a-entity>
-    <a-entity 
-      counter-display-top="width: 0.5; height: 0.29; length: 2.29; color: #e6e6e6"
-      position="0 0 -0.5*0.5"
-      rotation="0 90 0">
-    </a-entity>
+      <a-entity 
+        counter-display-top="width: 0.4; height: 0.29; length: 3; color: #e6e6e6"
+        position="-1.5 0 1.25"
+        rotation="0 88 0">
+      </a-entity>
 
+      <a-box
+        position="3 0.5 1.4"
+        rotation="0 -1 0"
+        width="3"
+        height="1"
+        depth="1"
+        color="#787878"
+        static-body>
 
-    <!-- Reliable ground collider -->
-    <a-plane id="ground" src="#groundTexture"
-      rotation="-90 0 0" width="1000" height="1000"
-      static-body="shape: box">
-    </a-plane>
-        
-</a-scene>
-</body>
+      <!-- Vending Machine -->
+
+      <a-box
+        position="1.8 0.5 0"
+        rotation="0 -1 0"
+        multisrc="src4:#vendingMachineFront;src1:#vendingMachineSide"
+        width="1.2"
+        height="2"
+        depth="1.2"
+        color="#ffffff"
+        static-body>
+
+      <!-- Reliable ground collider -->
+      <a-plane id="ground" src="#groundTexture"
+        position="0 -1 0"
+        rotation="-90 0 0" width="1000" height="1000"
+        static-body="shape: box">
+      </a-plane>
+          
+    </a-scene>
+  </body>
 
 </html>

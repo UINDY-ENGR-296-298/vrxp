@@ -1,13 +1,6 @@
 
 (function(){
 
-function yVal(xVal){
-  return (1/(100*xVal+1))-(102/101)
-}
-  /*  Equation of the Curve (Copy-Paste into Desmos Graphing calculator):
-      \left(100x+1\right)^{-1}-\frac{102}{101}
-  */
-
 AFRAME.registerComponent('ceiling-trim', {
   schema: {
     width: { type: 'number', default: 1 },
@@ -26,31 +19,31 @@ AFRAME.registerComponent('ceiling-trim', {
     shape.bezierCurveTo(
       d.width * 0.000499975001875, d.length * -0.0598984902865,
       d.width * 0.0330640265864, d.length * -0.796189952839,
-      d.width * 0.05, d.length * yVal(0.05)
+      d.width * 0.05, d.length * -0.8432343234323433
     );
 
     shape.bezierCurveTo(
       d.width * 0.0669359734136, d.length * -0.890278694026,
       d.width * 0.103427132526, d.length * -0.929208463742,
-      d.width * 0.15,  d.length * yVal(0.15)
+      d.width * 0.15,  d.length * -0.9474009900990099 
     );
 
     shape.bezierCurveTo(
       d.width * 0.196572867474, d.length * -0.965593516456,
       d.width * 0.350088237616, d.length * -0.982541575323,
-      d.width * 0.4,  d.length * yVal(0.4)
+      d.width * 0.4,  d.length * -0.9855107461965709
     );
 
     shape.bezierCurveTo(
       d.width * 0.449911762384, d.length * -0.98847991707,
       d.width * 0.650009835093, d.length * -0.994824811466,
-      d.width * 0.7, d.length * yVal(0.7)
+      d.width * 0.7, d.length * -0.9958164830567564
     );
 
     shape.bezierCurveTo(
       d.width * 0.749990164907,  d.length * -0.996808154648,
       d.width * 0.950002402278, d.length * -0.999509875525,
-      d.width * 1,    d.length * yVal(1)
+      d.width * 1,    d.length * -1
     );
 
     
@@ -102,31 +95,31 @@ AFRAME.registerComponent('ceiling', {
     shape.bezierCurveTo(
       d.width * 0.000499975001875, d.length * -0.0598984902865,
       d.width * 0.0330640265864, d.length * -0.796189952839,
-      d.width * 0.05, d.length * yVal(0.05)
+      d.width * 0.05, d.length * -0.8432343234323433
     );
 
     shape.bezierCurveTo(
       d.width * 0.0669359734136, d.length * -0.890278694026,
       d.width * 0.103427132526, d.length * -0.929208463742,
-      d.width * 0.15,  d.length * yVal(0.15)
+      d.width * 0.15,  d.length * -0.9474009900990099 
     );
 
     shape.bezierCurveTo(
       d.width * 0.196572867474, d.length * -0.965593516456,
       d.width * 0.350088237616, d.length * -0.982541575323,
-      d.width * 0.4,  d.length * yVal(0.4)
+      d.width * 0.4,  d.length * -0.9855107461965709
     );
 
     shape.bezierCurveTo(
       d.width * 0.449911762384, d.length * -0.98847991707,
       d.width * 0.650009835093, d.length * -0.994824811466,
-      d.width * 0.7, d.length * yVal(0.7)
+      d.width * 0.7, d.length * -0.9958164830567564
     );
 
     shape.bezierCurveTo(
       d.width * 0.749990164907,  d.length * -0.996808154648,
       d.width * 0.950002402278, d.length * -0.999509875525,
-      d.width * 1,    d.length * yVal(1)
+      d.width * 1,    d.length * -1
     );
 
     shape.lineTo(d.width*1, 0);

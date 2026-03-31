@@ -28,8 +28,9 @@
             `primitive: box; width: ${width}; height: ${height}; depth: ${depth}`
         );
         newCube.setAttribute('position', `${PosX} ${PosY} ${PosZ}`);
-        newCube.setAttribute('rotation', `${RotX} ${RotY} ${RotZ}`)
+        newCube.setAttribute('rotation', `${RotX} ${RotY} ${RotZ}`);
         newCube.setAttribute('material', 'src: #wallTexture; repeat: 10 10  ; roughness: 1; metalness: 0; side: double');
+        newCube.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${width}; height: ${height}; depth: ${depth}; log: true; Yrot: ${RotY}`)
         return newCube
     }
 

@@ -14,13 +14,13 @@
     <!--Components-->
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
+    <script src = "components/collision.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
     <script src="skybox/skycomponent.js"></script>
     <script src="components/ComplexComponents/campus_map.js"></script>
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
-    <script src = "components/collision.js"></script>
     <script>
       console.log(AFRAME.version);
       console.log(THREE.REVISION);
@@ -37,13 +37,103 @@
 
 </head>
 
+<!-- Loading Screen so the User doesn't get bored -->
+<div id="loadingHud">
+    <div id="loadingText">Preparing 3D campus... 3</div>
+</div>
+
+<style>
+  #loadingHud {
+    position: fixed;
+    inset: 0;
+    background: rgba(255, 255, 255, 0.96);
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 24px;
+    z-index: 99999;
+    font-family: Arial, sans-serif;
+    pointer-events: none;
+  }
+
+  #loadingText {
+    font-size: 28px;
+    font-weight: bold;
+    color: #111;
+    background: rgba(255,255,255,0.9);
+    padding: 10px 18px;
+    border-radius: 10px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+  }
+
+  #loadingHud.hidden {
+    display: none;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const loadingHud = document.getElementById("loadingHud");
+    const loadingText = document.getElementById("loadingText");
+
+    let count = 3;
+    loadingText.textContent = `Preparing 3D campus... ${count}`;
+
+    const timer = setInterval(() => {
+      count--;
+      if (count > 0) {
+        loadingText.textContent = `Preparing 3D campus... ${count}`;
+      } else {
+        clearInterval(timer);
+
+        const scene = document.querySelector("a-scene");
+
+        if (scene && scene.hasLoaded) {
+          loadingHud.classList.add("hidden");
+        } else if (scene) {
+          scene.addEventListener("loaded", () => {
+            loadingHud.classList.add("hidden");
+          }, { once: true });
+        } else {
+          loadingHud.classList.add("hidden");
+        }
+      }
+    }, 1200);
+  });
+</script>
+
 <body>
 
 <a-scene
-
     scene-fade="duration: 800"
     renderer="colorManagement: true; physicallyCorrectLights: true"
     skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- Skybox Collision -->
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 1000; height: 1000; depth: 2; log: true; Yrot: 90"
+      position="470 0 0"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 1000; height: 1000; depth: 2; log: true; Yrot: 90"
+      position="-470 0 0"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 1000; height: 1000; depth: 2; log: true; Yrot: 0"
+      position="0 0 470"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
+    <a-box
+      collision="target: #rig; origin: 0 0 0; width: 1000; height: 1000; depth: 2; log: true; Yrot: 0"
+      position="0 0 -470"
+      rotation="0 0 0"
+      visible="false">
+    </a-box>
 
     <!-- All assets go here -->
     <a-assets>
@@ -57,7 +147,7 @@
 
     <!-- create camera obj -->
     <a-entity id="rig"
-          wasd-move-only="speed:50"
+          wasd-move-only="speed:20"
           position="0 1 25">
 
     <a-camera

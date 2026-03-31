@@ -152,6 +152,8 @@
       if (completeObjective){
         const hud = document.querySelector("#hud");
         if (hud) hud.emit("hud-complete-objective");
+        bg.classList.remove("clickable");
+        bg.style.pointerEvents = "none";
       }
     });
   }

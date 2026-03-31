@@ -44,7 +44,7 @@
     init() {
       const d = this.data;
       const shape = new THREE.Shape();
-      shape.moveTo(-1 * d.width, 2 * d.height); 
+      shape.moveTo(0, 2 * d.height); 
       shape.arc(0, 0, d.width, 0, Math.PI, false);
       shape.closePath();
 

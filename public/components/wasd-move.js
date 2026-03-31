@@ -2,7 +2,7 @@ AFRAME.registerComponent('wasd-move-only', {
   schema: { speed: {type: 'number', default: 6} },
 
   init() {
-    this.state = {w:false, a:false, s:false, d:false};
+    this.state = {w:false, a:false, s:false, d:false, space:false, shift:false};
 
     this.forward = new THREE.Vector3();
     this.right   = new THREE.Vector3();
@@ -16,12 +16,18 @@ AFRAME.registerComponent('wasd-move-only', {
       if (e.code === 'KeyA') this.state.a = true;
       if (e.code === 'KeyS') this.state.s = true;
       if (e.code === 'KeyD') this.state.d = true;
+      // TESTING PURPOSES ONLY - REMOVE SPACE/SHIFT LATER  
+      if (e.code === 'Space') this.state.space = true;
+      if (e.code === 'ShiftLeft') this.state.shift = true;
     };
     this.onKeyUp = e => {
       if (e.code === 'KeyW') this.state.w = false;
       if (e.code === 'KeyA') this.state.a = false;
       if (e.code === 'KeyS') this.state.s = false;
       if (e.code === 'KeyD') this.state.d = false;
+      // TESTING PURPOSES ONLY - REMOVE SPACE/SHIFT LATER  
+      if (e.code === 'Space') this.state.space = false;
+      if (e.code === 'ShiftLeft') this.state.shift = false;
     };
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);
@@ -29,7 +35,9 @@ AFRAME.registerComponent('wasd-move-only', {
 
   tick(time, dt) {
     const dsec = dt / 1000;
-    if (!this.state.w && !this.state.a && !this.state.s && !this.state.d) return;
+    // REMOVE SPACE AND SHIFT LATER
+    if (!this.state.w && !this.state.a && !this.state.s && !this.state.d &&
+      !this.state.space && !this.state.shift) return;
     if (!this.cameraEl) return;
 
     const rig = this.el.object3D;
@@ -46,7 +54,7 @@ AFRAME.registerComponent('wasd-move-only', {
     // right vector from forward and up
     this.right.copy(this.forward).cross(this.up).normalize();
 
-    let moveX = 0, moveZ = 0;
+    let moveX = 0, moveY = 0, moveZ = 0;
 
     // invert directions compared to before
     // W forward
@@ -57,9 +65,15 @@ AFRAME.registerComponent('wasd-move-only', {
     if (this.state.d) { moveX -= this.right.x;   moveZ -= this.right.z; }
     // A left
     if (this.state.a) { moveX += this.right.x;   moveZ += this.right.z; }
+    // REMOVE THESE LATER
+    // Space Up
+    if (this.state.space) { moveY += this.up.y; }
+    // Shift Down
+    if (this.state.shift) { moveY -= this.up.y; }
 
     const speed = this.data.speed * dsec;
     rig.position.x += moveX * speed;
+    rig.position.y += moveY * speed; // REMOVE THIS LATER
     rig.position.z += moveZ * speed;
   },
 

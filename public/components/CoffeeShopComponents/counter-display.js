@@ -33,7 +33,7 @@
     }
   });
 
-  AFRAME.registerComponent('counter-display', {
+  AFRAME.registerComponent('counter-display-top', {
     schema: {
       width: { type: 'number', default: 1 },
       height: { type: 'number', default: 1 },
@@ -44,13 +44,8 @@
     init() {
       const d = this.data;
       const shape = new THREE.Shape();
-      shape.moveTo(-1 * d.width, 1 * d.height); 
-      shape.lineTo(-1 * d.width, 2 * d.height);
-      shape.lineTo(1 * d.width, 2 * d.height);
-      shape.lineTo(1 * d.width, 1 * d.height);
-      shape.lineTo(0.75 * d.width, 0);
-      shape.lineTo(-0.75 * d.width, 0);
-      shape.lineTo(-1 * d.width, 1 * d.height);
+      shape.moveTo(0, 2 * d.height); 
+      shape.arc(0, 0, d.width, 0, Math.PI, false);
       shape.closePath();
 
       const geometry = new THREE.ExtrudeGeometry(shape, {
@@ -59,8 +54,8 @@
       });
       const material = new THREE.MeshStandardMaterial({
         color: d.color,
-        roughness: 0.3,
-        metalness: 0.1
+        transparent: true,
+        opacity: 0.5
       });
       this.el.setObject3D('mesh', new THREE.Mesh(geometry, material));
     }

@@ -386,22 +386,6 @@
         // ===== Additional Campus Buildings & Features (Final balanced spacing + labeled) =====
         // NOTE: Only additions; all earlier content remains untouched.
 
-        // --- Helper for labeling ---
-        function addBuildingLabel(name, bx, bz, depth, rotY, y=8, width=28) {
-            const rad = (rotY || 0) * Math.PI / 180;
-            const fx = Math.sin(rad);
-            const fz = -Math.cos(rad);
-            const offset = (depth / 2) + 6; // slightly more forward than before
-            const lx = bx + fx * offset;
-            const lz = bz + fz * offset;
-
-            const label = document.createElement('a-entity');
-            label.setAttribute('position', `${lx} ${y} ${lz}`);
-            label.setAttribute('rotation', `0 ${rotY || 0} 0`);
-            label.setAttribute('text', `value: ${name}; align: center; width: ${width}; color: #111; anchor: center;`);
-            campus.appendChild(label);
-        }
-
         // === Good Hall (north of main road; re-centered, spaced farther north) ===
         campus.appendChild(building(110, 55, 40, 60, 0, 320, 0, 90, 0));
         campus.appendChild(building(60, 8, 20, 60, 0, 338, 0, 90, 0));
@@ -410,45 +394,25 @@
         campus.appendChild(building(66, 2, 20, 57, 0, 338, 0, 90, 0));
         campus.appendChild(walkway(30, 320, 90, 320, 6));
         campus.appendChild(walkway(60, 320, 60, 300, 6));
-        addBuildingLabel('Good Hall', 60, 320, 40, 90);
-
+       
         // === Ransburg Auditorium (slightly east and south of Good Hall) ===
         campus.appendChild(building(80, 40, 45, 130, 0, 290, 0, 0, 0));
         campus.appendChild(walkway(130, 290, 130, 315, 5));
-        addBuildingLabel('Ransburg Auditorium', 130, 290, 45, 0);
+  
 
         // === Christel DeHaan Fine Arts Center (northeast of Esch; pulled a bit back) ===
         campus.appendChild(building(95, 50, 45, 250, 0, 100, 0, 0, 0));
         campus.appendChild(walkway(180, 100, 250, 100, 6));
-        addBuildingLabel('Christel DeHaan Fine Arts Center', 250, 100, 45, 0);
 
         // === R.B. Annis Hall (Engineering) — slightly further NE but within same quadrant) ===
         campus.appendChild(building(120, 45, 45, 300, 0, 170, 0, 90, 0));
         campus.appendChild(walkway(230, 140, 300, 140, 6));
         campus.appendChild(parkingLot(340, 170, 60, 80));
-        addBuildingLabel('R.B. Annis Hall', 300, 170, 45, 90);
 
         // === Health Pavilion (SE; pulled a bit closer to existing roads) ===
         campus.appendChild(building(130, 60, 60, 230, 0, -250, 0, 90, 0));
         campus.appendChild(walkway(182.5, -232.5, 210, -232.5, 8));
         campus.appendChild(parkingLot(270, -250, 80, 100));
-        addBuildingLabel('Health Pavilion', 230, -250, 60, 90);
-
-        // === Nicoson Hall (Athletics) — balanced south position) ===
-        // campus.appendChild(building(85, 45, 85, 150, 0, -400, 0, 0, 0));
-        // campus.appendChild(walkway(150, -270, 182.5, -232.5, 6));
-        // addBuildingLabel('Nicoson Hall', 150, -270, 85, 0);
-
-        // === Ruth Lilly Fitness Center (RLFC) — pulled slightly south for realism) ===
-        // campus.appendChild(building(125, 55, 65, 40, 0, -250, 0, 90, 0));
-        // campus.appendChild(walkway(40, -250, 10, -250, 6));
-        // campus.appendChild(parkingLot(40, -300, 70, 120));
-        // addBuildingLabel('Ruth Lilly Fitness Center', 40, -250, 65, 90);
-
-        // === Greyhound Village / Apartments (SW; modest offset from RLFC/Nicoson) ===
-        // campus.appendChild(building(120, 45, 45, -150, 0, -270, 0, 0, 0));
-        // campus.appendChild(parkingLot(-150, -320, 90, 160));
-        // addBuildingLabel('Greyhound Village', -150, -270, 45, 0);
 
         // === Residence Halls (W side, slightly wider spacing) ===
         campus.appendChild(building(75, 40, 35, -280, 0, 60, 0, 0, 0));   // Cory Bretz
@@ -461,17 +425,11 @@
         campus.appendChild(walkway(-255, -10, -255, 150, 4));
         campus.appendChild(parkingLot(-330, 60, 120, 140));
         campus.appendChild(road(-330, 60, -182.5, 60, 12));
-        addBuildingLabel('Cory Bretz Hall', -280, 60, 35, 0);
-        addBuildingLabel('Roberts Hall', -280, 0, 35, 0);
-        addBuildingLabel('Warren Hall', -280, 120, 35, 0);
-        addBuildingLabel('Grey Hall', -230, 140, 35, 0);
 
         // === Police & Facilities (far south center, evenly spaced) ===
         campus.appendChild(building(70, 35, 40, -40, 0, -340, 0, 0, 0));
         campus.appendChild(building(70, 35, 40, 60, 0, -340, 0, 0, 0));
         campus.appendChild(road(-80, -360, 100, -360, 10));
-        addBuildingLabel('Campus Police', -40, -340, 40, 0);
-        addBuildingLabel('Facilities', 60, -340, 40, 0);
 
         // === Optional greens and connecting walks (kept away from center circle) ===
         //campus.appendChild(walkway(-100, -150, 100, -150, 6));
@@ -482,13 +440,6 @@
         campus.appendChild(road(520, 520, 520, -520, 18));
         campus.appendChild(road(-520, -520, 520, -520, 18));
         campus.appendChild(road(-520, 520, -520, -520, 18));
-
-        // ===== Labels for your existing buildings (added here, no edits to originals) =====
-        addBuildingLabel('Krannert Memorial Library', 0, 98, 80, 0);
-        addBuildingLabel('Lilly Hall', -105, -62.5, 60, 0);
-        addBuildingLabel('Martin Hall', -80, 20, 10, 90);
-        addBuildingLabel('Schwitzer Student Center', 17.5, -150, 60, 0);
-        addBuildingLabel('Esch Hall', 130, -20, 40, 90);
 
 
     }

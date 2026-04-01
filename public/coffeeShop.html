@@ -129,7 +129,7 @@
               glowColor: #32c743;
               radius: 1.5;
               fadetime: 1000"
-          position="-5 0 10">
+          position="-10 0 5">
       </a-entity>
 
       <!-- Walls -->
@@ -272,8 +272,14 @@
       </a-entity>
 
       <a-entity
-        counter="width: 7; length: 8.5; thickness: 1; depth: 1"
+        counter="width: 7; length: 8.5; depth: 1; color: #787878"
         position="-3.6 0.5 -1.7"
+        rotation="90 90 0">
+      </a-entity>
+
+      <a-entity
+        counter="width: 7.3; length: 8.8; depth: 0.1; color: #c4c4c4"
+        position="-3.6 1.05 -1.7"
         rotation="90 90 0">
       </a-entity>
 
@@ -297,11 +303,22 @@
         depth="1"
         color="#787878"
         static-body>
+      </a-box>
+      
+      <a-box
+        position="3 1.05 1.4"
+        rotation="0 -1 0"
+        width="3.2"
+        height="0.1"
+        depth="1.1"
+        color="#c4c4c4"
+        static-body>
+      </a-box>
 
       <!-- Vending Machine -->
 
       <a-box
-        position="1.8 0.5 0"
+        position="4.8 1 1.4"
         rotation="0 -1 0"
         multisrc="src4:#vendingMachineFront;src1:#vendingMachineSide"
         width="1.2"
@@ -309,10 +326,10 @@
         depth="1.2"
         color="#ffffff"
         static-body>
+      </a-box>
 
       <!-- Reliable ground collider -->
       <a-plane id="ground" src="#groundTexture"
-        position="0 -1 0"
         rotation="-90 0 0" width="1000" height="1000"
         static-body="shape: box">
       </a-plane>

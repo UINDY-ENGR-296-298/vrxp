@@ -4,9 +4,8 @@ AFRAME.registerComponent('counter', {
   schema: {
     width: { type: 'number', default: 1 },
     length: { type: 'number', default: 1.5 },
-    thickness: { type: 'number', default: 1 },
     depth: { type: 'number', default: 1 },
-    color: { type: 'color', default: '#787878' },
+    color: { type: 'color', default: '#ffffff' },
   },
 
   init() {

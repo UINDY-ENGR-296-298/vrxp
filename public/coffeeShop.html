@@ -149,11 +149,13 @@
     </a-entity>
 
     <img id="groundTexture" src="images/concrete.jpg" alt="">
+          <!-- Commented out for now, uncomment when fixed    
               // Wait until the A-Frame scene is fully loaded
               if (scene.hasLoaded) setObjectives();
               else scene.addEventListener("loaded", setObjectives);
             });
           </script>
+          -->
 
           
           <!-- Cursor and raycaster for clicking -->
@@ -227,15 +229,6 @@
         material="src: #CeilingTexture; repeat: 2.8 4.2"
         static-body>
       </a-box>
-    <a-entity
-        teleport-pad="to: three_d_map.html;
-            width: 2.5;
-            color: #c0d950;
-            glowColor: #32c743;
-            radius: 1.5;
-            fadetime: 1000"
-        position="0 0 20">
-    </a-entity>
 
       <!-- Ceiling and Trim (Both should have same width and height) -->
 
@@ -254,6 +247,7 @@
       <!-- Back Wall of the Shop -->
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 14.3; height: 4; depth: 0.3; log: true; Yrot: 0"
         position="0 2 -5.14"
         rotation="0 0 0"
         width="14.3"
@@ -262,20 +256,11 @@
         color="#545454"
         static-body>
       </a-box>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 25; height: 7; depth: 0.5; log: true; Yrot: 0"
-      position="0 3.5 -9"
-      rotation="0 0 0"
-      width="25"
-      height="7"
-      depth="0.5"
-      color="#545454"
-      static-body>
-    </a-box>
 
       <!-- Left Red Box thing w/ sign -->
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 2.86; height: 4; depth: 2.29; log: true"
         position="-6 2 -4.5"
         rotation="0 0 0"
         color = "#d41234"
@@ -292,20 +277,11 @@
         rotation="0 0 0"
         static-body="shape: box">
       </a-plane>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 5; height: 7; depth: 4; log: true"
-      position="-10.5 3.5 -8"
-      rotation="0 0 0"
-      width="5"
-      height="7"
-      depth="4"
-      color="#d41234"
-      static-body>
-    </a-box>
 
       <!-- Right Red Box thing -->
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 2.86; height: 4; depth: 2.29; log: true"
         position="6.86 2 1.14"
         rotation="0 0 0"
         width="2.86"
@@ -314,20 +290,11 @@
         color="#d41234"
         static-body>
       </a-box>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 5; height: 7; depth: 4; log: true"
-      position="12 3.5 2"
-      rotation="0 0 0"
-      width="5"
-      height="7"
-      depth="4"
-      color="#d41234"
-      static-body>
-    </a-box>
 
       <!-- Right Gray Wall w/ Doorway to Back Room -->
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 1.14; height: 4; depth: 3.43; log: true; Yrot: 0"
         position="2.28 2 -3.43"
         rotation="0 0 0"
         width="1.14"
@@ -336,18 +303,9 @@
         color="#545454"
         static-body>
       </a-box>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 2; height: 7; depth: 6; log: true; Yrot: 0"
-      position="4 3.5 -6"
-      rotation="0 0 0"
-      width="2"
-      height="7"
-      depth="6"
-      color="#545454"
-      static-body>
-    </a-box>
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 4.57; height: 4; depth: 0.3; log: true; Yrot: 0"
         position="4.57 3.43 -3.43"
         rotation="0 0 0"
         width="4"
@@ -356,18 +314,9 @@
         color="#545454"
         static-body>
       </a-box>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 7; height: 3; depth: 6; log: true; Yrot: 0"
-      position="8 6 -6"
-      rotation="0 0 0"
-      width="7"
-      height="3"
-      depth="6"
-      color="#545454"
-      static-body>
-    </a-box>
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 1.14; height: 4; depth: 4.57; log: true; Yrot: 0"
         position="6.86 2 -2.29"
         rotation="0 0 0"
         width="1.14"
@@ -376,25 +325,8 @@
         color="#545454"
         static-body>
       </a-box>
-    <a-box
-      collision="target: #rig; origin: 0 0 0; width: 2; height: 7; depth: 8; log: true; Yrot: 0"
-      position="12 3.5 -4"
-      rotation="0 0 0"
-      width="2"
-      height="7"
-      depth="8"
-      color="#545454"
-      static-body>
-    </a-box>
 
       <!-- Counter  -->
-
-    <a-entity 
-      collision="target: #rig; origin: 2 0 0; width: 4; height: 0.5; depth: 0.5; log: true; Yrot: 0"
-      counter-display="width: 0.5; height: 0.5; length: 4; color: #000000"
-      position="0 0 0"
-      rotation="0 90 0">
-    </a-entity>
 
       <a-entity 
         counter-display-top="width: 0.4; height: 0.29; length: 2; color: #e6e6e6"

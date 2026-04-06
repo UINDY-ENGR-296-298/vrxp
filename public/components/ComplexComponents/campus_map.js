@@ -228,7 +228,7 @@
         'geometry',
         'primitive: cone; radiusBottom: 51; radiusTop: 50.1; height: 2; openEnded: true'
         );
-        invertedCone.setAttribute('material', 'color: #11750a; side: double');
+        invertedCone.setAttribute('material', 'src: #groundTexture; repeat: 300 1.5; roughness: 1; metalness: 0; side: double');
         invertedCone.setAttribute('rotation', '180 0 0');
         invertedCone.setAttribute('position', '0 -1 -37.5');
         campus.appendChild(invertedCone);
@@ -384,64 +384,48 @@
 //-----------------------------------------------------------------------------------------//
 //-----------------------------------------------------------------------------------------//
 //-----------------------------------------------------------------------------------------//
-        // ===== Additional Campus Buildings & Features (Final balanced spacing + labeled) =====
-        // NOTE: Only additions; all earlier content remains untouched.
+        // Only nearby outer buildings around the center green:
+        // - apartments behind Martin/Lilly across a road
+        // - athletics buildings to the east / northeast
+        // - Good Hall past Esch across a road
+        // - Health Pavilion farther southeast
 
-        // === Good Hall (north of main road; re-centered, spaced farther north) ===
-        campus.appendChild(building(110, 55, 40, 60, 0, 320, 0, 90, 0));
-        campus.appendChild(building(60, 8, 20, 60, 0, 338, 0, 90, 0));
-        campus.appendChild(building(62, 6, 20, 59, 0, 338, 0, 90, 0));
-        campus.appendChild(building(64, 4, 20, 58, 0, 338, 0, 90, 0));
-        campus.appendChild(building(66, 2, 20, 57, 0, 338, 0, 90, 0));
-        campus.appendChild(walkway(30, 320, 90, 320, 6));
-        campus.appendChild(walkway(60, 320, 60, 300, 6));
-       
-        // === Ransburg Auditorium (slightly east and south of Good Hall) ===
-        campus.appendChild(building(80, 40, 45, 130, 0, 290, 0, 0, 0));
-        campus.appendChild(walkway(130, 290, 130, 315, 5));
-  
+        // ===================== Apartments behind Martin / Lilly =====================
+        // road behind Martin/Lilly
+        campus.appendChild(road(-40, 118, 165, 118, 12));
 
-        // === Christel DeHaan Fine Arts Center (northeast of Esch; pulled a bit back) ===
-        campus.appendChild(building(95, 50, 45, 250, 0, 100, 0, 0, 0));
-        campus.appendChild(walkway(180, 100, 250, 100, 6));
+        // apartment bars behind Martin/Lilly
+        campus.appendChild(building(118, 34, 34, -250, 0, 100, 0, 90, 0));
+        campus.appendChild(building(112, 34, 34, -250, 0, -60, 0, 90, 0));
 
-        // === R.B. Annis Hall (Engineering) — slightly further NE but within same quadrant) ===
-        campus.appendChild(building(120, 45, 45, 300, 0, 170, 0, 90, 0));
-        campus.appendChild(walkway(230, 140, 300, 140, 6));
-        campus.appendChild(parkingLot(340, 170, 60, 80));
+        campus.appendChild(walkway(18, 135, 18, 118, 5));
+        campus.appendChild(walkway(138, 135, 138, 118, 5));
 
-        // === Health Pavilion (SE; pulled a bit closer to existing roads) ===
-        campus.appendChild(building(130, 60, 60, 230, 0, -250, 0, 90, 0));
-        campus.appendChild(walkway(182.5, -232.5, 210, -232.5, 8));
-        campus.appendChild(parkingLot(270, -250, 80, 100));
+        // ===================== East-side road beyond Esch / Schwitzer =====================
+        campus.appendChild(road(172, 150, 172, -240, 12));
 
-        // === Residence Halls (W side, slightly wider spacing) ===
-        campus.appendChild(building(75, 40, 35, -280, 0, 60, 0, 0, 0));   // Cory Bretz
-        campus.appendChild(building(75, 40, 35, -280, 0, 0, 0, 0, 0));    // Roberts
-        campus.appendChild(building(75, 40, 35, -280, 0, 120, 0, 0, 0));  // Warren
-        campus.appendChild(building(65, 40, 35, -230, 0, 140, 0, 0, 0));  // Grey
-        campus.appendChild(walkway(-280, 60, -230, 60, 4));
-        campus.appendChild(walkway(-280, 0, -230, 0, 4));
-        campus.appendChild(walkway(-280, 120, -230, 120, 4));
-        campus.appendChild(walkway(-255, -10, -255, 150, 4));
-        campus.appendChild(parkingLot(-330, 60, 120, 140));
-        campus.appendChild(road(-330, 60, -182.5, 60, 12));
+        // ===================== Athletics buildings =====================
+        // main athletics / ARC mass
+        campus.appendChild(building(138, 42, 64, 21, 0, -320, 0, 0, 0));
+ 
+        // smaller athletics support / adjacent mass
+        // campus.appendChild(building(72, 32, 34, 248, 0, 148, 0, 0, 0));
 
-        // === Police & Facilities (far south center, evenly spaced) ===
-        campus.appendChild(building(70, 35, 40, -40, 0, -340, 0, 0, 0));
-        campus.appendChild(building(70, 35, 40, 60, 0, -340, 0, 0, 0));
-        campus.appendChild(road(-80, -360, 100, -360, 10));
+        campus.appendChild(walkway(172, 78, 188, 78, 5));
+        campus.appendChild(walkway(172, 148, 188, 148, 5));
 
-        // === Optional greens and connecting walks (kept away from center circle) ===
-        //campus.appendChild(walkway(-100, -150, 100, -150, 6));
-        campus.appendChild(walkway(-100, 20, 57, 20, 6));
+        // ===================== Good Hall =====================
+        // sits across the road on the far side of Esch from the green
+        campus.appendChild(building(108, 36, 42, 223, 0, -40, 0, 90, 0));
 
-        // === Outer frame roads (moderate bounds, not oversized) ===
-        campus.appendChild(road(-520, 520, 520, 520, 18));
-        campus.appendChild(road(520, 520, 520, -520, 18));
-        campus.appendChild(road(-520, -520, 520, -520, 18));
-        campus.appendChild(road(-520, 520, -520, -520, 18));
+        campus.appendChild(walkway(172, -40, 202, -40, 5));
 
+        // ===================== Health Pavilion =====================
+        // farther southeast, beyond another road
+        campus.appendChild(road(255, -95, 255, -260, 12));
+        campus.appendChild(building(156, 44, 72, 223, 0, -300, 0, 90, 0));
+
+        campus.appendChild(walkway(255, -185, 274, -185, 5));
 
     }
 

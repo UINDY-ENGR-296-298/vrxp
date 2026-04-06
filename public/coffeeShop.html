@@ -77,88 +77,65 @@
             hud-coords="target: #rig">
           </a-entity>
 
-    <!-- set objectives -->
-    <!-- can use different cookie key to have different objective list, not implimented but shouldt be too hard -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const scene = document.querySelector("a-scene");
-        const hud = document.querySelector("#hud");
+          <!-- set objectives -->
+          <!-- can use different cookie key to have different objective list, not implimented but shouldt be too hard -->
+          <script>
+            document.addEventListener("DOMContentLoaded", () => {
+              const scene = document.querySelector("a-scene");
+              const hud = document.querySelector("#hud");
 
-        // Define the objective list ONCE
-        const LIST = [
-          " ",
-          "Travel through the pink teleporter to the campus map",
-          "Explore to find the green teleporter and travel to the Christel DeHaan Center for Global Engagement",
-          "Read through the information avalible",
-          "Return to the campus map",
-          "Good Job boss you're free to explore the campus freely"
-        ];
+              // Define the objective list ONCE
+              const LIST = [
+                " ",
+                "Travel through the pink teleporter to the campus map",
+                "Explore to find the green teleporter and travel to the Christel DeHaan Center for Global Engagement",
+                "Read through the information avalible",
+                "Return to the campus map",
+                "Good Job boss you're free to explore the campus freely"
+              ];
 
-        function setObjectives() {
-          // normal init, keep progress if cookie exists
-          initObjectives(hud, LIST);
-
-          window.addEventListener("keydown", (e) => {
-            const k = e.key.toLowerCase();
-
-            // test complete
-            if (k === "o") hud.emit("hud-complete-objective");
-
-            // reset with P
-            if (k === "p") {
-              deleteCookie("objectives_v2");      // hard delete
-              initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
-              console.log("Reset objectives:", getCookie("objectives_v2"));
-            }
-          });
-        }
               function setObjectives() {
-                // Set a list, first one shows, next appears when completed
-                hud.emit("hud-set-objectives", {
-                  list: [
-                    "task 1",
-                    "task 2",
-                    "task 3"
-                  ]
-                });
+                // normal init, keep progress if cookie exists
+                initObjectives(hud, LIST);
 
-                // Optional test: press O to complete the current objective
                 window.addEventListener("keydown", (e) => {
-                  if (e.key.toLowerCase() === "o") {
-                    hud.emit("hud-complete-objective");
+                  const k = e.key.toLowerCase();
+
+                  // test complete
+                  if (k === "o") hud.emit("hud-complete-objective");
+
+                  // reset with P
+                  if (k === "p") {
+                    deleteCookie("objectives_v2");      // hard delete
+                    initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
+                    console.log("Reset objectives:", getCookie("objectives_v2"));
                   }
                 });
               }
+                    function setObjectives() {
+                      // Set a list, first one shows, next appears when completed
+                      hud.emit("hud-set-objectives", {
+                        list: [
+                          "task 1",
+                          "task 2",
+                          "task 3"
+                        ]
+                      });
 
-        if (scene.hasLoaded) setObjectives();
-        else scene.addEventListener("loaded", setObjectives);
-      });
-    </script>
-      
-        <!-- Cursor and raycaster for clicking -->
-        <a-entity
-          id="aimDot"
-          class="cursor"
-          cursor="fuse: false"
-          raycaster="objects: .clickable"
-          position="0 0 -1"
-          geometry="primitive: circle; radius: 0.005"
-          material="color: white; shader: flat">
-        </a-entity>
-      </a-camera>
-    </a-entity>
+                      // Optional test: press O to complete the current objective
+                      window.addEventListener("keydown", (e) => {
+                        if (e.key.toLowerCase() === "o") {
+                          hud.emit("hud-complete-objective");
+                        }
+                      });
+                    }
 
-    <img id="groundTexture" src="images/concrete.jpg" alt="">
-          <!-- Commented out for now, uncomment when fixed    
-              // Wait until the A-Frame scene is fully loaded
               if (scene.hasLoaded) setObjectives();
               else scene.addEventListener("loaded", setObjectives);
             });
           </script>
-          -->
-
-          
-          <!-- Cursor and raycaster for clicking -->
+      
+        <!-- Cursor and raycaster for clicking -->
           <a-entity
             id="aimDot"
             class="cursor"
@@ -170,13 +147,17 @@
           </a-entity>
         </a-camera>
       </a-entity>
+
+      <!-- Import Textures -->
       <a-assets>
         <img id="groundTexture" src="images/concrete.jpg" alt="">
-        <img id="vendingMachineFront" src="images/vending_machine_front.jpg" alt="">
-        <img id="vendingMachineSide" src="images/vending_machine_side.png" alt="">
-        <img id="RedBoxSign" src="images/red_box_sign.jpg" alt="">
-        <img id="CeilingTexture" src="images/ceiling.jpg" alt="">
-        <img id="Windows" src="images/windows.jpg" alt="">
+        <img id="BackCounter" src="images/CoffeeShopImages/back_counter.png" alt="">
+        <img id="BackWall" src="images/CoffeeShopImages/back_wall.png" alt="">
+        <img id="VendingMachineFront" src="images/CoffeeShopImages/vending_machine_front.jpg" alt="">
+        <img id="VendingMachineSide" src="images/CoffeeShopImages/vending_machine_side.png" alt="">
+        <img id="RedBoxSign" src="images/CoffeeShopImages/red_box_sign.jpg" alt="">
+        <img id="CeilingTexture" src="images/CoffeeShopImages/ceiling.jpg" alt="">
+        <img id="Windows" src="images/CoffeeShopImages/windows.jpg" alt="">
       </a-assets>
 
   <!------------------------------------------------------------------------------------------------------>
@@ -186,13 +167,13 @@
       <!-- TELEPORT PAD TO RETURN TO MAIN WORLD -->
 
       <a-entity
-          teleport-pad="to: three_d_map.html;
-              width: 2.5;
-              color: #c0d950;
-              glowColor: #32c743;
-              radius: 1.5;
-              fadetime: 1000"
-          position="-10 0 5">
+        teleport-pad="to: three_d_map.html;
+          width: 2.5;
+          color: #c0d950;
+          glowColor: #32c743;
+          radius: 1.5;
+          fadetime: 1000"
+        position="-10 0 5">
       </a-entity>
 
       <!-- Walls -->
@@ -256,6 +237,31 @@
         color="#545454"
         static-body>
       </a-box>
+
+      <a-plane src="#BackWall"
+        position="-1.4 2.5 -4.84"
+        width="6.25"
+        height="3"
+        rotation="0 0 0"
+        static-body="shape: box">
+      </a-plane>
+
+      <a-box
+        position="-1.4 1 -4.19"
+        width="6.25"
+        height="0.1"
+        depth="1.3"
+        color="#E2B49C"
+        static-body>
+      </a-box>
+
+      <a-plane src="#BackCounter"
+        position="-1.4 0.5 -3.84"
+        width="6.25"
+        height="1"
+        rotation="0 0 0"
+        static-body="shape: box">
+      </a-plane>
 
       <!-- Left Red Box thing w/ sign -->
 

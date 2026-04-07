@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-      <meta charset="UTF-8" />
-      <title>VRXP - The Perk III</title>
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta charset="UTF-8" />
+    <title>VRXP - The Perk III</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-      <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
-      <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+    <!-- A-Frame (pinned to version compatible with extras v4.1.2) -->
+    <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
     <!-- Physics system -->
     <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
@@ -21,32 +21,32 @@
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
     <script src="components/collision.js"></script>
-      <!-- Physics system -->
-      <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+    <!-- Physics system -->
+    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
-      <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
-      <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
-      
-      <!-- aframe-multisrc-component (for vending machine) -->
-      <script src="https://cdn.rawgit.com/elbobo/aframe-multisrc-component/b6d23310/dist/0.3/aframe-multisrc-component.js"></script>
-      
-      <!-- Components -->
-      <script src="components/CoffeeShopComponents/ceiling.js"></script>
-      <script src="components/CoffeeShopComponents/counter-display.js"></script>
-      <script src="components/CoffeeShopComponents/counter.js"></script>
-      <script src="components/wasd-move.js"></script>
-      <script src="components/arrow-look.js"></script>
-      <script src="components/teleport-pad.js"></script>
-      <script src="components/scene-fade.js"></script>
-      <script src="components/hud.js"></script>
+    <!-- aframe-extras v4.1.2 (has kinematic-body + movement-controls) -->
+    <script src="https://cdn.jsdelivr.net/gh/donmccurdy/aframe-extras@v4.1.2/dist/aframe-extras.min.js"></script>
+    
+    <!-- aframe-multisrc-component (for vending machine) -->
+    <script src="https://cdn.rawgit.com/elbobo/aframe-multisrc-component/b6d23310/dist/0.3/aframe-multisrc-component.js"></script>
+    
+    <!-- Components -->
+    <script src="components/CoffeeShopComponents/ceiling.js"></script>
+    <script src="components/CoffeeShopComponents/counter-display.js"></script>
+    <script src="components/CoffeeShopComponents/counter.js"></script>
+    <script src="components/wasd-move.js"></script>
+    <script src="components/arrow-look.js"></script>
+    <script src="components/teleport-pad.js"></script>
+    <script src="components/scene-fade.js"></script>
+    <script src="components/hud.js"></script>
 
-      <!-- Sky -->
-      <script src="skybox/skycomponent.js"></script>
+    <!-- Sky -->
+    <script src="skybox/skycomponent.js"></script>
 
-      <style>
-        html, body { margin:0; height:100%; }
-        .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
-      </style>
+    <style>
+      html, body { margin:0; height:100%; }
+      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
+    </style>
 
   </head>
 
@@ -64,7 +64,7 @@
       <a-entity id="rig"
         dynamic-body="mass:1"
         wasd-move-only="speed:10"
-        position="0 0 6">
+        position="-8 0 9">
 
         <a-camera
           look-controls
@@ -158,6 +158,9 @@
         <img id="RedBoxSign" src="images/CoffeeShopImages/red_box_sign.jpg" alt="">
         <img id="CeilingTexture" src="images/CoffeeShopImages/ceiling.jpg" alt="">
         <img id="Windows" src="images/CoffeeShopImages/windows.jpg" alt="">
+        <img id="Floor" src="images/CoffeeShopImages/coffee_shop_floor.jpg" alt="">
+        <img id="LeftTrim" src="images/CoffeeShopImages/left_wall_trim.png" alt="">
+        <img id="RightBox" src="images/CoffeeShopImages/right_red_box_texture.png" alt="">
       </a-assets>
 
   <!------------------------------------------------------------------------------------------------------>
@@ -268,12 +271,12 @@
       <!-- Left Red Box thing w/ sign -->
 
       <a-box
-        collision="target: #rig; origin: 0 0 0; width: 2.86; height: 4; depth: 2.29; log: true"
-        position="-6 2 -4.5"
+        collision="target: #rig; origin: 0 0 0; width: 2.86; height: 5; depth: 2.29; log: true"
+        position="-6 2.5 -4.5"
         rotation="0 0 0"
         color = "#d41234"
         width="2.86"
-        height="4"
+        height="5"
         depth="2.29"
         static-body>
       </a-box>
@@ -286,18 +289,37 @@
         static-body="shape: box">
       </a-plane>
 
+      <a-box
+        material="src: #LeftTrim"
+        position="-6.9 1.85 -3.8"
+        rotation="0 0 0"
+        width="0.75"
+        height="3.7"
+        depth="1"
+        color="#ffffff"
+        static-body>
+      </a-box>
+
       <!-- Right Red Box thing -->
 
       <a-box
-        collision="target: #rig; origin: 1 0 0; width: 5; height: 4; depth: 2.29; log: true"
-        position="6.86 2 1.14"
+        collision="target: #rig; origin: 1 0 0; width: 5; height: 5; depth: 2.29; log: true"
+        position="6.86 2.5 1.14"
         rotation="0 0 0"
         width="2.86"
-        height="4"
+        height="5"
         depth="2.29"
         color="#d41234"
         static-body>
       </a-box>
+
+      <a-plane src="#RightBox"
+        position="6.86 2 2.3"
+        width="2.86"
+        height="4"
+        rotation="0 0 0"
+        static-body="shape: box">
+      </a-plane>
 
       <!-- Right Gray Wall w/ Doorway to Back Room -->
 
@@ -422,6 +444,16 @@
         color="#ffffff"
         static-body>
       </a-box>
+
+      <!-- Floor -->
+
+      <a-plane material="src: #Floor; repeat: 6 10"
+        position="0 0 0"
+        width="20"
+        height="20"
+        rotation="-90 0 0"
+        static-body="shape: box">
+      </a-plane>
 
       <!-- Reliable ground texture -->
       <a-plane id="ground" src="#groundTexture"

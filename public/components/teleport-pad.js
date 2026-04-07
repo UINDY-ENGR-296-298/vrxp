@@ -7,7 +7,8 @@ AFRAME.registerComponent('teleport-pad', {
     color:    {type: 'string', default: '#1e90ff'}, // base color
     glowColor:{type: 'string', default: '#00ffff'}, // ring and beam color
     radius:   {type: 'number', default: 1.2},       // trigger distance on XZ
-    fadetime: {type: 'number', default: 800}        // fade duration in ms
+    fadetime: {type: 'number', default: 800},       // fade duration in ms
+    complete_objective: {type: 'bool', default: false},
   },
 
   init: function () {
@@ -17,7 +18,6 @@ AFRAME.registerComponent('teleport-pad', {
     // make sure the main entity has no strange default geometry
     el.setAttribute('geometry', 'primitive: box; width: 0.001; height: 0.001; depth: 0.001; visible: false');
     el.setAttribute('material', 'opacity: 0; transparent: true');
-
     // create a base disc
     const base = document.createElement('a-entity');
     base.setAttribute('geometry', {
@@ -169,9 +169,23 @@ AFRAME.registerComponent('teleport-pad', {
       overlay.style.opacity = '1';
     });
 
-    setTimeout(function () {
-      if (window.saveObjectiveStore) window.saveObjectiveStore();
-      window.location.href = url;
-    }, duration);
+  // Use => instead of function ()
+  setTimeout(() => {
+    // 1. Logic for completing the objective
+    if (this.data.complete_objective) {
+      const hud = document.querySelector("#hud");
+      if (hud) {
+        // This triggers the listener in your cookie file 
+        // which increments 'current' and calls prevSet(s)
+        hud.emit("hud-complete-objective");
+      }
+    }
+
+    // 2. Extra safety: save the store before leaving
+    if (window.saveObjectiveStore) window.saveObjectiveStore();
+
+    // 3. Change the page
+    window.location.href = url;
+  }, duration);
   }
 });

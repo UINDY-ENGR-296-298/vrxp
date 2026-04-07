@@ -179,6 +179,7 @@
       <!-- Walls -->
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 20; height: 6; depth: 0.3; log: true; Yrot: 0"
         position="0 3 10"
         rotation="0 0 0"
         width="20"
@@ -190,6 +191,7 @@
       </a-box>
 
       <a-box
+        collision="target: #rig; origin: 0 0 0; width: 20; height: 6; depth: 0.3; log: true; Yrot: 90"
         position="10 3 0"
         rotation="0 90 0"
         width="20"
@@ -287,7 +289,7 @@
       <!-- Right Red Box thing -->
 
       <a-box
-        collision="target: #rig; origin: 0 0 0; width: 2.86; height: 4; depth: 2.29; log: true"
+        collision="target: #rig; origin: 1 0 0; width: 5; height: 4; depth: 2.29; log: true"
         position="6.86 2 1.14"
         rotation="0 0 0"
         width="2.86"
@@ -384,12 +386,36 @@
         static-body>
       </a-box>
 
+      <a-box
+        collision="target: #rig; origin: 0 0 0; width: 11; height: 4; depth: 1; Yrot: 3; log: true"
+        position="0 0.5 1.5"
+        width="11"
+        height="1"
+        depth="1"
+        color="#e410e4"
+        rotation="0 -3 0"
+        opacity="0"
+        static-body="shape: box">
+      </a-box>
+
+      <a-box
+        collision="target: #rig; origin: 0 0 0; width: 5; height: 4; depth: 1; Yrot: 87; log: true"
+        position="-5.5 0.5 -1.5"
+        width="5"
+        height="1"
+        depth="1"
+        color="#e410e4"
+        rotation="0 -87 0"
+        opacity="0"
+        static-body="shape: box">
+      </a-box>
+
       <!-- Vending Machine -->
 
       <a-box
         position="4.8 1 1.4"
         rotation="0 -1 0"
-        multisrc="src4:#vendingMachineFront;src1:#vendingMachineSide"
+        multisrc="src4:#VendingMachineFront;src1:#VendingMachineSide"
         width="1.2"
         height="2"
         depth="1.2"
@@ -397,7 +423,7 @@
         static-body>
       </a-box>
 
-      <!-- Reliable ground collider -->
+      <!-- Reliable ground texture -->
       <a-plane id="ground" src="#groundTexture"
         rotation="-90 0 0" width="1000" height="1000"
         static-body="shape: box">

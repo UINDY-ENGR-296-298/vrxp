@@ -432,13 +432,9 @@
         static-body>
       </a-box>
 
-      <!-- Floor -->
-
-      <a-plane material="src: #Floor; repeat: 6 10"
-        position="0 0 0"
-        width="20"
-        height="20"
-        rotation="-90 0 0"
+      <!-- Reliable ground texture -->
+      <a-plane id="ground" src="#groundTexture"
+        rotation="-90 0 0" width="1000" height="1000"
         static-body="shape: box">
       </a-plane>
 

@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
 
     <!-- Components -->
-    <!-- <script src="components/collision.js"></script> -->
+    <script src="components/collision.js"></script>
     <script src="components/blankwall.js"></script>
     <script src="components/chair.js"></script>
     <script src="components/table.js"></script>
@@ -29,8 +29,8 @@
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
     <script src="components/scene-fade.js"></script>
-    <script src="components/chair_component.js"></script>
-    <script src="components/videoscreen.js"></script>
+    <!-- <script src="components/chair_component.js"></script> -->
+    <!-- <script src="components/videoscreen.js"></script> -->
 
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
@@ -62,7 +62,6 @@
 
       <!-- create camera obj -->
       <a-entity id="rig"
-        dynamic-body="mass:1"
         wasd-move-only="speed:10"
         position="0 0 6">
 
@@ -161,8 +160,10 @@
     <a-entity
       blank-wall="width:12; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="0 0 12"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 12.2; height: 4; depth: 0.3; log: true; Yrot: 0">
     </a-entity>
+
 
     <!-- add teleporter (with con fig) to next html -->
     <a-entity
@@ -180,27 +181,31 @@
     <a-entity
       blank-wall="width:10; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-6 0 7"
-      rotation="0 90 0">
+      rotation="0 90 0"
+      collision="target: #rig; origin: 0 0 0; width: 10.2; height: 4; depth: 0.3; log: true; Yrot: 90">
     </a-entity>
 
     <!-- RIGHT WALL of the room -->
     <a-entity
       blank-wall="width:10; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="6 0 7"
-      rotation="0 90 0">
+      rotation="0 90 0"
+      collision="target: #rig; origin: 0 0 0; width: 10.2; height: 4; depth: 0.3; log: true; Yrot: 90">
     </a-entity>
 
     <!-- FRONT WALL SEGMENTS of the room (doorway 4 m wide at z = +2) -->
     <a-entity
       blank-wall="width:4; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-4 0 2"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 4.2; height: 4; depth: 2; log: true; Yrot: 0">
     </a-entity>
 
     <a-entity
       blank-wall="width:4; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="4 0 2"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 4.2; height: 4; depth: 2; log: true; Yrot: 0">
     </a-entity>
 
 
@@ -216,7 +221,8 @@
     <a-entity
       blank-wall="width:15; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="2 0 -5.5"
-      rotation="0 90 0">
+      rotation="0 90 0"
+      collision="target: #rig; origin: 0 0 0; width: 15.2; height: 4; depth: 3; log: true; Yrot: 90">
     </a-entity>
 
     <!-- LEFT HALLWAY WALL, FRONT SEGMENT
@@ -228,7 +234,8 @@
     <a-entity
       blank-wall="width:8.5; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-2 0 -2.25"
-      rotation="0 90 0">
+      rotation="0 90 0"
+      collision="target: #rig; origin: 0 0 0; width: 8.7; height: 4; depth: 3; log: true; Yrot: 90">
     </a-entity>
 
     <!-- LEFT HALLWAY WALL, BACK SEGMENT
@@ -239,14 +246,16 @@
     <a-entity
       blank-wall="width:3.5; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-2 0 -11.25"
-      rotation="0 90 0">
+      rotation="0 90 0"
+      collision="target: #rig; origin: 0 0 0; width: 3.7; height: 4; depth: 3; log: true; Yrot: 90">
     </a-entity>
 
     <!-- HALLWAY END CAP at z = -13 -->
     <a-entity
       blank-wall="width:4; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="0 0 -13"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 4.2; height: 4; depth: 3; log: true; Yrot: 0">
     </a-entity>
 
 
@@ -269,7 +278,8 @@
     <a-entity
       blank-wall="width:6; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-5 0 -6.5"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 14; height: 4; depth: 3; log: true; Yrot: 0">
     </a-entity>
 
     <!-- BRANCH BOTTOM WALL (toward -Z side of branch)
@@ -279,7 +289,8 @@
     <a-entity
       blank-wall="width:6; height:4; thickness:0.15; color:#eaeaea; anchor:ground"
       position="-5 0 -9.5"
-      rotation="0 0 0">
+      rotation="0 0 0"
+      collision="target: #rig; origin: 0 0 0; width: 14; height: 4; depth: 3; log: true; Yrot: 0">
     </a-entity>
 
     <!-- Roof -->
@@ -293,7 +304,8 @@
      <a-box
         width="3" height="4" depth="0.15" color="#eaeaea"
         position="-8 5 -8"
-        rotation="0 90 0">
+        rotation="0 90 0"
+        collision="target: #rig; origin: 0 0 0; width: 3.2; height: 4; depth: ; log: true; Yrot: 90">
     </a-box>
 
 
@@ -301,7 +313,7 @@
 
 <!------------------------------------------------------------------------------------------------------>
 <!--                                        End Outer Shell                                           --> 
-<!------------------------------------------------------------------------------------------------------>
+<!-------------------------------------------------------------------------------------------------->
 
 
     <!-- Reliable ground collider -->

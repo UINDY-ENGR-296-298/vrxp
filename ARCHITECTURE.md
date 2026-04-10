@@ -107,9 +107,6 @@ The project contains a simple HUD and objective system:
 
 - This is a static web project: edit files under `public/` and reload the served page.
 - There is no bundler or build pipeline in the repo.
-- Follow the repository naming convention:
-  - folders in `camelCase`
-  - files in `snake_case`
 
 ## Recommended Focus for Future Developers
 

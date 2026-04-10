@@ -48,6 +48,7 @@
             `width:${ROOM_W}; height:${WALL_H}; thickness:${WALL_T}; color:#ffffff; anchor:ground`
         );
         wBack.setAttribute('position', `0 0 ${-ROOM_D / 2}`);
+        wBack.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${ROOM_W}; height: ${WALL_H}; depth: ${WALL_T}; log: true; Yrot: 0`);
         room.appendChild(wBack);
 
         // Front wall
@@ -58,6 +59,7 @@
         );
         wFront.setAttribute('position', `0 0 ${ROOM_D / 2}`);
         wFront.setAttribute('rotation', '0 180 0');
+        wFront.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${ROOM_W}; height: ${WALL_H}; depth: ${WALL_T}; log: true; Yrot: 180`);
         room.appendChild(wFront);
 
         // Left wall
@@ -68,6 +70,7 @@
         );
         wLeft.setAttribute('rotation', '0 90 0');
         wLeft.setAttribute('position', `${-ROOM_W / 2} 0 0`);
+        wLeft.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${ROOM_D}; height: ${WALL_H}; depth: ${WALL_T}; log: true; Yrot: 90`);
         room.appendChild(wLeft);
 
         // Right wall split around opening
@@ -80,6 +83,7 @@
         );
         rightA.setAttribute('rotation', '0 -90 0');
         rightA.setAttribute('position', `${ROOM_W / 2} 0 ${(SIDE_OPENING_W / 2 + segDepth / 2)}`);
+        rightA.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${segDepth}; height: ${WALL_H}; depth: ${WALL_T}; log: true; Yrot: 90`);
         room.appendChild(rightA);
 
         const rightB = document.createElement('a-entity');
@@ -89,6 +93,7 @@
         );
         rightB.setAttribute('rotation', '0 -90 0');
         rightB.setAttribute('position', `${ROOM_W / 2} 0 ${-(SIDE_OPENING_W / 2 + segDepth / 2)}`);
+        rightB.setAttribute('collision', `target: #rig; origin: 0 0 0; width: ${segDepth}; height: ${WALL_H}; depth: ${WALL_T}; log: true; Yrot: 90`);
         room.appendChild(rightB);
 
         // ===== Ceiling =====
@@ -209,7 +214,8 @@
 
                 const chair = document.createElement('a-entity');
                 chair.setAttribute('classroom-chair', '');
-                chair.setAttribute('position', `${tx} 0 ${tz + S(0.3809999878080004)}`); // scale offset
+                chair.setAttribute('scale', `${x} ${x} ${x}`);
+                chair.setAttribute('position', `${tx} 0 ${tz + S(0.3809999878080004)}`);
                 chair.setAttribute('rotation', '0 180 0');
                 room.appendChild(chair);
             }

@@ -17,7 +17,7 @@ The primary runtime entry point is `public/index.html`, with additional scene pa
 ## Repository Layout
 
 - `ARCHITECTURE.md` — this document
-- `README.md` — run/deploy instructions and naming conventions
+- `README.md` — run/deploy instructions
 - `Dockerfile` — copies `public/` into nginx and exposes port 80
 - `public/` — served web app root
   - `index.html` — main VR load-in scene
@@ -106,9 +106,6 @@ The project contains a simple HUD and objective system:
 
 - This is a static web project: edit files under `public/` and reload the served page.
 - There is no bundler or build pipeline in the repo.
-- Follow the repository naming convention:
-  - folders in `camelCase`
-  - files in `snake_case`
 
 ## Recommended Focus for Future Developers
 

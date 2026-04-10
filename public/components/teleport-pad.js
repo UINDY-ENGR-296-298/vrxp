@@ -16,7 +16,8 @@ AFRAME.registerComponent('teleport-pad', {
     const el   = this.el;
 
     // make sure the main entity has no strange default geometry
-    el.setAttribute('geometry', 'primitive: box; width: 0.001; height: 0.001; depth: 0.001; visible: false');
+    el.setAttribute('geometry', 'primitive: box; width: 0.001; height: 0.001; depth: 0.001');
+    // el.setAttribute('visible', false);
     el.setAttribute('material', 'opacity: 0; transparent: true');
     // create a base disc
     const base = document.createElement('a-entity');

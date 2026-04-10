@@ -9,7 +9,7 @@
     <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
 
     <!-- Physics system -->
-    <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script> -->
 
     <!-- Components -->
     <script src="components/collision.js"></script>
@@ -24,7 +24,6 @@
     <script src="components/ceiling-light-square.js"></script>
     <script src="components/air-vent.js"></script>
     <script src="components/classroom-floor.js"></script>
-    <script src="index.js"></script>
     <script src="components/wasd-move.js"></script>
     <script src="components/arrow-look.js"></script>
     <script src="components/teleport-pad.js"></script>
@@ -37,15 +36,16 @@
 
     <!-- Classroom -->
     <script src="components/ComplexComponents/classroom_function.js"></script>
->   
+
     <!-- Dynamic elements -->
     <script src="components/hud.js"></script>
     <script src="components/cookies.js"></script>
 
+    <link rel="icon" href="images/favicon.ico">
 
     <style>
       html, body { margin:0; height:100%; }
-      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
+      .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0, 0, 0, 0.35); padding:6px 8px; border-radius:6px; }
     </style>
 
   </head>
@@ -169,8 +169,8 @@
     <a-entity
     teleport-pad="to: three_d_map.html;
                   width: 2.5;
-                  color: #754we9;
-                  glowColor: #754we9;
+                  color: #ffffff;
+                  glowColor: #ffffff;
                   radius: 1.5;
                   fadetime: 1000"
     position="0 0 -10">
@@ -316,11 +316,15 @@
 <!-------------------------------------------------------------------------------------------------->
 
 
-    <!-- Reliable ground collider -->
+    <!-- Reliable ground collider
     <a-plane id="ground" src="#groundTexture"
              rotation="-90 0 0" width="1000" height="1000"
              static-body="shape: box"
-             repeat="10 10"></a-plane>
+             repeat="10 10"></a-plane> -->
+
+    <a-plane id="ground" src="#groundTexture"
+         rotation="-90 0 0" width="1000" height="1000"
+         repeat="10 10"></a-plane>
 
 </a-scene>  <!-- End A-Scene -->
 

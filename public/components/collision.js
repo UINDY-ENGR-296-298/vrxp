@@ -61,11 +61,11 @@ AFRAME.registerComponent('collision', {
     }
 
     if (this.data.log) {
-      console.log(
-        this._targetWorld.x.toFixed(3),
-        this._targetWorld.y.toFixed(3),
-        this._targetWorld.z.toFixed(3)
-      );
+      // console.log(
+      //   this._targetWorld.x.toFixed(3),
+      //   this._targetWorld.y.toFixed(3),
+      //   this._targetWorld.z.toFixed(3)
+      // );
     }
 
     // transform origin from this entity's local space into world space

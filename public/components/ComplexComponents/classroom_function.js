@@ -209,7 +209,8 @@
 
                 const chair = document.createElement('a-entity');
                 chair.setAttribute('classroom-chair', '');
-                chair.setAttribute('position', `${tx} 0 ${tz + S(0.3809999878080004)}`); // scale offset
+                chair.setAttribute('scale', `${x} ${x} ${x}`);
+                chair.setAttribute('position', `${tx} 0 ${tz + S(0.3809999878080004)}`);
                 chair.setAttribute('rotation', '0 180 0');
                 room.appendChild(chair);
             }

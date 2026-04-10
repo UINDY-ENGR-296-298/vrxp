@@ -2,7 +2,7 @@
 
 ## Overview
 
-This repo is a static A-Frame WebXR experience built entirely in the browser with no frontend build step.
+This repository is a static A-Frame WebXR experience built entirely in the browser with no frontend build step.
 The app is served from `public/`, and the scene is composed from HTML, A-Frame primitives, and custom components.
 The primary runtime entry point is `public/index.html`, with additional scene pages in `public/*.html`.
 
@@ -17,7 +17,8 @@ The primary runtime entry point is `public/index.html`, with additional scene pa
 ## Repository Layout
 
 - `ARCHITECTURE.md` — this document
-- `README.md` — run/deploy instructions and naming conventions
+- `USAGE.md` - detailed instructions on how to deploy and run the project
+- `README.md` — basic docker commands and naming conventions
 - `Dockerfile` — copies `public/` into nginx and exposes port 80
 - `public/` — served web app root
   - `index.html` — main VR load-in scene
@@ -63,7 +64,7 @@ Custom components are organized into categories but share a common implementatio
 ### Component folders
 
 - `public/components/` — core application components
-- `public/components/CoffeeShopComponents/` — coffee shop-specific helpers
+- `public/components/CoffeeShopComponents/` — components specifically used in the coffee shop
 - `public/components/ComplexComponents/` — larger scene builders and room constructors
 - `public/components/OtherComponents/` — utility or interaction helpers
 

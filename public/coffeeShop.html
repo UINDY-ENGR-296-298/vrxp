@@ -36,6 +36,8 @@
     <!-- Sky -->
     <script src="skybox/skycomponent.js"></script>
 
+    <link rel="icon" href="images/favicon.ico">
+
     <style>
       html, body { margin:0; height:100%; }
       .hud { position:absolute; top:8px; left:10px; font:14px system-ui; color:#fff; background:rgba(0,0,0,.35); padding:6px 8px; border-radius:6px; }
@@ -55,7 +57,6 @@
 
       <!-- Camera Rig -->
       <a-entity id="rig"
-        dynamic-body="mass:1"
         wasd-move-only="speed:10"
         position="-8 0 9"
         rotation="0 -55 0">
@@ -83,10 +84,9 @@
           " ",
           "Travel through the pink teleporter to the campus map",
           "Explore to find the yellow teleporter and travel to the Christel DeHaan Center for Global Engagement",
-          "Read through the information available, and return to the campus map",
+          "Return to the campus map",
           "Find the purple teleporter near the park bench and travel through to the video room",
-          "Watch some of the available videos depicting the UIndy experience",
-          "Return to the campus map when you are ready to move on",
+          "Watch some of the videos showing the UIndy experience. Return to the campus map when you are ready",
           "Find the orange teleporter and travel through it to reach the Perk III",
           "Return to the campus map",
           "Congratulations! You have finished the guided tour, feel free to explore where ever you wish"
@@ -102,31 +102,14 @@
                   // test complete
                   if (k === "o") hud.emit("hud-complete-objective");
 
-                  // reset with P
-                  if (k === "p") {
-                    deleteCookie("objectives_v2");      // hard delete
-                    initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
-                    console.log("Reset objectives:", getCookie("objectives_v2"));
-                  }
-                });
-              }
-                    function setObjectives() {
-                      // Set a list, first one shows, next appears when completed
-                      hud.emit("hud-set-objectives", {
-                        list: [
-                          "task 1",
-                          "task 2",
-                          "task 3"
-                        ]
-                      });
-
-                      // Optional test: press O to complete the current objective
-                      window.addEventListener("keydown", (e) => {
-                        if (e.key.toLowerCase() === "o") {
-                          hud.emit("hud-complete-objective");
-                        }
-                      });
-                    }
+            // reset with P
+            if (k === "p") {
+              deleteCookie("objectives_v2");      // hard delete
+              initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
+              console.log("Reset objectives:", getCookie("objectives_v2"));
+            }
+          });
+        }
 
               if (scene.hasLoaded) setObjectives();
               else scene.addEventListener("loaded", setObjectives);
@@ -413,6 +396,12 @@
       </a-box>
 
       <!-- Counter  -->
+
+      <a-entity 
+        counter-display="width: 0.4; height: 0.29; length: 2; color: #232323"
+        position="-5.75 0 -3.05"
+        rotation="0 3 0">
+      </a-entity>
 
       <a-entity 
         counter-display-top="width: 0.4; height: 0.29; length: 2; color: #e6e6e6"

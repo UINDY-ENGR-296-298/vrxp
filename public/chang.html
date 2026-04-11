@@ -21,6 +21,7 @@
   <script src="components/hud.js"></script>
   <script src="components/cookies.js"></script>
 
+  <link rel="icon" href="images/favicon.ico">
 
   <style>
     html, body {
@@ -39,7 +40,6 @@
 
     <!-- camera rig -->
     <a-entity id="rig"
-      dynamic-body="mass:1"
       wasd-move-only="speed:20"
       position="0 0 0">
 
@@ -65,10 +65,13 @@
         const LIST = [
           " ",
           "Travel through the pink teleporter to the campus map",
-          "Explore to find the green teleporter and travel to the Christel DeHaan Center for Global Engagement",
-          "Read through the information avalible",
+          "Explore to find the yellow teleporter and travel to the Christel DeHaan Center for Global Engagement",
           "Return to the campus map",
-          "Good Job boss you're free to explore the campus freely"
+          "Find the purple teleporter near the park bench and travel through to the video room",
+          "Watch some of the videos showing the UIndy experience. Return to the campus map when you are ready",
+          "Find the orange teleporter and travel through it to reach the Perk III",
+          "Return to the campus map",
+          "Congratulations! You have finished the guided tour, feel free to explore where ever you wish"
         ];
 
         function setObjectives() {

@@ -3,15 +3,15 @@
 ## Overview
 
 This repository is a static A-Frame WebXR experience built entirely in the browser with no frontend build step.
-The app is served from `public/`, and the scene is composed from HTML, A-Frame primitives, and custom components.
-The primary runtime entry point is `public/index.html`, with additional scene pages in `public/*.html`.
+The app is served from `docs/`, and the scene is composed from HTML, A-Frame primitives, and custom components.
+The primary runtime entry point is `docs/index.html`, with additional scene pages in `docs/*.html`.
 
 ## Key Technologies
 
 - A-Frame 1.5.0 via CDN
 - A-Frame Physics System via CDN (`aframe-physics-system`)
-- Custom A-Frame components under `public/components/`
-- Static assets in `public/fonts/`, `public/images/`, `public/media/`, `public/models/`
+- Custom A-Frame components under `docs/components/`
+- Static assets in `publicfonts/`, `docs/images/`, `docs/media/`, `docs/models/`
 - Docker + nginx for hosting from the root `Dockerfile`
 
 ## Repository Layout
@@ -19,8 +19,8 @@ The primary runtime entry point is `public/index.html`, with additional scene pa
 - `ARCHITECTURE.md` — this document
 - `USAGE.md` - detailed instructions on how to deploy and run the project
 - `README.md` — basic docker commands and naming conventions
-- `Dockerfile` — copies `public/` into nginx and exposes port 80
-- `public/` — served web app root
+- `Dockerfile` — copies `docs/` into nginx and exposes port 80
+- `docs/` — served web app root
   - `index.html` — main VR load-in scene
   - `*.html` — additional scene pages and demo pages
   - `components/` — custom A-Frame components and reusable scripts
@@ -32,11 +32,11 @@ The primary runtime entry point is `public/index.html`, with additional scene pa
 
 ### Scene Composition
 
-`public/index.html` is the primary scene page and includes:
+`docs/index.html` is the primary scene page and includes:
 
 - `aframe.min.js`
 - `aframe-physics-system.min.js`
-- Custom scripts from `public/components/` and `public/skybox/`
+- Custom scripts from `docs/components/` and `docs/skybox/`
 - A single `<a-scene>` with:
   - `scene-fade` for page fade transitions
   - `skybox-box` for the environmental skybox
@@ -63,10 +63,10 @@ Custom components are organized into categories but share a common implementatio
 
 ### Component folders
 
-- `public/components/` — core application components
-- `public/components/CoffeeShopComponents/` — components specifically used in the coffee shop
-- `public/components/ComplexComponents/` — larger scene builders and room constructors
-- `public/components/OtherComponents/` — utility or interaction helpers
+- `docs/components/` — core application components
+- `docs/components/CoffeeShopComponents/` — components specifically used in the coffee shop
+- `docs/components/ComplexComponents/` — larger scene builders and room constructors
+- `docs/components/OtherComponents/` — utility or interaction helpers
 
 ### Important components
 
@@ -81,8 +81,8 @@ Custom components are organized into categories but share a common implementatio
 
 ### Skybox code
 
-- `public/skybox/skycomponent.js` — skybox loader used by `index.html`
-- `public/skybox/alt_sky.js` and `public/skybox/chang_skycomponent.js` — alternative skybox implementations
+- `docs/skybox/skycomponent.js` — skybox loader used by `index.html`
+- `docs/skybox/alt_sky.js` and `docs/skybox/chang_skycomponent.js` — alternative skybox implementations
 
 ## Objective and HUD System
 
@@ -93,25 +93,25 @@ The project contains a simple HUD and objective system:
 - `cookies.js` manages cookie storage for objective progress using `objectives_v2`
 - `index.html` contains inline initialization logic for the current mission list
 
-> Note: `public/index.html` references `components/objectives-init.js`, but this file does not exist in the repo. Objective initialization is currently performed by inline script in `index.html` and the persistence helper functions in `public/components/cookies.js`.
+> Note: `docs/index.html` references `components/objectives-init.js`, but this file does not exist in the repo. Objective initialization is currently performed by inline script in `index.html` and the persistence helper functions in `docs/components/cookies.js`.
 
 ## Deployment and Run Workflow
 
 - Build the Docker image from repo root:
   - `docker build -t vrxp_img .`
-- Run the container with `public/` mounted into nginx:
+- Run the container with `docs/` mounted into nginx:
   - Windows: `docker run -it --rm -p 8080:80 -v "$PWD\public":/usr/share/nginx/html --name vrxp_con vrxp_img`
 - Access the app in a browser at `http://localhost:8080`
 
 ## Development Notes
 
-- This is a static web project: edit files under `public/` and reload the served page.
+- This is a static web project: edit files under `docs/` and reload the served page.
 - There is no bundler or build pipeline in the repo.
 
 ## Recommended Focus for Future Developers
 
-1. Start with `public/index.html` to understand the main scene bootstrap.
-2. Learn the base components in `public/components/` before modifying page-specific scenes.
-3. Use `public/components/ComplexComponents/` for larger procedural room logic rather than inline HTML.
+1. Start with `docs/index.html` to understand the main scene bootstrap.
+2. Learn the base components in `docs/components/` before modifying page-specific scenes.
+3. Use `docs/components/ComplexComponents/` for larger procedural room logic rather than inline HTML.
 4. Keep component behavior idempotent and clean up DOM/listeners in `remove()`.
 5. Keep static assets reachable from `/` paths when referenced from served pages.

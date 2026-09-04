@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>VRXP - Load-In World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- Physics system -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+  <!-- Components -->
+  <script src="components/wasd-move.js"></script>
+  <script src="components/arrow-look.js"></script>
+  <script src="components/teleport-pad.js"></script>
+  <script src="components/scene-fade.js"></script>
+  <script src="skybox/skycomponent.js"></script>
+  <script src="components/collision.js"></script>
+  <script src="components/hud.js"></script>
+  <script src="components/cookies.js"></script>
+  <script src="components/objectives-init.js"></script>
+  <script src="components/videoscreen.js"></script>
+  <script src="components/ComplexComponents/video_room.js"></script>
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <a-scene
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- camera rig -->
+    <a-entity id="rig"
+      wasd-move-only="speed:20"
+      position="0 0 5">
+
+      <a-camera
+        look-controls
+        arrow-look
+        wasd-controls-enabled="false">
+
+      <a-entity
+        id = "hud"
+        position="3 2 -3"
+        hud-coords="target: #rig">
+      </a-entity>
+
+      <!-- set objectives -->
+      <!-- can use different cookie key to have different objective list, not implimented but shouldt be too hard -->
+      <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const scene = document.querySelector("a-scene");
+        const hud = document.querySelector("#hud");
+
+        // Define the objective list ONCE
+        const LIST = [
+          " ",
+          "Travel through the pink teleporter to the campus map",
+          "Explore to find the yellow teleporter and travel to the Christel DeHaan Center for Global Engagement",
+          "Return to the campus map",
+          "Find the purple teleporter near the park bench and travel through to the video room",
+          "Watch some of the videos showing the UIndy experience. Return to the campus map when you are ready",
+          "Find the orange teleporter and travel through it to reach the Perk III",
+          "Return to the campus map",
+          "Congratulations! You have finished the guided tour, feel free to explore where ever you wish"
+        ];
+
+        function setObjectives() {
+          // normal init, keep progress if cookie exists
+          initObjectives(hud, LIST);
+
+          window.addEventListener("keydown", (e) => {
+            const k = e.key.toLowerCase();
+
+            // test complete
+            if (k === "o") hud.emit("hud-complete-objective");
+
+            // reset with P
+            if (k === "p") {
+              deleteCookie("objectives_v2");      // hard delete
+              initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
+              console.log("Reset objectives:", getCookie("objectives_v2"));
+            }
+          });
+        }
+
+        if (scene.hasLoaded) setObjectives();
+        else scene.addEventListener("loaded", setObjectives);
+      });
+    </script>
+
+      <!--aim dot-->
+      <a-entity
+        id="aimDot"
+        class="cursor"
+        cursor="fuse: false"
+        raycaster="objects: .clickable"
+        position="0 0 -1"
+        geometry="primitive: circle; radius: 0.005"
+        material="color: white; shader: flat">
+      </a-entity>
+
+      </a-camera>
+    </a-entity>
+
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+    <!-- Assets -->
+    <a-assets>
+      <!-- MSDF font assets (public/fonts/...) -->
+      <a-asset-item id="robotoFont" src="/fonts/Roboto-msdf.json"></a-asset-item>
+      <img id="robotoFontImg" src="/fonts/Roboto-msdf.png" crossorigin="anonymous" />
+
+      <!-- Your textures -->
+      <img id="groundTexture" src="images/concrete.jpg" alt="" />
+      <img id="pathTex" src="images/path_texture.jpg" alt="" />
+      <img id="wallTex" src="images/wallphoto.jpg">
+      <img id="cellingTex" src="images/cellingPhoto.jpg">
+
+      <!-- Plain HTML video element (define videos to use latter) -->
+      <video  id="Grady"
+        src="media/Grady vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+      <video  id="Volleyball"
+        src="media/Volleyball Vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Wrestling"
+        src="media/Wrestling vid.MP4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Flags"
+        src="media/Flags.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Lofts"
+        src="media/Lofts.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+        <video  id="Dinning"
+        src="media/Dinning Hall.mp4"
+        crossorigin="anonymous"
+        muted
+        playsinline
+        loop
+        preload="auto"></video>
+
+    </a-assets>
+
+    <!-- Ground collider -->
+    <a-plane
+      id="ground"
+      src="#groundTexture"
+      position="0 -2 0"
+      rotation="-90 0 0"
+      width="1000"
+      height="1000"
+      static-body="shape: box">
+    </a-plane>
+
+
+    <a-entity
+      teleport-pad="to: three_d_map.html;
+                      width: 2.5;
+                      color: #624aed;
+                      glowColor: #624aed;
+                      radius: 1.5;
+                      fadetime: 1000;
+                      complete_objective: true"
+      position="0 0 -13">
+    </a-entity>
+
+    <!-- Play/Pause Video -->
+    <!-- The "screen" -->
+        <a-entity
+          position="-9.75 1.5 2"
+          rotation="0 90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Grady;
+            autoplay: true;">
+        </a-entity>
+
+          <a-entity
+          position="9.75 1.5 2"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Volleyball;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="-9.75 1.5 -4"
+          rotation="0 90 0"
+          tv-screen="
+            width: 2.8;
+            aspect: 0.5624;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Wrestling;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="9.75 0.5 -4"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Flags;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="-9.75 0.5 -10"
+          rotation="0 90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Lofts;
+            autoplay: true;">
+        </a-entity>
+
+        <a-entity
+          position="9.75 0.5 -10"
+          rotation="0 -90 0"
+          tv-screen="
+            width: 4.8;
+            aspect: 1.7778;
+            x: 0;
+            y: 1.5;
+            zLift: 0.01;
+            src: #Dinning;
+            autoplay: true;">
+        </a-entity>
+
+  </a-scene>
+</body>
+</html>

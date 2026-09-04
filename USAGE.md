@@ -20,7 +20,7 @@ From the repository root, build the Docker image:
 docker build -t vrxp_img .
 ```
 
-Start the container with the local `docs/` folder mounted into nginx:
+Start the container with the local `public/` folder mounted into nginx:
 
 - Windows PowerShell:
 

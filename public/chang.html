@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Chang World</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- A-Frame -->
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+
+  <!-- Physics system -->
+  <script src="https://cdn.jsdelivr.net/npm/aframe-physics-system@4.0.1/dist/aframe-physics-system.min.js"></script>
+
+  <!-- Components -->
+  <script src="components/wasd-move.js"></script>
+  <script src="components/arrow-look.js"></script>
+  <script src="components/teleport-pad.js"></script>
+  <script src="components/scene-fade.js"></script>
+  <script src="components/wall-text.js"></script>
+  <script src="skybox/chang_skycomponent.js"></script>
+  <script src="components/hud.js"></script>
+  <script src="components/cookies.js"></script>
+
+  <link rel="icon" href="images/favicon.ico">
+
+  <style>
+    html, body {
+      margin: 0;
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+</head>
+
+<body>
+  <a-scene
+    scene-fade="duration: 800"
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    skybox-box="path: ./skybox/; ext: .jpg; rotTop: 1.5708; rotBottom: -1.5708; size: 1000">
+
+    <!-- camera rig -->
+    <a-entity id="rig"
+      wasd-move-only="speed:20"
+      position="0 0 0">
+
+      <a-camera
+        look-controls
+        arrow-look
+        wasd-controls-enabled="false">
+
+        <a-entity
+        id = "hud"
+        position="3 2 -3"
+        hud-coords="target: #rig">
+      </a-entity>
+
+    <!-- set objectives -->
+    <!-- can use different cookie key to have different objective list, not implimented but shouldt be too hard -->
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const scene = document.querySelector("a-scene");
+        const hud = document.querySelector("#hud");
+
+        // Define the objective list ONCE
+        const LIST = [
+          " ",
+          "Travel through the pink teleporter to the campus map",
+          "Explore to find the yellow teleporter and travel to the Christel DeHaan Center for Global Engagement",
+          "Return to the campus map",
+          "Find the purple teleporter near the park bench and travel through to the video room",
+          "Watch some of the videos showing the UIndy experience. Return to the campus map when you are ready",
+          "Find the orange teleporter and travel through it to reach the Perk III",
+          "Return to the campus map",
+          "Congratulations! You have finished the guided tour, feel free to explore where ever you wish"
+        ];
+
+        function setObjectives() {
+          // normal init, keep progress if cookie exists
+          initObjectives(hud, LIST);
+
+          window.addEventListener("keydown", (e) => {
+            const k = e.key.toLowerCase();
+
+            // test complete
+            if (k === "o") hud.emit("hud-complete-objective");
+
+            // reset with P
+            if (k === "p") {
+              deleteCookie("objectives_v2");      // hard delete
+              initObjectives(hud, LIST, { reset: true, startIndex: 0 }); // re-seed cookie + HUD
+              console.log("Reset objectives:", getCookie("objectives_v2"));
+            }
+          });
+        }
+
+        if (scene.hasLoaded) setObjectives();
+        else scene.addEventListener("loaded", setObjectives);
+      });
+    </script>
+
+        <a-entity
+          id="aimDot"
+          class="cursor"
+          cursor="fuse: false"
+          raycaster="objects: .clickable"
+          position="0 0 0"
+          geometry="primitive: circle; radius: 0.005"
+          material="color: white; shader: flat">
+        </a-entity>
+
+      </a-camera>
+    </a-entity>
+
+    <!-- LIGHTS -->
+    <a-entity light="type: ambient; intensity: 0.45"></a-entity>
+    <a-entity light="type: directional; intensity: 1.0" position="2 6 2"></a-entity>
+
+
+    <!-- Ground collider -->
+    <a-plane
+      id="ground"
+      src="#groundTexture"
+      position="0 0 -50"
+      rotation="-90 0 0"
+      width="10"
+      height="100"
+      static-body="shape: box">
+    </a-plane>
+
+    <!-- add teleporter to next html -->
+    <a-entity 
+      teleport-pad="to: three_d_map.html; radius: 1.5"
+      position="0 1 -95">
+    </a-entity>
+
+  </a-scene>
+</body>
+</html>
